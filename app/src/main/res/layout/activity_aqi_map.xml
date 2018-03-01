@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--因为webView加载的map这个页面，存在一个网页版的toolbar，所以在此全屏显示，而下面一个原生toolbar来覆盖-->
+    <WebView
+        android:id="@+id/web_aqi_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include layout="@layout/content_toolbar" />
+</android.support.constraint.ConstraintLayout>
