@@ -71,7 +71,7 @@
     <string name="str_map">地图</string>
     <string name="str_location">定位</string>
     <string name="str_share_title">"分享AQI应用给朋友"</string>
-    <string name="str_url_app_download">关注蓝天，关爱健康，欢迎安装AQI应用，点击 http://zhiwei.in/aqi/aqi.apk 下载</string>
+    <string name="str_url_app_download">关注蓝天，关爱健康，欢迎安装AQI应用，点击 https://raw.githubusercontent.com/zhiwei1990/BlueDreamAQI/master/release/aqi.apk 下载</string>
     <string name="str_avatar_desc">avatar</string>
     <string name="str_about_title">关于AQI</string>
     <string name="str_developer_introduction">人生就像一场旅行，不必在乎目的地，在乎的是，沿途的风景以及看风景的心情。志威梦，用心灵感悟人生......</string>
@@ -88,7 +88,7 @@
     <string name="str_donate">捐赠支持</string>
     <string name="str_donate_content">期待您的慷慨支持，志威会更加努力的用心做好产品</string>
     <string name="str_qrcode_wechat">扫描关注\"志威梦\"</string>
-    <string name="str_url_bug_report">"https://github.com/zhiwei1990/BlueDreamAQI"</string>
+    <string name="str_url_bug_report">"https://github.com/zhiwei1990/BlueDreamAQI/issues"</string>
     <string name="str_url_github">"https://github.com/zhiwei1990/BlueDreamAQI"</string>
     <string name="str_try_again">重新试试</string>
     <string name="str_tips_no_browser">请确定手机是否安装浏览器</string>
