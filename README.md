@@ -1,4 +1,4 @@
-##BlueDreamAQI
+## BlueDreamAQI
 
 梦之蓝AQI，一款旨在技术研究与学习的pm25等空气质量指数预报的Android版App。
 
@@ -8,7 +8,7 @@
 - Android SDK
 - AndroidStudio 3.0+
 
-#### App截图[下载Sample](./app/release/app-release.apk)
+#### App截图[下载Sample](https://raw.githubusercontent.com/zhiwei1990/BlueDreamAQI/master/release/aqi.apk)
 
 ![北京AQI图1](/images/img_aqi_beijing.png)![北京AQI图2](./images/img_aqi_beijing_nearby.png)![关于开发者](./images/img_aqi_about.png)
 
@@ -34,7 +34,7 @@
 
 目前项目中使用了以上开源库，在此表示感谢！
 
-####支持捐赠
+#### 支持捐赠
 
 ![微信支持](./images/img_wechat_pay.png)![阿里支持](./images/img_alipay.png)
 
