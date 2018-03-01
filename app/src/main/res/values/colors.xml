@@ -15,6 +15,7 @@
     <color name="colorAQIVeryUnhealthy">#660099</color>
     <color name="colorAQIHazardous">#7E0023</color>
     <!--aqi color in chart 颜色值太多，分级较细致，容后再研究-->
+    <!-- 5-13,30-42,42-68,68-89,89-237,137-158,158-174,174-250,-->
     <color name="colorAir0">#1AA061</color>
     <color name="colorAir1">#42AB59</color>
     <color name="colorAir2">#99C247</color>

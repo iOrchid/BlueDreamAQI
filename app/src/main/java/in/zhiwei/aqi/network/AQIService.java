@@ -51,7 +51,7 @@ public interface AQIService {
      * 检查升级
      * @return string数据
      */
-    @GET("http://zhiwei.net.cn/apk/update.json")
+    @GET("https://raw.githubusercontent.com/zhiwei1990/BlueDreamAQI/master/release/update.json")
     Observable<UpgradeRes> checkUpgrade();
 
 }
