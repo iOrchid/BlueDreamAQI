@@ -33,7 +33,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/error" />
+                android:src="@drawable/error_gray" />
 
             <Button
                 android:id="@+id/btn_error_main"
