@@ -11,12 +11,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +28,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
@@ -60,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     SwipeRefreshLayout mRefreshLayout;//刷新的layout
     @BindView(R.id.ll_aqi_main)
     LinearLayout mLinearLayout;//aqi的主体布局
-    @BindView(R.id.cv_error_main)
-    CardView cvError;//错误提示
+    @BindViews({R.id.btn_error_main, R.id.iv_airship_main})
+    List<View> viewError;//遇到网络错误view控制
 
     @BindView(R.id.tv_api_num_header)
     TextView tvAQINumHeader;//header 中aqi数字
@@ -95,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private int mAirPressure;//压强
 
     private CityAQIPresenter mPresenter;//用于控制fragment UI的presenter
+    private static final ButterKnife.Action<View> LIST_INVISIBLE = (view, index) -> view.setVisibility(View.INVISIBLE);//控制list里面的view 的不显
+    private static final ButterKnife.Action<View> LIST_VISIBLE = (view, index) -> view.setVisibility(View.VISIBLE);//控制list中的view的显
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -245,10 +246,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     }
                     //刷新
                     onRefresh();
-                }, throwable -> {
-                    throwable.printStackTrace();
-                    Log.e("test", "throwable:: " + throwable.getMessage());
-                });
+                }, Throwable::printStackTrace);
     }
 
     /**
@@ -306,8 +304,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mToolbar.setTitle(aqiModel.getCity().getName());
         //refreshlayout
         mRefreshLayout.setRefreshing(false);
+        //根据网络状态的提示页面显隐控制
         mLinearLayout.setVisibility(View.VISIBLE);
-        cvError.setVisibility(View.INVISIBLE);
+        ButterKnife.apply(viewError, LIST_INVISIBLE);
     }
 
     /**
@@ -408,8 +407,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     @Override
     public void onGetAQIFailed(@NonNull String error) {
         mRefreshLayout.setRefreshing(false);
+        //根据网络状态的提示页面显隐控制
         mLinearLayout.setVisibility(View.INVISIBLE);
-        cvError.setVisibility(View.VISIBLE);
+        ButterKnife.apply(viewError, LIST_VISIBLE);
         ToastUtils.showShort(error);
     }
 
