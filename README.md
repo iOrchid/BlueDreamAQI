@@ -40,7 +40,7 @@
 
 > 获取我们都只是个开发技术小白，但是我们坚持学习前进，欢迎各位朋友**fork**、**star**本项目，让我们一同学习，一同进步！
 
-**License:**[LGPL](./LICENSE,"开源协议")
+**License:**
 
 > The Blue Dream AQI software suite is licensed under the terms of the Apache license.
 >
