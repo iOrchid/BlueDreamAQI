@@ -20,7 +20,7 @@
 
 - [ ] 数据精确完善，App设置&反馈，体验&性能提升
 - [ ] Animation、Splash、Theme、Font
-- [ ] 接入pm25.in数据源，提供不同的UI风格
+- [ ] 接入pm25.in数据源，Air Visual 数据源,提供不同的UI风格
 - [ ] AQI预报、温馨（语音）提示、推送、社交化分享
 - [ ] 优化&新技术的引入，NDK、Kotlin等。
 
