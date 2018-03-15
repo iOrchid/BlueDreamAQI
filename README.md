@@ -4,6 +4,8 @@
 
 [![get form baiduAppStore](./images/baiduAppStore.png)](http://shouji.baidu.com/software/23484351.html)
 
+[![get from HuaweiAppStore](./images/huawei_appstore.png)](http://app.hicloud.com/app/C100221047)
+
 #### 开发环境
 
 - JDK1.8
