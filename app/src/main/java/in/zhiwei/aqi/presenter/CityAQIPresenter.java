@@ -88,7 +88,7 @@ public class CityAQIPresenter implements IAQIContract.IAQIPresenter {
      *
      * @param server 原始的html的string
      */
-    private void parserHtml(String server) {
+    public void parserHtml(String server) {
         Document html = Jsoup.parse(server);
         Element pageMain = html.getElementById("waPageMain");//获取main的div
         Elements waPageContent = pageMain.getElementsByClass("waPageContent");//获取content的div
@@ -120,7 +120,10 @@ public class CityAQIPresenter implements IAQIContract.IAQIPresenter {
         AQIEntity entity = new AQIEntity();
         entity.setAqiModel(aqiModel);
         entity.setOtherAQIData(otherAQIData);
+        //回调到UI填充数据
         mAQIView.onGetAQISuccess(entity);
+        //将数据缓存到本地
+        SPUtils.getInstance().put(GlobalConstants.SP_KEY_AQI_SERVER_DATA,server);
     }
 
     /**
@@ -155,7 +158,10 @@ public class CityAQIPresenter implements IAQIContract.IAQIPresenter {
                             mAQIView.onCheckUpgradeFailed(throwable.getMessage());
                         });
     }
-
+    /**
+     * 下载app
+     * @param context context
+     */
     public void downloadApk(@NonNull Context context) {
         initDownLoad(context, apkUrl, updateInfo);
     }

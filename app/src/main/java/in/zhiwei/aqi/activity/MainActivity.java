@@ -114,6 +114,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         initData();
         //
         mPresenter = new CityAQIPresenter(this);
+        String html = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_AQI_SERVER_DATA);
+        if (!html.isEmpty()) {
+            mPresenter.parserHtml(html);
+        }
         //首次进来就开始请求网络
         onRefresh();
         //检查升级
@@ -408,8 +412,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onGetAQIFailed(@NonNull String error) {
         mRefreshLayout.setRefreshing(false);
         //根据网络状态的提示页面显隐控制
-        mLinearLayout.setVisibility(View.INVISIBLE);
-        ButterKnife.apply(viewError, LIST_VISIBLE);
+        if (SPUtils.getInstance().getString(GlobalConstants.SP_KEY_AQI_SERVER_DATA).isEmpty()) {
+            //如果缓存了aqi数据，则显示缓存数据，而不是直接跳转到错误界面,否则显示错误信息界面
+            mLinearLayout.setVisibility(View.INVISIBLE);
+            ButterKnife.apply(viewError, LIST_VISIBLE);
+        }
         ToastUtils.showShort(error);
     }
 
