@@ -1,94 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/srl_main"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/ctl_main"
-    tools:showIn="@layout/activity_main">
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/srl_main"
+	android:layout_width="0dp"
+	android:layout_height="0dp"
+	app:layout_constraintBottom_toBottomOf="parent"
+	app:layout_constraintLeft_toLeftOf="parent"
+	app:layout_constraintRight_toRightOf="parent"
+	app:layout_constraintTop_toBottomOf="@+id/ctl_main"
+	tools:showIn="@layout/activity_main">
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:scrollbarThumbVertical="@android:color/transparent"
-        android:scrollbars="vertical">
+	<android.support.v4.widget.NestedScrollView
+		android:id="@+id/nsv_main"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:scrollbarThumbVertical="@android:color/transparent"
+		android:scrollbars="vertical">
 
-        <LinearLayout
-            android:id="@+id/ll_aqi_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            android:orientation="vertical"
-            android:visibility="invisible">
-            <!--AQI header-->
-            <include layout="@layout/content_header_aqi_fragment" />
+		<LinearLayout
+			android:id="@+id/ll_aqi_main"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fitsSystemWindows="true"
+			android:orientation="vertical"
+			android:visibility="invisible">
+			<!--AQI header-->
+			<include layout="@layout/content_header_aqi_fragment" />
 
-            <TextView
-                android:id="@+id/tv_temperature_api_fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@string/str_temperature_wind"
-                android:textSize="12sp" />
+			<TextView
+				android:id="@+id/tv_temperature_api_fragment"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="10dp"
+				android:text="@string/str_temperature_wind"
+				android:textSize="12sp" />
 
-            <View
-                android:id="@+id/v1_temperature_aqi_fragment"
-                android:layout_width="60dp"
-                android:layout_height="1dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorAQIHazardous" />
+			<View
+				android:id="@+id/v1_temperature_aqi_fragment"
+				android:layout_width="60dp"
+				android:layout_height="1dp"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="10dp"
+				android:background="@color/colorAQIHazardous" />
 
-            <TextView
-                android:id="@+id/tv_title_aqi_forest_fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:text="@string/str_api_forest"
-                android:textColor="@color/colorGrayTitle" />
+			<TextView
+				android:id="@+id/tv_title_aqi_forest_fragment"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginTop="10dp"
+				android:text="@string/str_api_forest"
+				android:textColor="@color/colorGrayTitle" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_simple_aqi_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                tools:listitem="@layout/item_rv_simple_api_fragment" />
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv_simple_aqi_fragment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dp"
+				android:orientation="horizontal"
+				tools:listitem="@layout/item_rv_simple_api_fragment" />
 
-            <!--<include layout="@layout/content_chart_aqi_fragment" />-->
+			<!--<include layout="@layout/content_chart_aqi_fragment" />-->
 
-            <include layout="@layout/content_weather_data_api_fragment" />
+			<include layout="@layout/content_weather_data_api_fragment" />
 
-            <!--<include layout="@layout/con
-                tent_detail_forest_api_fragment" />-->
+			<!--<include layout="@layout/con
+				tent_detail_forest_api_fragment" />-->
 
-            <TextView
-                android:id="@+id/tv_title_nearby_city"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/str_nearby_city"
-                android:textColor="@color/colorBlueTitle"
-                android:textSize="16sp" />
+			<TextView
+				android:id="@+id/tv_title_nearby_city"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:layout_marginBottom="10dp"
+				android:layout_marginTop="10dp"
+				android:text="@string/str_nearby_city"
+				android:textColor="@color/colorBlueTitle"
+				android:textSize="16sp" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_nearby_city_aqi_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:listitem="@layout/item_rv_nearby_aqi_fragment" />
-        </LinearLayout>
+			<android.support.v7.widget.RecyclerView
+				android:id="@+id/rv_nearby_city_aqi_fragment"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				tools:listitem="@layout/item_rv_nearby_aqi_fragment" />
+		</LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+	</android.support.v4.widget.NestedScrollView>
 
 
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     Toolbar mToolbar;//toolbar
     @BindView(R.id.srl_main)
     SwipeRefreshLayout mRefreshLayout;//刷新的layout
+    @BindView(R.id.nsv_main)
+    NestedScrollView mNestedScrollView;//滚动布局
     @BindView(R.id.ll_aqi_main)
     LinearLayout mLinearLayout;//aqi的主体布局
     @BindViews({R.id.btn_error_main, R.id.iv_airship_main})
@@ -308,6 +311,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         mToolbar.setTitle(aqiModel.getCity().getName());
         //refreshlayout
         mRefreshLayout.setRefreshing(false);
+        //滚动到顶部
+        mNestedScrollView.scrollTo(0, 0);
         //根据网络状态的提示页面显隐控制
         mLinearLayout.setVisibility(View.VISIBLE);
         ButterKnife.apply(viewError, LIST_INVISIBLE);

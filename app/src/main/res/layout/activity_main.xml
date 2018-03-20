@@ -12,7 +12,6 @@
 
     <include layout="@layout/content_main" />
 
-
     <ImageView
         android:id="@+id/iv_airship_main"
         android:layout_width="wrap_content"
