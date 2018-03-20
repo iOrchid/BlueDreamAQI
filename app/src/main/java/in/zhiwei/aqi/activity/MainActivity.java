@@ -417,7 +417,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             mLinearLayout.setVisibility(View.INVISIBLE);
             ButterKnife.apply(viewError, LIST_VISIBLE);
         }
-        ToastUtils.showShort(error);
+	    ToastUtils.showShort(Tools.convertError(error));
     }
 
     @Override
