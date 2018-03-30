@@ -56,8 +56,8 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //leakcannary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.3'
-    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.3'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //android utils
     implementation 'com.blankj:utilcode:1.12.5'
     // jsoup HTML parser library @ https://jsoup.org/

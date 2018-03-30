@@ -383,7 +383,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         tvAQILevelNameHeader.setTextColor(colorBG);
         clAQIHeader.setBackgroundColor(getResources().getColor(Tools.getAQILevelColor(mAQI)));//背景颜色
         int colorBanner = mAQI > 150 ? getResources().getColor(R.color.colorWhiteTranslate) : getResources().getColor(R.color.colorBlackTranslate);
-        String updateTime = aqiModel.getTime().getS().getCn().getTime();
+        //有可能不是中文，会出现 Attempt to invoke virtual method 'java.lang.String in.zhiwei.aqi.entity.AQIModel$TimeBean$SBean$CnBean.getTime()' on a null object reference
+        String updateTime = aqiModel.getTime().getS().getEn().getTime();//先默认英文的时间，如果是是中文环境，在重新赋值
+        AQIModel.TimeBean.SBean.CnBean cnBean = aqiModel.getTime().getS().getCn();
+        if (Tools.isChinese() && cnBean != null) {
+            updateTime = cnBean.getTime();
+        }
         //首要污染物
         String dominentpol = aqiModel.getDominentpol();
         String strBanner = dominentpol == null ? updateTime : Tools.strFormat(getString(R.string.str_api_update_time), updateTime, dominentpol);
@@ -399,11 +404,10 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private void setWeatherData(@NonNull AQIModel aqiModel) {
         AQIModel.TimeBean.SBean sBean = aqiModel.getTime().getS();
         //默认就支持中文，英文
-        String updateTime;
-        if (Tools.isChinese()) {
-            updateTime = sBean.getCn().getTime();
-        } else {
-            updateTime = sBean.getEn().getTime();
+        String updateTime = sBean.getEn().getTime();//先默认英文的时间，如果是是中文环境，在重新赋值
+        AQIModel.TimeBean.SBean.CnBean cnBean = sBean.getCn();
+        if (Tools.isChinese() && cnBean != null) {
+            updateTime = cnBean.getTime();
         }
         String city = aqiModel.getCity().getName();
         String weekDayTime = updateTime.substring(4, updateTime.length());
