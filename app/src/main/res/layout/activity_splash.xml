@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<ImageView
+		android:id="@+id/iv_logo_splash"
+		android:layout_width="120dp"
+		android:layout_height="120dp"
+		android:src="@drawable/aqi_logo"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.3" />
+
+	<com.airbnb.lottie.LottieAnimationView
+		android:id="@+id/lav_a_splash"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		app:layout_constraintRight_toLeftOf="@+id/lav_q_splash"
+		app:layout_constraintTop_toBottomOf="@+id/iv_logo_splash"
+		app:lottie_rawRes="@raw/a" />
+
+	<com.airbnb.lottie.LottieAnimationView
+		android:id="@+id/lav_q_splash"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@+id/iv_logo_splash"
+		app:lottie_rawRes="@raw/q" />
+
+	<com.airbnb.lottie.LottieAnimationView
+		android:id="@+id/lav_i_splash"
+		android:layout_width="60dp"
+		android:layout_height="60dp"
+		app:layout_constraintLeft_toRightOf="@+id/lav_q_splash"
+		app:layout_constraintTop_toBottomOf="@id/iv_logo_splash"
+		app:lottie_rawRes="@raw/i" />
+
+	<TextView
+		android:id="@+id/tv_version_splash"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/str_version_splash"
+		android:textColor="@color/colorDeepSkyBlue"
+		android:textSize="12sp"
+		android:textStyle="italic"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintVertical_bias="0.6" />
+
+	<TextView
+		android:id="@+id/tv_me_splash"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="20dp"
+		android:gravity="center"
+		android:text="@string/str_copy_right"
+		android:textColor="@color/colorGray"
+		android:textSize="12sp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>

@@ -18,10 +18,10 @@
             android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+			<!--<intent-filter>-->
+				<!--<action android:name="android.intent.action.MAIN" />-->
+				<!--<category android:name="android.intent.category.LAUNCHER" />-->
+			<!--</intent-filter>-->
         </activity>
         <!-- 查看aqi地图的界面-->
         <activity
@@ -31,6 +31,16 @@
         <activity
             android:name=".activity.AboutActivity"
             android:screenOrientation="portrait" />
+		<!--Splash 界面-->
+		<activity
+			android:name=".activity.SplashActivity"
+			android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
         <!--根据ip获取城市定位的service-->
         <service android:name=".service.LocationService" />
         <!--下载app监听-->

@@ -102,4 +102,5 @@
         2、App旨在开发技术研究学习，同时希望能给予用户相关便利;\n
         3、AQI关注空气质量、关爱生命健康，使用本软件的任何后果用户自担;\n
         4、点击确认则表示同意协议，并责任自担，否则请取消，并卸载，谢谢！</string>
+	<string name="str_version_splash">梦之蓝AQI  V: %s</string>
 </resources>

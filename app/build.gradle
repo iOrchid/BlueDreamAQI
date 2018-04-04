@@ -62,4 +62,6 @@ dependencies {
     implementation 'com.blankj:utilcode:1.12.5'
     // jsoup HTML parser library @ https://jsoup.org/
     implementation 'org.jsoup:jsoup:1.11.2'
+    //lottie Android 炫酷动画依赖库
+    implementation 'com.airbnb.android:lottie:2.5.1'
 }
