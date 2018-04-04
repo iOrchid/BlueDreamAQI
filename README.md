@@ -39,6 +39,7 @@
 - LeakCannary
 - Jsoup
 - UtilCode
+- Lottie
 
 目前项目中使用了以上开源库，在此表示感谢！
 
