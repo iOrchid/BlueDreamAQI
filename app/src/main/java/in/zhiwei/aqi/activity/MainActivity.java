@@ -386,8 +386,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         //有可能不是中文，会出现 Attempt to invoke virtual method 'java.lang.String in.zhiwei.aqi.entity.AQIModel$TimeBean$SBean$CnBean.getTime()' on a null object reference
         String updateTime = aqiModel.getTime().getS().getEn().getTime();//先默认英文的时间，如果是是中文环境，在重新赋值
         AQIModel.TimeBean.SBean.CnBean cnBean = aqiModel.getTime().getS().getCn();
-        if (Tools.isChinese() && cnBean != null) {
-            updateTime = cnBean.getTime();
+        if (Tools.isChinese()) {
+            updateTime = cnBean == null ? Tools.translateEn(updateTime) : cnBean.getTime();
         }
         //首要污染物
         String dominentpol = aqiModel.getDominentpol();
@@ -406,8 +406,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         //默认就支持中文，英文
         String updateTime = sBean.getEn().getTime();//先默认英文的时间，如果是是中文环境，在重新赋值
         AQIModel.TimeBean.SBean.CnBean cnBean = sBean.getCn();
-        if (Tools.isChinese() && cnBean != null) {
-            updateTime = cnBean.getTime();
+        if (Tools.isChinese()) {
+            updateTime = cnBean == null ? Tools.translateEn(updateTime) : cnBean.getTime();
         }
         String city = aqiModel.getCity().getName();
         String weekDayTime = updateTime.substring(4, updateTime.length());

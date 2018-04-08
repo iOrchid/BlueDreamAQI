@@ -392,5 +392,43 @@ public class Tools {
 		}
 		return tips;
 	}
+
+	/**
+	 * 有时候会出现中文的更新数据为空，所以使用英文的来转化一下
+	 * @param str 英文的更新时间描述
+	 * @return 中文描述
+	 */
+	public static String translateEn(@NonNull String str) {
+		//Updated on Sunday 11:00
+		String weekday = str.substring(11, str.length() - 5).trim();
+		StringBuilder updateTime = new StringBuilder("更新时间: ");
+		switch (weekday) {
+			case "Sunday":
+				updateTime.append("星期日 ");
+				break;
+			case "Monday":
+				updateTime.append("星期一 ");
+				break;
+			case "Tuesday":
+				updateTime.append("星期二 ");
+				break;
+			case "Wednesday":
+				updateTime.append("星期三 ");
+				break;
+			case "Thursday":
+				updateTime.append("星期四 ");
+				break;
+			case "Friday":
+				updateTime.append("星期五 ");
+				break;
+			case "Saturday":
+				updateTime.append("星期六 ");
+				break;
+			default:
+				break;
+		}
+		String time = str.substring(str.length() - 5);
+		return updateTime.append(time).toString();
+	}
 }
 
