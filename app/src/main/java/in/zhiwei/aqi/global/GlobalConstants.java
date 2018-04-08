@@ -11,6 +11,7 @@ public class GlobalConstants {
     public static final String SP_KEY_DOWNLOAD_ID = "download_app_id";//下载apk的id标记
     public static final String SP_KEY_IS_AGREE_TIPS = "is_agree_tips";//是否同意服务协议
     public static final String SP_KEY_AQI_SERVER_DATA = "aqi_server_data";//从服务器获取的html原始数据string
+    public static final String SP_KEY_HAS_SHOWED = "has_showed";//是否已经长按，用于显隐控制
 
     /**
      * 私有构造函数

@@ -103,4 +103,5 @@
         3、AQI关注空气质量、关爱生命健康，使用本软件的任何后果用户自担;\n
         4、点击确认则表示同意协议，并责任自担，否则请取消，并卸载，谢谢！</string>
 	<string name="str_version_splash">梦之蓝AQI  V: %s</string>
+	<string name="str_long_click_tips">长按背景,可查看aqi等级详情</string>
 </resources>

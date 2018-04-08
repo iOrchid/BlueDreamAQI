@@ -73,8 +73,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     TextView tvAQIUpdateTimeHeader;//header中，更新数据的时间
     @BindView(R.id.tv_temperature_api_fragment)
     TextView tvAQITemperature;//温度和风速
+    @BindView(R.id.tv_tips_header)
+    TextView tvTips;//跑马灯效果的提示
     @BindView(R.id.cl_header_api_main)
     ConstraintLayout clAQIHeader;//header布局
+
+
     @BindView(R.id.rv_simple_aqi_fragment)
     RecyclerView mRvSimpleAQI;//星期AQI数据的recyclerView
     @BindView(R.id.rv_nearby_city_aqi_fragment)
@@ -112,6 +116,14 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         boolean isAgree = SPUtils.getInstance().getBoolean(GlobalConstants.SP_KEY_IS_AGREE_TIPS, false);
         if (!isAgree) {
             initTips();
+        }
+        //长按钮提示
+        boolean hasShowed = SPUtils.getInstance().getBoolean(GlobalConstants.SP_KEY_HAS_SHOWED);
+        if (hasShowed) {
+            tvTips.setVisibility(View.INVISIBLE);
+        } else {
+            tvTips.setVisibility(View.VISIBLE);
+            tvTips.setSelected(true);
         }
         //initData
         initData();
@@ -187,6 +199,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 .setView(R.layout.pop_aqi_level_description).create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
+        //保存状态，隐藏 长按 提示
+        SPUtils.getInstance().put(GlobalConstants.SP_KEY_HAS_SHOWED, true);
         return false;
     }
 
