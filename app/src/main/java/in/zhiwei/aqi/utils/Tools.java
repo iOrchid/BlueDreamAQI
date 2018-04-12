@@ -117,6 +117,30 @@ public class Tools {
 	}
 
 	/**
+	 * 根据aqi 指数，获取对应颜色等级的layer-list的drawable
+	 *
+	 * @param aqi aqi指数
+	 * @return 对应颜色等级的layer-list的drawable res id
+	 */
+	public static int getAQILevelBG(int aqi) {
+		int level;
+		if (aqi <= 50) {
+			level = R.drawable.shape_aqi_good_widget;
+		} else if (aqi >= 51 && aqi <= 100) {
+			level = R.drawable.shape_aqi_moderate_widget;
+		} else if (aqi >= 101 && aqi <= 150) {
+			level = R.drawable.shape_aqi_usg_widget;
+		} else if (aqi >= 151 && aqi <= 200) {
+			level = R.drawable.shape_aqi_unhealthy_widget;
+		} else if (aqi >= 201 && aqi <= 300) {
+			level = R.drawable.shape_aqi_very_unhealthy_widget;
+		} else {
+			level = R.drawable.shape_aqi_hazardous_widget;
+		}
+		return level;
+	}
+
+	/**
 	 * 生成js代码，根据指定的div
 	 *
 	 * @param divs 需要生成js代码的对应div的数组
@@ -385,6 +409,9 @@ public class Tools {
 			case "Unable to resolve host \"aqicn.org\": No address associated with hostname":
 			case "Unable to resolve host \"raw.githubusercontent.com\": No address associated with hostname":
 				tips = "网络错误,请检查网络连接是否正常";
+				break;
+			case "Invalid index 0, size is 0"://搜索城市、站点的错误提示
+				tips  = "未查询到匹配城市或站点，请检查输入";
 				break;
 			default:
 				tips = error;

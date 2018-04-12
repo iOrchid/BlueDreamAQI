@@ -24,9 +24,10 @@
 			<!--</intent-filter>-->
         </activity>
         <!-- 查看aqi地图的界面-->
-        <activity
-            android:name=".activity.CityAQIMapActivity"
-            android:screenOrientation="portrait" />
+		<activity
+			android:name=".activity.CityAQIMapActivity"
+			android:screenOrientation="portrait"
+			android:theme="@style/AnimTheme" />
         <!-- 关于界面-->
         <activity
             android:name=".activity.AboutActivity"
@@ -41,14 +42,34 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-        <!--根据ip获取城市定位的service-->
-        <service android:name=".service.LocationService" />
+		<!--aqi站点搜索界面-->
+		<activity
+			android:name=".activity.SearchStationActivity"
+			android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+			</intent-filter>
+		</activity>
+
+		<!-- 根据ip获取城市定位的service -->
+		<service android:name=".service.LocationService" />
+		<service android:name=".service.GetAQIServices" />
         <!--下载app监听-->
         <receiver android:name=".receiver.DownloadReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+		<receiver android:name=".widgets.AqiWidget">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+			</intent-filter>
+
+			<meta-data
+				android:name="android.appwidget.provider"
+				android:resource="@xml/aqi_widget_info" />
+		</receiver>
     </application>
 
 </manifest>

@@ -27,11 +27,21 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
 
-    <!--aqi 等级图表的样式-->
-    <style name="aqi_level_chart">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_margin">1dp</item>
-    </style>
+	<!--带有转场动画的theme配置-->
+	<style name="AnimTheme" parent="Theme.AppCompat.Light.NoActionBar">
+		<item name="android:windowAnimationStyle">@style/AboutTheme</item>
+	</style>
+
+	<style name="AboutTheme">
+		<item name="android:activityOpenEnterAnimation">@anim/map_trans_in</item>
+		<item name="android:activityOpenExitAnimation">@anim/main_out</item>
+	</style>
+
+	<!--aqi 等级图表的样式-->
+	<style name="aqi_level_chart">
+		<item name="android:layout_width">0dp</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_margin">1dp</item>
+	</style>
 </resources>

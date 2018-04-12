@@ -11,9 +11,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.blankj.utilcode.util.SPUtils;
 
@@ -30,13 +33,15 @@ import in.zhiwei.aqi.utils.Tools;
 
 public class CityAQIMapActivity extends AppCompatActivity {
 
-    private static final String INTENT_KEY_CITY_ID = "city_id";//用于查看地图数据的城市id，拼音或英文
-    private static final String URL_AQI_CITY_MAP = "http://aqicn.org/map/%s/m/";//查看城市aqi地图信息
+	private static final String INTENT_KEY_CITY_ID = "city_id";//用于查看地图数据的城市id，拼音或英文
+	private static final String URL_AQI_CITY_MAP = "http://aqicn.org/map/%s/m/";//查看城市aqi地图信息,here表示当前城市
 
     @BindView(R.id.toolbar_main)
     Toolbar mToolbar;//toolbar
     @BindView(R.id.web_aqi_map)
     WebView mWebView;
+	@BindView(R.id.pb_aqi_map)
+	ProgressBar mProgressBar;//
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,19 +50,19 @@ public class CityAQIMapActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        //获取当前城市的name
-        String cityName = SPUtils.getInstance().getString(GlobalConstants.SP_CURRENT_CITY_NAME, getString(R.string.str_beijing));
+		//获取当前城市的name
+		String cityName = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_NAME, getString(R.string.str_beijing));
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher_round);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+			actionBar.setHomeAsUpIndicator(R.drawable.back);
             actionBar.setTitle(cityName);
         }
         // init webView
         initWebView();
         //获取传递来的city参数
         String city = getIntent().getStringExtra(INTENT_KEY_CITY_ID);
-        if (!TextUtils.isEmpty(city)) {
-            loadUrl(Tools.strFormat(URL_AQI_CITY_MAP, city));
+		if (!TextUtils.isEmpty(city)) {
+			loadUrl(Tools.strFormat(URL_AQI_CITY_MAP, city.toLowerCase()));
         }
     }
 
@@ -103,15 +108,31 @@ public class CityAQIMapActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             //设置加载前的函数
             @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+				mProgressBar.setVisibility(View.VISIBLE);
             }
 
             //设置结束加载函数
             @Override
-            public void onPageFinished(WebView view, String url) {
-
+			public void onPageFinished(WebView view, String url) {
+				mProgressBar.setVisibility(View.INVISIBLE);
             }
         });
     }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home://toolbar的返回键
+				finish();
+				break;
+			default:
+				break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	@Override
+	public void finish() {
+		super.finish();
+		overridePendingTransition(R.anim.main_in, R.anim.map_scale_out);
+	}
 }

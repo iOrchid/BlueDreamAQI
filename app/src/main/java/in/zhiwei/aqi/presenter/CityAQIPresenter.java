@@ -28,6 +28,7 @@ import in.zhiwei.aqi.network.AQIService;
 import in.zhiwei.aqi.network.HttpApi;
 import in.zhiwei.aqi.utils.Tools;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -38,9 +39,10 @@ import io.reactivex.schedulers.Schedulers;
 
 public class CityAQIPresenter implements IAQIContract.IAQIPresenter {
 
-    private IAQIContract.IAQIView mAQIView;//AQIView的对象
-    private String apkUrl;//apk下载url
-    private String updateInfo;//升级信息
+	private IAQIContract.IAQIView mAQIView;//AQIView的对象
+	private String apkUrl;//apk下载url
+	private String updateInfo;//升级信息
+	private Disposable disposable;
 
     /**
      * presenter
@@ -52,12 +54,12 @@ public class CityAQIPresenter implements IAQIContract.IAQIPresenter {
         this.mAQIView = view;
     }
 
-    @Override
-    public void start() {
-        //用于初始化配置
-        String city = SPUtils.getInstance().getString(GlobalConstants.SP_CURRENT_CITY_ID, "beijing");
-        getServerAQI(city);
-    }
+	@Override
+	public void start() {
+		//用于初始化配置
+		String city = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_ID, "beijing");
+		getServerAQI(city);
+	}
 
     /**
      * 获取指定城市的aqi返回html
@@ -69,19 +71,19 @@ public class CityAQIPresenter implements IAQIContract.IAQIPresenter {
         getServerAQI(city, language);
     }
 
-    /**
-     * 指定城市，语言，获取aqi的html返回
-     *
-     * @param city     城市，string类型
-     * @param language 语言，cn，en等
-     */
-    private void getServerAQI(@NonNull String city, @NonNull String language) {
-        AQIService aqiService = HttpApi.getInstance().create(AQIService.class);
-        aqiService.getAQIServerHtmlStr(city, language)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::parserHtml, throwable -> mAQIView.onGetAQIFailed(throwable.getMessage()));
-    }
+	/**
+	 * 指定城市，语言，获取aqi的html返回
+	 *
+	 * @param city     城市，string类型
+	 * @param language 语言，cn，en等
+	 */
+	private void getServerAQI(@NonNull String city, @NonNull String language) {
+		AQIService aqiService = HttpApi.getInstance().create(AQIService.class);
+		disposable = aqiService.getAQIServerHtmlStr(city, language)
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe(this::parserHtml, throwable -> mAQIView.onGetAQIFailed(throwable.getMessage()));
+	}
 
     /**
      * 解析html数据
@@ -197,4 +199,12 @@ public class CityAQIPresenter implements IAQIContract.IAQIPresenter {
 //        context.getContentResolver().registerContentObserver(CONTENT_URI, true, downloadObserver);
     }
 
+	/**
+	 * 关闭资源
+	 */
+	public void dispose() {
+		if (disposable != null) {
+			disposable.dispose();
+		}
+	}
 }

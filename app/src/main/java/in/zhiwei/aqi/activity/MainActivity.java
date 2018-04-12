@@ -47,6 +47,7 @@ import in.zhiwei.aqi.network.HttpApi;
 import in.zhiwei.aqi.presenter.CityAQIPresenter;
 import in.zhiwei.aqi.utils.Tools;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -54,14 +55,16 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class MainActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, IAQIContract.IAQIView, NearbyAdapter.OnNearbyItemClickListener {
 
+	public static final int SEARCH_CITY_REQUEST_CODE = 100;//请求码
+	public static final String INTENT_KEY_STATION_NAME = "station_name";//intent 传值的key
     @BindView(R.id.toolbar_main)
     Toolbar mToolbar;//toolbar
     @BindView(R.id.srl_main)
     SwipeRefreshLayout mRefreshLayout;//刷新的layout
+	@BindView(R.id.ll_aqi_main)
+	LinearLayout mLinearLayout;//aqi的主体布局
     @BindView(R.id.nsv_main)
     NestedScrollView mNestedScrollView;//滚动布局
-    @BindView(R.id.ll_aqi_main)
-    LinearLayout mLinearLayout;//aqi的主体布局
     @BindViews({R.id.btn_error_main, R.id.iv_airship_main})
     List<View> viewError;//遇到网络错误view控制
 
@@ -98,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private int mTemperature;//温度
     private int mWindSpeed;//风速
     private int mHumidity;//湿度
-    private int mAirPressure;//压强
+	private int mAirPressure;//压强
+	private Disposable disposable;
 
     private CityAQIPresenter mPresenter;//用于控制fragment UI的presenter
     private static final ButterKnife.Action<View> LIST_INVISIBLE = (view, index) -> view.setVisibility(View.INVISIBLE);//控制list里面的view 的不显
@@ -112,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         ButterKnife.bind(this);
         //toolsBar,使用toolbar，就需要设置app的theme为noActionbar，
         initToolbar();
-        //服务责任协议
-        boolean isAgree = SPUtils.getInstance().getBoolean(GlobalConstants.SP_KEY_IS_AGREE_TIPS, false);
+		//服务责任协议
+		boolean isAgree = SPUtils.getInstance().getBoolean(GlobalConstants.SP_KEY_IS_AGREE_TIPS);
         if (!isAgree) {
             initTips();
         }
@@ -159,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     private void initToolbar() {
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
-        //获取当前城市的name
-        String cityName = SPUtils.getInstance().getString(GlobalConstants.SP_CURRENT_CITY_NAME, getString(R.string.str_beijing));
+		//获取当前城市的name
+		String cityName = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_NAME, getString(R.string.str_beijing));
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher_round);
@@ -221,13 +225,18 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
             case R.id.location_menu://定位到当前位置
                 getLocation();
                 break;
-//            case R.id.map_menu://查看aqi地图数据
-//                String city = SPUtils.getInstance().getString(GlobalConstants.SP_CURRENT_CITY_ID, "beijing");
-//                CityAQIMapActivity.actionActivity(this, city);
+			case R.id.map_menu://查看aqi地图数据
+				String city = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_ID, "beijing");
+				CityAQIMapActivity.actionActivity(this, city);
 //                break;
-            case R.id.share_menu://分享
+				break;
+			case R.id.share_menu://分享
                 shareIt();
                 break;
+			case R.id.search_menu://搜索城市
+				Intent searchIntent = new Intent(this, SearchStationActivity.class);
+				startActivityForResult(searchIntent, SEARCH_CITY_REQUEST_CODE);
+				break;
 //            case R.id.setting_menu://设置
 //                new AlertDialog.Builder(this)
 //                        .setView(R.layout.pop_aqi_level_description)
@@ -236,7 +245,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                break;
             case R.id.about_menu://关于App和作者
                 Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
+				startActivity(intent);
+				overridePendingTransition(R.anim.main_in, R.anim.main_out);
                 break;
             default:
                 break;
@@ -248,22 +258,22 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
      * 使用ip定位aqi城市，然后刷新
      */
     private void getLocation() {
-        HttpApi.getInstance().create(AQIService.class)
-                .getNearestStation("")//城市编号，暂时v1.0版本不写
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(nearestRes -> {
-                    String city = nearestRes.getG().getCity();
-                    String cityName;
-                    if (Tools.isChinese()) {
-                        cityName = nearestRes.getG().getNames().getZhCN();
-                    } else {
-                        cityName = nearestRes.getG().getNames().getEn();
-                    }
-                    if (!TextUtils.isEmpty(city)) {
-                        //缓存当前城市信息
-                        SPUtils.getInstance().put(GlobalConstants.SP_CURRENT_CITY_ID, city);
-                        SPUtils.getInstance().put(GlobalConstants.SP_CURRENT_CITY_NAME, cityName);
+		disposable = HttpApi.getInstance().create(AQIService.class)
+				.getNearestStation("")//城市编号，暂时v1.0版本不写
+				.subscribeOn(Schedulers.io())
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe(nearestRes -> {
+					String city = nearestRes.getG().getCity();
+					String cityName;
+					if (Tools.isChinese()) {
+						cityName = nearestRes.getG().getNames().getZhCN();
+					} else {
+						cityName = nearestRes.getG().getNames().getEn();
+					}
+					if (!TextUtils.isEmpty(city) && !TextUtils.isEmpty(cityName)) {
+						//缓存当前城市信息
+						SPUtils.getInstance().put(GlobalConstants.SP_KEY_CURRENT_CITY_ID, city);
+						SPUtils.getInstance().put(GlobalConstants.SP_KEY_CURRENT_CITY_NAME, cityName);
                     }
                     //刷新
                     onRefresh();
@@ -467,15 +477,38 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public void onNearbyItemClicked(@NonNull String station) {
         mPresenter.changeStation(station);
         //缓存为current station
-        SPUtils.getInstance().put(GlobalConstants.SP_CURRENT_CITY_ID, station);
+        SPUtils.getInstance().put(GlobalConstants.SP_KEY_CURRENT_CITY_ID, station);
         mRefreshLayout.setRefreshing(true);
     }
 
-    @Override
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == SEARCH_CITY_REQUEST_CODE && resultCode == RESULT_OK) {
+			String stationName = data.getStringExtra(INTENT_KEY_STATION_NAME);
+			mRefreshLayout.setRefreshing(true);
+			mPresenter.changeStation(stationName);
+		}
+	}
+
+	@Override
     public void onRefresh() {
         //开始网络请求
         mPresenter.start();
         //加载中
         mRefreshLayout.setRefreshing(true);
     }
+	@Override
+	protected void onStop() {
+		super.onStop();
+		if (disposable != null) {
+			disposable.dispose();
+		}
+		mPresenter.dispose();
+	}
+	@Override
+	public void finish() {
+		super.finish();
+		overridePendingTransition(R.anim.main_in, R.anim.main_out);
+	}
 }

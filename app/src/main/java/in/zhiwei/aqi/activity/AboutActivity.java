@@ -107,4 +107,9 @@ public class AboutActivity extends AppCompatActivity {
                 .show();
     }
 
+	@Override
+	public void finish() {
+		super.finish();
+		overridePendingTransition(R.anim.main_in, R.anim.about_scale_out);
+	}
 }

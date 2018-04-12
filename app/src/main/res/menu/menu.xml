@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/location_menu"
-        android:icon="@drawable/location"
-        android:title="@string/str_location"
-        app:showAsAction="always" />
-    <!--<item-->
-        <!--android:id="@+id/map_menu"-->
-        <!--android:icon="@drawable/earth"-->
-        <!--android:title="@string/str_map"-->
-        <!--app:showAsAction="always|withText" />-->
-    <item
-        android:id="@+id/share_menu"
-        android:icon="@drawable/share"
-        android:title="@string/str_share"
-        app:showAsAction="withText" />
-    <!--<item-->
-        <!--android:id="@+id/setting_menu"-->
-        <!--android:icon="@drawable/setting"-->
-        <!--android:title="@string/str_setting" />-->
-    <item
-        android:id="@+id/about_menu"
-        android:icon="@drawable/about"
-        android:title="@string/str_about" />
+	<item
+		android:id="@+id/location_menu"
+		android:icon="@drawable/location"
+		android:title="@string/str_location"
+		app:showAsAction="always" />
+	<item
+		android:id="@+id/map_menu"
+		android:icon="@drawable/earth"
+		android:title="@string/str_map"
+		app:showAsAction="always|withText" />
+	<item
+		android:id="@+id/search_menu"
+		android:icon="@drawable/search"
+		android:title="@string/str_search_city"
+		app:showAsAction="withText" />
+	<item
+		android:id="@+id/share_menu"
+		android:icon="@drawable/share"
+		android:title="@string/str_share"
+		app:showAsAction="withText" />
+	<!--<item-->
+	<!--android:id="@+id/setting_menu"-->
+	<!--android:icon="@drawable/setting"-->
+	<!--android:title="@string/str_setting" />-->
+	<item
+		android:id="@+id/about_menu"
+		android:icon="@drawable/about"
+		android:title="@string/str_about" />
 </menu>

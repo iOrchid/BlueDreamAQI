@@ -23,6 +23,9 @@ import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.utils.AnTools;
 import in.zhiwei.aqi.utils.Tools;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * 闪屏界面，splash动画
@@ -42,6 +45,7 @@ public class SplashActivity extends AppCompatActivity {
 	TextView tvVersion;//版本
 	@BindView(R.id.tv_me_splash)
 	TextView tvDesc;
+	private Disposable disposable;//控制阀
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,15 +58,15 @@ public class SplashActivity extends AppCompatActivity {
 			//动画结束，进入主界面
 			if (animatedValue == 1.0f) {
 				//启动主界面
-				Observable.timer(100, TimeUnit.MILLISECONDS)
+				disposable = Observable.timer(100, TimeUnit.MILLISECONDS)
+						.subscribeOn(Schedulers.io())
+						.observeOn(AndroidSchedulers.mainThread())
 						.subscribe(aLong -> {
-							startActivity(new Intent(this, MainActivity.class));
-						});
-				//延后finish当前的splash界面
-				Observable.timer(200, TimeUnit.MILLISECONDS)
-						.subscribe(aLong -> {
-							//延迟2秒，finish本activity
-							this.finish();
+							Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+							startActivity(intent);
+							overridePendingTransition(R.anim.main_in, R.anim.main_out);
+							//结束当前activity
+							finish();
 						});
 			}
 		});
@@ -108,5 +112,8 @@ public class SplashActivity extends AppCompatActivity {
 		super.onDestroy();
 		//结束动画
 		cancelAnimation();
+		if (disposable != null) {
+			disposable.dispose();
+		}
 	}
 }

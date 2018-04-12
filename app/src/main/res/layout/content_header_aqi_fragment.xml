@@ -7,6 +7,7 @@
 	android:background="@color/colorAQIGood"
 	android:fitsSystemWindows="true"
 	android:paddingTop="12dp">
+
 	<!--具有跑马灯效果的textView提示-->
 	<TextView
 		android:id="@+id/tv_tips_header"

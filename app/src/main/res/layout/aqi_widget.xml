@@ -1,0 +1,31 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/rl_root_widget"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:background="@drawable/shape_aqi_usg_widget">
+
+	<TextView
+		android:id="@+id/tv_aqi_widget"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		android:contentDescription="@string/str_aqi_widget"
+		android:gravity="center"
+		android:text="@string/str_aqi_widget"
+		android:textColor="@color/colorWhite"
+		android:textSize="36sp"
+		android:textStyle="bold|italic" />
+
+	<TextView
+		android:id="@+id/tv_city_widget"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:background="@color/colorBlack"
+		android:gravity="center"
+		android:lines="1"
+		android:text="@string/str_text_widget"
+		android:textColor="@color/colorWhite" />
+
+</RelativeLayout>

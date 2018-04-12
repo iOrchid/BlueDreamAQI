@@ -102,6 +102,12 @@
         2、App旨在开发技术研究学习，同时希望能给予用户相关便利;\n
         3、AQI关注空气质量、关爱生命健康，使用本软件的任何后果用户自担;\n
         4、点击确认则表示同意协议，并责任自担，否则请取消，并卸载，谢谢！</string>
-	<string name="str_version_splash">梦之蓝AQI  V: %s</string>
+	<string name="str_version_splash">梦之蓝AQI  v%s</string>
 	<string name="str_long_click_tips">长按背景,可查看aqi等级详情</string>
+	<string name="str_aqi_widget">175</string>
+	<string name="configure">Configure</string>
+	<string name="add_widget">Add widget</string>
+	<string name="str_text_widget">上海 09:00</string>
+	<string name="str_search_city">搜索城市</string>
+	<string name="str_input_city">请输入城市名称或拼音</string>
 </resources>

@@ -13,6 +13,7 @@ import in.zhiwei.aqi.network.AQIService;
 import in.zhiwei.aqi.network.HttpApi;
 import in.zhiwei.aqi.utils.Tools;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -23,17 +24,19 @@ import io.reactivex.schedulers.Schedulers;
 
 public class LocationService extends IntentService {
 
-    /**
-     * 创建一个intentService，默认构造函数，内部调用super的构造函数，并设置一个线程的名称
-     */
-    public LocationService() {
-        super("aqi_location");
-    }
+	private Disposable disposable;//控制阀
+
+	/**
+	 * 创建一个intentService，默认构造函数，内部调用super的构造函数，并设置一个线程的名称
+	 */
+	public LocationService() {
+		super("aqi_location");
+	}
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-        HttpApi.getInstance().create(AQIService.class)
-                .getNearestStation("")//城市编号，暂时v1.0版本不写
+		disposable = HttpApi.getInstance().create(AQIService.class)
+				.getNearestStation("")//城市编号，暂时v1.0版本不写
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(nearestRes -> {
@@ -46,12 +49,19 @@ public class LocationService extends IntentService {
                     }
                     if (!TextUtils.isEmpty(city)) {
                         //缓存当前城市信息
-                        SPUtils.getInstance().put(GlobalConstants.SP_CURRENT_CITY_ID, city);
-                        SPUtils.getInstance().put(GlobalConstants.SP_CURRENT_CITY_NAME, cityName);
+						SPUtils.getInstance().put(GlobalConstants.SP_KEY_CURRENT_CITY_ID, city);
+						SPUtils.getInstance().put(GlobalConstants.SP_KEY_CURRENT_CITY_NAME, cityName);
                     }
                 }, throwable -> {
                     throwable.printStackTrace();
                     Log.e("test", "throwable:: " + throwable.getMessage());
                 });
     }
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (disposable!=null){
+			disposable.dispose();
+		}
+	}
 }
