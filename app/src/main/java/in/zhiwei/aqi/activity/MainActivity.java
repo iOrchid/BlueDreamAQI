@@ -498,6 +498,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
         //加载中
         mRefreshLayout.setRefreshing(true);
     }
+
 	@Override
 	protected void onStop() {
 		super.onStop();
@@ -506,6 +507,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 		}
 		mPresenter.dispose();
 	}
+
 	@Override
 	public void finish() {
 		super.finish();

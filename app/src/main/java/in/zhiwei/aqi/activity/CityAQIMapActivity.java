@@ -119,6 +119,7 @@ public class CityAQIMapActivity extends AppCompatActivity {
             }
         });
     }
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -130,6 +131,7 @@ public class CityAQIMapActivity extends AppCompatActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	@Override
 	public void finish() {
 		super.finish();
