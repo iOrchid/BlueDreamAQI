@@ -4,7 +4,7 @@
 
 从以下方式获取Demo：
 
-[![get form baiduAppStore](./images/baiduAppStore.png)](http://shouji.baidu.com/software/23484351.html)
+[![get form baiduAppStore](./images/baiduAppStore.png)](http://shouji.baidu.com/software/23722654.html)
 
 [![get from HuaweiAppStore](./images/huawei_appstore.png)](http://app.hicloud.com/app/C100221047)
 
