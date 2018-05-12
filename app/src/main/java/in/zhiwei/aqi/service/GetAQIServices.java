@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.blankj.utilcode.util.SPUtils;
@@ -91,7 +92,10 @@ public class GetAQIServices extends Service {
 		aqiDispose = aqiService.getAQIServerHtmlStr(city, language)
 				.subscribeOn(Schedulers.io())
 				.observeOn(AndroidSchedulers.mainThread())
-				.subscribe(this::parserHtml);
+				.subscribe(this::parserHtml, throwable -> {
+					throwable.printStackTrace();
+					Log.d("GetAQIServices", throwable.getMessage());
+				});
 	}
 
 	/**
