@@ -2,13 +2,7 @@
 
 梦之蓝AQI，一款旨在技术研究与学习,预报pm25等空气质量指数预报的Android版App。
 
-从以下方式获取Demo：
-
-[![get form baiduAppStore](./images/baiduAppStore.png)](http://shouji.baidu.com/software/23722654.html)
-
-[![get from HuaweiAppStore](./images/huawei_appstore.png)](http://app.hicloud.com/app/C100221047)
-
-[![get from fir.im](./images/fir.png)](https://fir.im/AQI)
+[![get form baiduAppStore](./images/baiduAppStore.png)](http://shouji.baidu.com/software/23722654.html)[![get from HuaweiAppStore](./images/huawei_appstore.png)](http://app.hicloud.com/app/C100221047)[![get from HuaweiAppStore](./images/wandoujia.png)](http://www.wandoujia.com/apps-in.zhiwei.aqi)
 
 #### 开发环境
 
@@ -24,23 +18,26 @@
 
 - [x] ~~基础功能实现，App升级、简单分享~~
 - [x] ~~Splash、widget、aqi地图、城市选择、 转场动画~~
-- [ ] 数据精确完善，App设置&反馈，前台进程、Material Design UI交互，体验&性能提升
-- [ ] 接入pm25.in数据源，Air Visual 数据源, 提供不同的UI风格
+- [ ] 数据精确，App设置&反馈，前台进程、体验&性能提升，热修复接入
+- [ ]  pm25.com ，加入aqi资讯 吸入/沉淀量检测，生活指南/指数，作为2.0 beta版开发
+- [ ] 接入pm25.in数据源，Air Visual 数据源,提供不同的UI风格
 - [ ] AQI预报、温馨（语音）提示、推送、社交化分享
 - [ ] 优化&新技术的引入，NDK、Kotlin、flutter框架实现
 - [ ] 自建python服务器，提供api，以及用户账户，上传每日城市图片
 
 #### 开源库的引用
 
-- ButterKnife
-- Okhttp3、Retrofit2
-- Gson
-- RxJava2、RxAndroid
-- LeakCannary
-- Jsoup
-- UtilCode
-- Lottie-Android
-- Tinypinyin
+-  [butterknife](https://github.com/JakeWharton/butterknife)
+- [okhttp3](https://github.com/square/okhttp)
+- [retrofit2](https://github.com/square/retrofit)
+- [gson](https://github.com/google/gson)
+- [RxJava2](https://github.com/ReactiveX/RxJava)
+- [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+- [leakcanary](https://github.com/square/leakcanary)
+- [jsoup](https://github.com/jhy/jsoup)
+- [Android UtilCode](https://github.com/Blankj/AndroidUtilCode)
+- [lottie-android](https://github.com/airbnb/lottie-android)
+- [TinyPinyin](https://github.com/promeG/TinyPinyin)
 
 目前项目中使用了以上开源库，在此表示感谢！
 
