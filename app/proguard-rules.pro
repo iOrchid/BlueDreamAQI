@@ -171,3 +171,20 @@ public static java.lang.String TABLENAME;
 
 #忽略警告
 -ignorewarnings
+
+#基线包使用，生成mapping.txt
+-printmapping mapping.txt
+#生成的mapping.txt在app/build/outputs/mapping/release路径下，移动到/app路径下
+#修复后的项目使用，保证混淆结果一致，如果第一次生成base包的时候，app目录下是没有mapping.txt的，就要注释到下面这个，不然编译会报错
+-applymapping mapping.txt
+#hotfix
+-keep class com.taobao.sophix.**{*;}
+-keep class com.ta.utdid2.device.**{*;}
+#防止inline
+-dontoptimize
+-keep class in.zhiwei.aqi.AQIApplication{*;}
+-keepclassmembers class in.zhiwei.aqi.AQIApplication {
+    public <init>();
+}
+# 如果不使用android.support.annotation.Keep则需加上此行
+-keep class in.zhiwei.aqi.SophixStubApplication$RealApplicationStub

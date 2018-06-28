@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="in.zhiwei.aqi">
+	package="in.zhiwei.aqi">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--android:hardwareAccelerated="false" Pointer 0x0, not in getPreloadedDrawables?的解决-->
-    <application
-        android:name=".AQIApplication"
-        android:allowBackup="true"
-        android:hardwareAccelerated="false"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <!--首页主页面-->
-        <activity
-            android:name=".activity.MainActivity"
-            android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
-            android:screenOrientation="portrait">
+	<uses-permission android:name="android.permission.INTERNET" />
+	<!--android:hardwareAccelerated="false" Pointer 0x0, not in getPreloadedDrawables?的解决-->
+
+	<application
+		android:name=".AqiSophixApplication"
+		android:allowBackup="true"
+		android:hardwareAccelerated="false"
+		android:icon="@mipmap/ic_launcher"
+		android:label="@string/app_name"
+		android:roundIcon="@mipmap/ic_launcher_round"
+		android:supportsRtl="true"
+		android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+		<!--首页主页面-->
+		<activity
+			android:name=".activity.MainActivity"
+			android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
+			android:screenOrientation="portrait">
 			<!--<intent-filter>-->
-				<!--<action android:name="android.intent.action.MAIN" />-->
-				<!--<category android:name="android.intent.category.LAUNCHER" />-->
+			<!--<action android:name="android.intent.action.MAIN" />-->
+			<!--<category android:name="android.intent.category.LAUNCHER" />-->
 			<!--</intent-filter>-->
-        </activity>
-        <!-- 查看aqi地图的界面-->
+		</activity>
+		<!-- 查看aqi地图的界面-->
 		<activity
 			android:name=".activity.CityAQIMapActivity"
 			android:screenOrientation="portrait"
 			android:theme="@style/AnimTheme" />
-        <!-- 关于界面-->
-        <activity
-            android:name=".activity.AboutActivity"
-            android:screenOrientation="portrait" />
+		<!-- 关于界面-->
+		<activity
+			android:name=".activity.AboutActivity"
+			android:screenOrientation="portrait" />
 		<!--Splash 界面-->
 		<activity
 			android:name=".activity.SplashActivity"
@@ -55,12 +56,12 @@
 		<!-- 根据ip获取城市定位的service -->
 		<service android:name=".service.LocationService" />
 		<service android:name=".service.GetAQIServices" />
-        <!--下载app监听-->
-        <receiver android:name=".receiver.DownloadReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
-            </intent-filter>
-        </receiver>
+		<!--下载app监听-->
+		<receiver android:name=".receiver.DownloadReceiver">
+			<intent-filter>
+				<action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+			</intent-filter>
+		</receiver>
 		<receiver android:name=".widgets.AqiWidget">
 			<intent-filter>
 				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -70,6 +71,6 @@
 				android:name="android.appwidget.provider"
 				android:resource="@xml/aqi_widget_info" />
 		</receiver>
-    </application>
+	</application>
 
 </manifest>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.animation.keyframe.BaseKeyframeAnimation;
 import com.blankj.utilcode.util.AppUtils;
+import com.taobao.sophix.SophixManager;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -79,6 +80,8 @@ public class SplashActivity extends AppCompatActivity {
 		//底部描述的字体
 		typeface = Typeface.createFromAsset(getAssets(), "fonts/curlz.ttf");
 		tvDesc.setTypeface(typeface);
+		//sophix热修复的请求服务器补丁
+		SophixManager.getInstance().queryAndLoadNewPatch();
 	}
 
 	/**
