@@ -95,6 +95,8 @@ public class CityAQIMapActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
+        //禁用webView的点击事件
+	    mWebView.setOnTouchListener((v, event) -> true);
     }
 
     /**

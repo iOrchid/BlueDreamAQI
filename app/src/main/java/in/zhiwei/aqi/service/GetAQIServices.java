@@ -33,7 +33,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 用于后台定时获取aqi数据的service
+ * 用于后台定时获取aqi数据的service，定时来更新桌面widget
  * Author: gzw48760.
  * Date: 2018/4/10 0010,19:48.
  */
