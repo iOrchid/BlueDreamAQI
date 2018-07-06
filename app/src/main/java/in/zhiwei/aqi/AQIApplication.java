@@ -20,8 +20,8 @@ import in.zhiwei.aqi.service.LocationService;
 public class AQIApplication extends Application {
 
 	@Override
-    public void onCreate() {
-        super.onCreate();
+	public void onCreate() {
+		super.onCreate();
 		//初始化配置
 		Utils.init(this);
 		// 添加中文城市词典
@@ -33,5 +33,5 @@ public class AQIApplication extends Application {
 		//启动定时服务
 		Intent timerIntent = new Intent(this, GetAQIServices.class);
 		startService(timerIntent);
-    }
+	}
 }

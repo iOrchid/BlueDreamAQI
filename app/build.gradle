@@ -11,6 +11,10 @@ android {
 		versionCode versions.versionCode
 		versionName versions.versionName
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+		resConfigs "zh-rCN","en","xhdpi"
+		ndk {
+			abiFilters "armeabi" // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
+		}
 	}
 	buildTypes {
 		release {
@@ -21,6 +25,12 @@ android {
 	compileOptions {
 		sourceCompatibility JavaVersion.VERSION_1_8
 		targetCompatibility JavaVersion.VERSION_1_8
+	}
+
+	sourceSets {
+		main {
+			jniLibs.srcDirs = ['libs']
+		}
 	}
 }
 

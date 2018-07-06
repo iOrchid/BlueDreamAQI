@@ -187,4 +187,4 @@ public static java.lang.String TABLENAME;
     public <init>();
 }
 # 如果不使用android.support.annotation.Keep则需加上此行
--keep class in.zhiwei.aqi.SophixStubApplication$RealApplicationStub
+-keep class in.zhiwei.aqi.AqiSophixApplication$RealApplicationStub
