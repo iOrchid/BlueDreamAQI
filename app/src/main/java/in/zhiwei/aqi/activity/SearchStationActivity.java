@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -66,7 +67,8 @@ public class SearchStationActivity extends AppCompatActivity implements ISearchC
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//contentView
+		//status bar
+		BarUtils.setStatusBarVisibility(this, false);
 		setContentView(R.layout.activity_widget_configure);
 		ButterKnife.bind(this);
 		initData();

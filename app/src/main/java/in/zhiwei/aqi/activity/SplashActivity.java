@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.animation.keyframe.BaseKeyframeAnimation;
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.BarUtils;
 import com.taobao.sophix.SophixManager;
 
 import java.util.List;
@@ -51,6 +52,8 @@ public class SplashActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//statusBar 隐藏
+		BarUtils.setStatusBarVisibility(this, false);
 		setContentView(R.layout.activity_splash);
 		ButterKnife.bind(this);
 		//注册动画监听,最后一个view注册监听
