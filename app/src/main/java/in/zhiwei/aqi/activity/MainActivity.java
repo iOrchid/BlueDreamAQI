@@ -242,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 			case R.id.map_menu://查看aqi地图数据
 				String city = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_ID, "beijing");
 				CityAQIMapActivity.actionActivity(this, city);
-//                break;
 				break;
 			case R.id.share_menu://分享
 				shareIt();

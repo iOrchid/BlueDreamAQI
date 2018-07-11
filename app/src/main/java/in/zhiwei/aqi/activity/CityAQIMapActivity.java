@@ -66,7 +66,7 @@ public class CityAQIMapActivity extends AppCompatActivity {
 		}
 		// init webView
 		initWebView();
-		//获取传递来的city参数
+		//获取传递来的city参数,必须是小写的拼音才行
 		String city = getIntent().getStringExtra(INTENT_KEY_CITY_ID);
 		if (!TextUtils.isEmpty(city)) {
 			loadUrl(Tools.strFormat(URL_AQI_CITY_MAP, city.toLowerCase()));
