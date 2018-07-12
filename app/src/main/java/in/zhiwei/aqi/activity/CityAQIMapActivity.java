@@ -20,6 +20,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.blankj.utilcode.util.BarUtils;
@@ -47,6 +49,10 @@ public class CityAQIMapActivity extends AppCompatActivity {
 	WebView mWebView;
 	@BindView(R.id.pb_aqi_map)
 	ProgressBar mProgressBar;//
+	@BindView(R.id.iv_error_map)
+	ImageView ivError;
+	@BindView(R.id.btn_error_map)
+	Button btnError;
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,6 +137,12 @@ public class CityAQIMapActivity extends AppCompatActivity {
 			@Override
 			public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
 				super.onReceivedError(view, request, error);
+				//internet disconnected
+				if (error.getErrorCode() == -2) {
+					mWebView.setVisibility(View.INVISIBLE);
+					ivError.setVisibility(View.VISIBLE);
+					btnError.setVisibility(View.VISIBLE);
+				}
 				Log.e("CityAQIMapActivity", "webView Client onReceived Error : " + error.getDescription());
 			}
 

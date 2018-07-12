@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,6 +54,9 @@ public class WebViewActivity extends AppCompatActivity {
 		String url = getIntent().getStringExtra("url");
 		if (url != null && !url.isEmpty()) {
 			loadUrl(url);
+		} else {
+			ToastUtils.showShort("web地址为空");
+			finish();
 		}
 	}
 

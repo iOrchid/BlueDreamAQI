@@ -260,7 +260,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 			case R.id.feedback_menu:
 				FeedbackAPI.openFeedbackActivity();
 				FeedbackAPI.setBackIcon(R.drawable.back);
-				FeedbackAPI.setHistoryTextSize(16.0f);
 				break;
 			case R.id.about_menu://关于App和作者
 				Intent intent = new Intent(this, AboutActivity.class);
