@@ -49,3 +49,4 @@
 .idea/sonarlint/
 /app/release/
 /app/release/output.json
+/.idea/caches/build_file_checksums.ser

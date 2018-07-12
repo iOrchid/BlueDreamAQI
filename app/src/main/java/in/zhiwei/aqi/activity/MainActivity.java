@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
-import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -113,8 +112,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//状态栏，隐藏
-		BarUtils.setStatusBarVisibility(this, false);
 		setContentView(R.layout.activity_main);
 		//ButterKnife init
 		ButterKnife.bind(this);
