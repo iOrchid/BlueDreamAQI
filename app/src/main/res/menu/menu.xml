@@ -27,6 +27,10 @@
 	<!--android:icon="@drawable/setting"-->
 	<!--android:title="@string/str_setting" />-->
 	<item
+		android:id="@+id/feedback_menu"
+		android:icon="@drawable/feedback"
+		android:title="@string/str_feedback" />
+	<item
 		android:id="@+id/about_menu"
 		android:icon="@drawable/about"
 		android:title="@string/str_about" />

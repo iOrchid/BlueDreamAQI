@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -256,6 +257,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 //                        .setCancelable(true)
 //                        .create().show();
 //                break;
+			case R.id.feedback_menu:
+				FeedbackAPI.openFeedbackActivity();
+				FeedbackAPI.setBackIcon(R.drawable.back);
+				FeedbackAPI.setHistoryTextSize(16.0f);
+				break;
 			case R.id.about_menu://关于App和作者
 				Intent intent = new Intent(this, AboutActivity.class);
 				startActivity(intent);
@@ -478,6 +484,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 					.show();
 		} else {
 			ToastUtils.showShort(R.string.str_version);
+//			Log.i("MainActivity", "App已是最新版本");
 		}
 	}
 
