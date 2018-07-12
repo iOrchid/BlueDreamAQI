@@ -24,7 +24,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.SPUtils;
 
 import butterknife.BindView;
@@ -57,8 +56,6 @@ public class CityAQIMapActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//status Bar
-		BarUtils.setStatusBarVisibility(this, false);
 		setContentView(R.layout.activity_aqi_map);
 		ButterKnife.bind(this);
 		setSupportActionBar(mToolbar);
@@ -108,8 +105,6 @@ public class CityAQIMapActivity extends AppCompatActivity {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 		}
-		//禁用webView的点击事件
-		mWebView.setOnTouchListener((v, event) -> true);
 	}
 
 	/**
@@ -146,17 +141,20 @@ public class CityAQIMapActivity extends AppCompatActivity {
 				Log.e("CityAQIMapActivity", "webView Client onReceived Error : " + error.getDescription());
 			}
 
+			@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+				//拦截，重载url请求，使在map中点击aqi点，不会跳转
+				return true;
+			}
 		});
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			case android.R.id.home://toolbar的返回键
-				finish();
-				break;
-			default:
-				break;
+		int i = item.getItemId();
+		if (i == android.R.id.home) {
+			finish();
 		}
 		return super.onOptionsItemSelected(item);
 	}
