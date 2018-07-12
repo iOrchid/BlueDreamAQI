@@ -137,6 +137,7 @@ public class WebViewActivity extends AppCompatActivity {
 	@Override
 	public void finish() {
 		super.finish();
-		overridePendingTransition(R.anim.main_in, R.anim.map_scale_out);
+		//转场动画，先不用
+//		overridePendingTransition(R.anim.main_in, R.anim.map_scale_out);
 	}
 }
