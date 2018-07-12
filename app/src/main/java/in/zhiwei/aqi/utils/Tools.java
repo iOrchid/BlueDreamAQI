@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
+import com.blankj.utilcode.util.AppUtils;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -411,7 +413,7 @@ public class Tools {
 				tips = "网络错误,请检查网络连接是否正常";
 				break;
 			case "Invalid index 0, size is 0"://搜索城市、站点的错误提示
-				tips  = "未查询到匹配城市或站点，请检查输入";
+				tips = "未查询到匹配城市或站点，请检查输入";
 				break;
 			default:
 				tips = error;
@@ -422,6 +424,7 @@ public class Tools {
 
 	/**
 	 * 有时候会出现中文的更新数据为空，所以使用英文的来转化一下
+	 *
 	 * @param str 英文的更新时间描述
 	 * @return 中文描述
 	 */
@@ -456,6 +459,15 @@ public class Tools {
 		}
 		String time = str.substring(str.length() - 5);
 		return updateTime.append(time).toString();
+	}
+
+	/**
+	 * 获取App的版本号
+	 *
+	 * @return versionName
+	 */
+	public static String getAppVersion() {
+		return AppUtils.getAppVersionName();
 	}
 }
 

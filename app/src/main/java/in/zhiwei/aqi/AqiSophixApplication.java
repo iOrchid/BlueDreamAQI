@@ -23,9 +23,6 @@ import com.taobao.sophix.SophixManager;
  */
 public class AqiSophixApplication extends SophixApplication {
 	private final String TAG = "SophixStubApplication";
-	private final String APP_ID = "24945841-1";//hotfix 申请的appid
-	private final String APP_SECRET = "1d1ed7fffced3e8d157343a80e315814";//hotfix的app secret
-	private final String APP_RSA_KEY = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDGOcDNHSbEXH7qE8HpckJEvVgbN6fhhX5TpbuYzEYVrUCvn+4+fkoNIH9t+xhADfNQBaR2T2j9hdVn4AZwppKkCuYiWFjQLYmKKz8xmVVUnFtmPi1aFttViBGfHS173oJUenIIWEPiWaGfgZ1S+JGLkWeVoNPzrUTuKiMUaUBbjW9/aktZ5VG0sbjbxr7w3M61Oyk4Cv8xpl6rxev0wky7nDitFg+q6fDV/smfRnY+LBPsV9WnuaA+Mxi1fakEkJdeeOF9GmzdtZZVUdejsvHYN5RlXjr0aQDj4yWFtct8CaKIIwF55xXWxVkdvrCr6hkhbRQoUAWmIyoxTUS2doojAgMBAAECggEABKYcGHNjkl1c+J5oANKWLUiHhXPjsw1PbiTH5oh76Ew85SGKE9sgX3hwpKKr6eyp1Smcts2b974oyBvf6sptS/2ZchrCUneO7zeebspazvYvypEQvTkmAbaEO0gS5gHM6rBIdlujk+5oNPZ0OxrrRuutEzxHXEKnCDLiybrCMKNw5n0CBqnovQVK68jtvMZHpuyHWX57JqqWAzgibd1cUWkbrGkQCmd2zrftutGNv3V5ImGAskMR3yEOwzSwXSYC1xVbZSUHpb2MjwAIgGXbDc7wLZ8RtiEHQH5YK2WCLXKs4ZQgGC1Zzvwmil/uXZPuMFcjf0dQm70Q63O76XyckQKBgQD6uL2XLcwxI1pmw7ltVVDHYKzaytiM5+MeZaFp8EcG81zY/BGMVZPg+K/Tl/n/jg+ckZwzir9ynGhmZmbJZYY1HpCxtxIHmvVYbbJyyEW5XWxHSFn5a4Uhj/R7UqEKWeZIAoYV8WjpPGEET+P8WB1xsWQw9GAUA7v+o6Rsv8Z7awKBgQDKZhYMq1wEQ7hEbFsDtTGu2prrUhOGlWyHF/tCjxfOkIvPXZ2r5VMx+oAFZNtxWyEylxZlBoflpU0hMV3mJOQTyPOZdFk1/xh3xouoEyoFvEC6HaRDVXeLy5aclby3UEya8ArnJvttq+MpPrPF5dJbG95GkZMF8hJy66fzPg3SKQKBgDtgvz3rkb1dcw59cg/LscrWQXm7qpeMX4SWayjsx9WEk0usPveuWMxh+ToydvmoClh5P7YRORAKrMr7m4I88hDogTolcjas40gjCq0WczTYREmJgA2LAkeVkUAXrJ4H9nq9ZkYSG1eJfiyIQyVDNQ31BhZ1+b8jt0UyOkGrFXWrAoGAZ3Yp3U4XWoK3hhqRp+KOxCAxQwuQuaJWePRUV2DIPap8HYNwXvd6QLkZiihVWKvJ24+KPhhJjaWjOM2Af23qPQbjJ1VnaQe+nTOcHk21lHr352vRlS3yTz7B/cc5Uce1cRo1qJWvvw83rtTDluz1S+eCBzbRHh/xOFeoYdodvIkCgYAc1EGZHTWoixrl202blmWb/32/LrY1TwQcw6rv0h9HNhTe/GL3FDQZAUzhXxzMg8TPGZN5hbLEjiW2r3Q6/zaD9h+pLTaOdWEWGlIbmMrUANenKdPac7YXNMHRf/SadCDtVCYKRhM320RK8dnXx4XaeWOu31nS19et+vyIQNowcw==";//hotfix的rsa key
 
 	// 此处SophixEntry应指定真正的Application，并且保证RealApplicationStub类名不被混淆。
 	@Keep
@@ -41,6 +38,9 @@ public class AqiSophixApplication extends SophixApplication {
 		initSophix();
 	}
 
+	/**
+	 * sophix热修复的配置
+	 */
 	private void initSophix() {
 		String appVersion = "0.0.0";
 		try {
@@ -52,7 +52,7 @@ public class AqiSophixApplication extends SophixApplication {
 		final SophixManager instance = SophixManager.getInstance();
 		instance.setContext(this)
 				.setAppVersion(appVersion)
-				.setSecretMetaData(APP_ID, APP_SECRET, APP_RSA_KEY)
+				.setAesKey(null)
 				.setEnableDebug(true)
 				.setEnableFullLog()
 				.setPatchLoadStatusStub((mode, code, info, handlePatchVersion) -> {
