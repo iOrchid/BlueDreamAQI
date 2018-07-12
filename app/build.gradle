@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply from: '../dependencies.gradle'
+// 在 apply plugin: 'com.android.application' 下添加
+apply plugin: 'com.aliyun.ams.emas-services'
 
 android {
 	compileSdkVersion versions.compileSdk
@@ -11,7 +13,7 @@ android {
 		versionCode versions.versionCode
 		versionName versions.versionName
 		testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-		resConfigs "zh-rCN","en","xhdpi"
+		resConfigs "zh-rCN", "en", "xhdpi"
 		ndk {
 			abiFilters "armeabi" // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
 		}
@@ -19,7 +21,7 @@ android {
 	buildTypes {
 		release {
 			minifyEnabled true
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'ams_proguard_rules.pro'
 		}
 	}
 	compileOptions {
@@ -77,6 +79,4 @@ dependencies {
 	//汉字 转 拼音
 	implementation 'com.github.promeg:tinypinyin:2.0.3' // TinyPinyin核心包，约80KB
 	implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
-	//hotfix sophix
-	implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.3'
 }
