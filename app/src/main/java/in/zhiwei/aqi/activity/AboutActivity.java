@@ -1,7 +1,6 @@
 package in.zhiwei.aqi.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,13 +14,13 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.utils.Tools;
+import in.zhiwei.aqi.webView.WebViewActivity;
 
 /**
  * 关于App及开发者
@@ -89,13 +88,16 @@ public class AboutActivity extends AppCompatActivity {
 	 * 跳转到指定的网页
 	 */
 	private void openWeb(@NonNull String url) {
-		Uri uri = Uri.parse(url);
-		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-		if (intent.resolveActivity(getPackageManager()) != null) {
-			startActivity(intent);
-		} else {
-			ToastUtils.showShort(R.string.str_tips_no_browser);
-		}
+//		Uri uri = Uri.parse(url);
+//		Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//		if (intent.resolveActivity(getPackageManager()) != null) {
+//			startActivity(intent);
+//		} else {
+//			ToastUtils.showShort(R.string.str_tips_no_browser);
+//		}
+		Intent openWeb = new Intent(this, WebViewActivity.class);
+		openWeb.putExtra("url", url);
+		startActivity(openWeb);
 	}
 
 	/**

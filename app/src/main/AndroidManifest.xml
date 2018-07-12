@@ -52,6 +52,7 @@
 				<action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
 			</intent-filter>
 		</activity>
+		<activity android:name=".webView.WebViewActivity" />
 
 		<!-- 根据ip获取城市定位的service -->
 		<service android:name=".service.LocationService" />
