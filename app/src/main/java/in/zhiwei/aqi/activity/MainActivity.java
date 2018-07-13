@@ -26,6 +26,7 @@ import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.taobao.sophix.SophixManager;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 		setContentView(R.layout.activity_main);
 		//ButterKnife init
 		ButterKnife.bind(this);
+		//sophix热修复的请求服务器补丁
+		SophixManager.getInstance().queryAndLoadNewPatch();
 		//toolsBar,使用toolbar，就需要设置app的theme为noActionbar，
 		initToolbar();
 		//服务责任协议
@@ -267,6 +270,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 				Intent intent = new Intent(this, AboutActivity.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.main_in, R.anim.main_out);
+				//多一次请求热修复补丁的机会
+				SophixManager.getInstance().queryAndLoadNewPatch();
 				break;
 			default:
 				break;

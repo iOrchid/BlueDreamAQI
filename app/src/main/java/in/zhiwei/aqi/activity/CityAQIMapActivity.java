@@ -28,6 +28,7 @@ import com.blankj.utilcode.util.SPUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.global.GlobalConstants;
 import in.zhiwei.aqi.utils.Tools;
@@ -148,6 +149,14 @@ public class CityAQIMapActivity extends AppCompatActivity {
 				return true;
 			}
 		});
+	}
+
+	@OnClick(R.id.btn_error_map)
+	public void doClick(View view) {
+		mWebView.reload();
+		ivError.setVisibility(View.INVISIBLE);
+		btnError.setVisibility(View.INVISIBLE);
+		mWebView.setVisibility(View.VISIBLE);
 	}
 
 	@Override
