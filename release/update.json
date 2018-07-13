@@ -2,6 +2,6 @@
     "appName": "梦之蓝AQI",
     "forceUpgrade": true,
     "updateUrl": "https://raw.githubusercontent.com/zhiwei1990/BlueDreamAQI/master/release/aqi.apk",
-    "upgradeInfo": "梦之蓝v1.1.0版本发布啦，新增Splash开屏、城市AQI地图、城市搜索切换等实用功能；修复了v1.0.0的已知Bug，欢迎更新体验！",
-    "versionNum": 2
+    "upgradeInfo": "梦之蓝v1.2.1版本发布啦，新增意见反馈，优化用户体验，欢迎使用~~",
+    "versionNum": 4
 }

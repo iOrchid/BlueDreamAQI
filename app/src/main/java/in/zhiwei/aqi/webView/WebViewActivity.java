@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.blankj.utilcode.util.BarUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
 import butterknife.BindView;
@@ -45,8 +44,6 @@ public class WebViewActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//status Bar
-		BarUtils.setStatusBarVisibility(this, false);
 		setContentView(R.layout.activity_webview);
 		ButterKnife.bind(this);
 		// init webView

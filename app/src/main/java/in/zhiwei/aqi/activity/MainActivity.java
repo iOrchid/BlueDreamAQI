@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 
@@ -235,28 +236,32 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.location_menu://定位到当前位置
-				getLocation();
+				if (checkNetwork()) {
+					getLocation();
+				}
+				ToastUtils.showShort("测试补丁修复");
 				break;
 			case R.id.map_menu://查看aqi地图数据
-				String city = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_ID, "beijing");
-				CityAQIMapActivity.actionActivity(this, city);
+				if (checkNetwork()) {
+					String city = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_ID, "beijing");
+					CityAQIMapActivity.actionActivity(this, city);
+				}
 				break;
 			case R.id.share_menu://分享
 				shareIt();
 				break;
 			case R.id.search_menu://搜索城市
-				Intent searchIntent = new Intent(this, SearchStationActivity.class);
-				startActivityForResult(searchIntent, SEARCH_CITY_REQUEST_CODE);
+				if (checkNetwork()) {
+
+					Intent searchIntent = new Intent(this, SearchStationActivity.class);
+					startActivityForResult(searchIntent, SEARCH_CITY_REQUEST_CODE);
+				}
 				break;
-//            case R.id.setting_menu://设置
-//                new AlertDialog.Builder(this)
-//                        .setView(R.layout.pop_aqi_level_description)
-//                        .setCancelable(true)
-//                        .create().show();
-//                break;
 			case R.id.feedback_menu:
-				FeedbackAPI.openFeedbackActivity();
-				FeedbackAPI.setBackIcon(R.drawable.back);
+				if (checkNetwork()) {
+					FeedbackAPI.openFeedbackActivity();
+					FeedbackAPI.setBackIcon(R.drawable.back);
+				}
 				break;
 			case R.id.about_menu://关于App和作者
 				Intent intent = new Intent(this, AboutActivity.class);
@@ -267,6 +272,20 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 				break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * 校验网络状态
+	 *
+	 * @return 可用与否
+	 */
+	private boolean checkNetwork() {
+		if (NetworkUtils.isAvailableByPing()) {
+			return true;
+		} else {
+			ToastUtils.showShort("网络似乎不可用哦~_~");
+			return false;
+		}
 	}
 
 	/**
