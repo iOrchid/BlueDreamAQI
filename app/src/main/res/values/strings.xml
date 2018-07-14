@@ -102,7 +102,9 @@
 	<string name="str_content_tips">1、本软件数据源相关AQI网站，数据仅供参考，本开发者不对数据权威性进行校验;\n
         2、App旨在开发技术研究学习，同时希望能给予用户相关便利;\n
         3、AQI关注空气质量、关爱生命健康，使用本软件的任何后果用户自担;\n
-        4、点击确认则表示同意协议，并责任自担，否则请取消，并卸载，谢谢！</string>
+        4、点击确认则表示同意协议，并责任自担，否则请取消，并卸载，谢谢!\n\n
+		~_~用心守卫脚下每一寸的坚实土地、呵护每一片纯净的蓝天，为你、为我、为子孙后世。愿所有正知的人健康幸福@_@
+	</string>
 	<string name="str_version_splash">梦之蓝AQI  v%s</string>
 	<string name="str_long_click_tips">长按背景,可查看aqi等级详情</string>
 	<string name="str_aqi_widget">175</string>
