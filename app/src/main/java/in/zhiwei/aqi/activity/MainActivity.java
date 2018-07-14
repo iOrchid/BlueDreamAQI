@@ -47,7 +47,7 @@ import in.zhiwei.aqi.entity.SimpleAQIBean;
 import in.zhiwei.aqi.global.GlobalConstants;
 import in.zhiwei.aqi.network.AQIService;
 import in.zhiwei.aqi.network.HttpApi;
-import in.zhiwei.aqi.presenter.CityAQIPresenter;
+import in.zhiwei.aqi.presenter.MainPresenter;
 import in.zhiwei.aqi.utils.Tools;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 	private int mAirPressure;//压强
 	private Disposable disposable;
 
-	private CityAQIPresenter mPresenter;//用于控制fragment UI的presenter
+	private MainPresenter mPresenter;//用于控制fragment UI的presenter
 	private static final ButterKnife.Action<View> LIST_INVISIBLE = (view, index) -> view.setVisibility(View.INVISIBLE);//控制list里面的view 的不显
 	private static final ButterKnife.Action<View> LIST_VISIBLE = (view, index) -> view.setVisibility(View.VISIBLE);//控制list中的view的显
 
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 		//initData
 		initData();
 		//
-		mPresenter = new CityAQIPresenter(this);
+		mPresenter = new MainPresenter(this);
 		String html = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_AQI_SERVER_DATA);
 		if (!html.isEmpty()) {
 			mPresenter.parserHtml(html);
