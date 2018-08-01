@@ -71,7 +71,7 @@ dependencies {
 	debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
 	releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 	//android utils
-	implementation 'com.blankj:utilcode:1.17.0'
+	implementation 'com.blankj:utilcode:1.17.3'
 	// jsoup HTML parser library @ https://jsoup.org/
 	implementation 'org.jsoup:jsoup:1.11.2'
 	//lottie Android 炫酷动画依赖库

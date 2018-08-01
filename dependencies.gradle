@@ -3,7 +3,7 @@ ext.versions = [
         compileSdk        : 27,
         targetSdk         : 27,
         buildTools        : '27.0.3',
-        versionName         : '1.2.1',
-        versionCode         : 4,
+        versionName         : '1.2.2',
+        versionCode         : 5,
         supportLib        : '27.1.1'
 ]

@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 				if (checkNetwork()) {
 					getLocation();
 				}
-				ToastUtils.showShort("测试补丁修复");
+				
 				break;
 			case R.id.map_menu://查看aqi地图数据
 				if (checkNetwork()) {

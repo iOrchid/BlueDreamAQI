@@ -153,11 +153,11 @@ public class MainPresenter implements IAQIContract.IAQIPresenter {
 				.subscribe(upgradeRes -> {
 							int localVersion = AppUtils.getAppVersionCode();
 							int versionNum = upgradeRes.getVersionNum();
-							mAQIView.onCheckUpgradeSuccess(localVersion < versionNum);
+							boolean forceUpgrade = upgradeRes.isForceUpgrade();
+							boolean hasNewVersion = localVersion < versionNum;
+							mAQIView.onCheckUpgradeSuccess(hasNewVersion && forceUpgrade);
 							apkUrl = upgradeRes.getUpdateUrl();
 							updateInfo = upgradeRes.getUpgradeInfo();
-							// TODO: 2018/7/14 0014，可以考虑是否强制升级
-//							upgradeRes.isForceUpgrade();
 						},
 						throwable -> {
 							throwable.printStackTrace();
