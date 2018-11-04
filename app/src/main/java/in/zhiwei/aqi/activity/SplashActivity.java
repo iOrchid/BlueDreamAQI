@@ -3,8 +3,6 @@ package in.zhiwei.aqi.activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,11 +11,12 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.animation.keyframe.BaseKeyframeAnimation;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.BarUtils;
-import com.taobao.sophix.SophixManager;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
@@ -60,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
 		mLottieViews.get(mLottieViews.size() - 1).addAnimatorUpdateListener(animation -> {
 			float animatedValue = (float) animation.getAnimatedValue();
 			//动画结束，进入主界面
-			if (animatedValue == 1.0f) {
+			if (animatedValue > 0.9f) {
 				//启动主界面
 				disposable = Observable.timer(100, TimeUnit.MILLISECONDS)
 						.subscribeOn(Schedulers.io())
@@ -83,8 +82,6 @@ public class SplashActivity extends AppCompatActivity {
 		//底部描述的字体
 		typeface = Typeface.createFromAsset(getAssets(), "fonts/curlz.ttf");
 		tvDesc.setTypeface(typeface);
-		//sophix热修复的请求服务器补丁
-		SophixManager.getInstance().queryAndLoadNewPatch();
 	}
 
 	/**

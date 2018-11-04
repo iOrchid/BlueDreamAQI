@@ -2,8 +2,9 @@ package in.zhiwei.aqi.utils;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 /**
  * 动画相关的工具类

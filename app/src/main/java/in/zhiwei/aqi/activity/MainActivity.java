@@ -4,17 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,15 +11,24 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.alibaba.sdk.android.feedback.impl.FeedbackAPI;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.taobao.sophix.SophixManager;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
@@ -117,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 		setContentView(R.layout.activity_main);
 		//ButterKnife init
 		ButterKnife.bind(this);
-		//sophix热修复的请求服务器补丁
-		SophixManager.getInstance().queryAndLoadNewPatch();
 		//toolsBar,使用toolbar，就需要设置app的theme为noActionbar，
 		initToolbar();
 		//服务责任协议
@@ -261,17 +257,12 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 				}
 				break;
 			case R.id.feedback_menu:
-				if (checkNetwork()) {
-					FeedbackAPI.openFeedbackActivity();
-					FeedbackAPI.setBackIcon(R.drawable.back);
-				}
+
 				break;
 			case R.id.about_menu://关于App和作者
 				Intent intent = new Intent(this, AboutActivity.class);
 				startActivity(intent);
 				overridePendingTransition(R.anim.main_in, R.anim.main_out);
-				//多一次请求热修复补丁的机会
-				SophixManager.getInstance().queryAndLoadNewPatch();
 				break;
 			default:
 				break;

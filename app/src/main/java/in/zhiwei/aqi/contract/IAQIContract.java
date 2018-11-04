@@ -1,7 +1,6 @@
 package in.zhiwei.aqi.contract;
 
-import android.support.annotation.NonNull;
-
+import androidx.annotation.NonNull;
 import in.zhiwei.aqi.BasePresenter;
 import in.zhiwei.aqi.BaseView;
 import in.zhiwei.aqi.entity.AQIEntity;

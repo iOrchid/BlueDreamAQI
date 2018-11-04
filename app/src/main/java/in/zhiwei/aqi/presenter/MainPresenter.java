@@ -4,7 +4,6 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.FileUtils;
@@ -18,6 +17,7 @@ import org.jsoup.select.Elements;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.contract.IAQIContract;
 import in.zhiwei.aqi.entity.AQIEntity;

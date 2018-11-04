@@ -6,7 +6,7 @@
 	<!--android:hardwareAccelerated="false" Pointer 0x0, not in getPreloadedDrawables?的解决-->
 
 	<application
-		android:name=".AqiSophixApplication"
+		android:name=".AQIApplication"
 		android:allowBackup="false"
 		android:hardwareAccelerated="false"
 		android:icon="@mipmap/ic_launcher"
@@ -19,10 +19,9 @@
 			android:name=".activity.MainActivity"
 			android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
 			android:screenOrientation="portrait">
-			<!--<intent-filter>-->
-			<!--<action android:name="android.intent.action.MAIN" />-->
-			<!--<category android:name="android.intent.category.LAUNCHER" />-->
-			<!--</intent-filter>-->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+			</intent-filter>
 		</activity>
 		<!-- 查看aqi地图的界面-->
 		<activity
@@ -74,7 +73,7 @@
 		</receiver>
 
 		<provider
-			android:name="android.support.v4.content.FileProvider"
+			android:name="androidx.core.content.FileProvider"
 			android:authorities="${applicationId}.provider"
 			android:exported="false"
 			android:grantUriPermissions="true">

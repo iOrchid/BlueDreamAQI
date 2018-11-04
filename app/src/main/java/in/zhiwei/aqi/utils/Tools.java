@@ -1,7 +1,6 @@
 package in.zhiwei.aqi.utils;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.AppUtils;
@@ -22,6 +21,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
 import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.entity.AQIModel;
 import in.zhiwei.aqi.entity.SimpleAQIBean;

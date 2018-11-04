@@ -1,8 +1,8 @@
 package in.zhiwei.aqi.presenter;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import in.zhiwei.aqi.contract.ISearchContract;
 import in.zhiwei.aqi.network.AQIService;
 import in.zhiwei.aqi.network.HttpApi;

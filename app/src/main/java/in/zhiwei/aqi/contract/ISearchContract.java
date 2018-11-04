@@ -1,9 +1,8 @@
 package in.zhiwei.aqi.contract;
 
-import android.support.annotation.NonNull;
-
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import in.zhiwei.aqi.BasePresenter;
 import in.zhiwei.aqi.BaseView;
 import in.zhiwei.aqi.network.res.SearchRes;

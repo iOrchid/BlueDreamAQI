@@ -2,13 +2,12 @@ package in.zhiwei.aqi.service;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.blankj.utilcode.util.SPUtils;
-import com.taobao.sophix.SophixManager;
 
+import androidx.annotation.Nullable;
 import in.zhiwei.aqi.global.GlobalConstants;
 import in.zhiwei.aqi.network.AQIService;
 import in.zhiwei.aqi.network.HttpApi;
@@ -36,8 +35,6 @@ public class LocationService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
-		//sophix热修复的请求服务器补丁
-		SophixManager.getInstance().queryAndLoadNewPatch();
 		disposable = HttpApi.getInstance().create(AQIService.class)
 				.getNearestStation("")//城市编号，暂时v1.0版本不写
                 .subscribeOn(Schedulers.io())

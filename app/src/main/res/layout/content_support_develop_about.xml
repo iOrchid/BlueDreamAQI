@@ -13,7 +13,7 @@
     app:layout_constraintTop_toBottomOf="@+id/cl_info_about"
     tools:showIn="@layout/activity_about">
 
-    <android.support.constraint.ConstraintLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_bug_report_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,9 +49,9 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/iv_bug_about"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_bug_report_about" />
-    </android.support.constraint.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_github_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -86,9 +86,9 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/iv_fork_about"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_fork_about" />
-    </android.support.constraint.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_wechat_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -123,9 +123,9 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/iv_wechat_about"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_wechat_about" />
-    </android.support.constraint.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_donate_about"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -161,6 +161,6 @@
             android:textSize="12sp"
             app:layout_constraintLeft_toRightOf="@+id/iv_donate_about"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_donate_about" />
-    </android.support.constraint.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

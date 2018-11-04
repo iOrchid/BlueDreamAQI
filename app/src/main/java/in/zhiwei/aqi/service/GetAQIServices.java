@@ -5,8 +5,6 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -20,6 +18,8 @@ import org.jsoup.select.Elements;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.entity.AQIModel;
 import in.zhiwei.aqi.global.GlobalConstants;
@@ -51,12 +51,6 @@ public class GetAQIServices extends Service {
 					//请求aqi
 					getServerAQI(city);
 				});
-//		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-//		int five = 5000; // 这是5s
-//		long triggerAtTime = SystemClock.elapsedRealtime() + five;
-//		Intent i = new Intent(this, AlarmReceiver.class);
-//		PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
-//		manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
 		return Service.START_STICKY;
 	}
 

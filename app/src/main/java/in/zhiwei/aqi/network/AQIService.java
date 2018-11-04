@@ -1,8 +1,7 @@
 package in.zhiwei.aqi.network;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import in.zhiwei.aqi.network.res.NearestRes;
 import in.zhiwei.aqi.network.res.SearchRes;
 import in.zhiwei.aqi.network.res.UpgradeRes;
