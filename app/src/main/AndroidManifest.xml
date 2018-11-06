@@ -18,6 +18,7 @@
 		<activity
 			android:name=".activity.MainActivity"
 			android:configChanges="orientation|keyboard|keyboardHidden|screenLayout"
+			android:launchMode="singleTask"
 			android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.VIEW" />
@@ -79,7 +80,7 @@
 			android:grantUriPermissions="true">
 			<meta-data
 				android:name="android.support.FILE_PROVIDER_PATHS"
-				android:resource="@xml/file_paths"/>
+				android:resource="@xml/file_paths" />
 		</provider>
 	</application>
 

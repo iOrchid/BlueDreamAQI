@@ -59,7 +59,7 @@ public class SplashActivity extends AppCompatActivity {
 		mLottieViews.get(mLottieViews.size() - 1).addAnimatorUpdateListener(animation -> {
 			float animatedValue = (float) animation.getAnimatedValue();
 			//动画结束，进入主界面
-			if (animatedValue > 0.9f) {
+			if (animatedValue == 0.97524375f) {
 				//启动主界面
 				disposable = Observable.timer(100, TimeUnit.MILLISECONDS)
 						.subscribeOn(Schedulers.io())
