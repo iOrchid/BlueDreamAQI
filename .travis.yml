@@ -1,0 +1,32 @@
+language: android
+sudo: required
+jdk: oraclejdk8
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+  - $HOME/.android/build-cache
+
+env:
+ global:
+ - ANDROID_API=28
+ - ANDROID_BUILD_TOOLS=28.0.3
+ - ADB_INSTALL_TIMEOUT=5 # Minutes.
+
+android:
+  components:
+  - tools
+  - tools # Running this twice get's the latest build tools (https://github.com/codepath/android_guides/wiki/Setting-up-Travis-CI)
+  - platform-tools
+  - android-${ANDROID_API}
+  - build-tools-${ANDROID_BUILD_TOOLS}
+  - extra
+
+script:
+  - chmod +x ./gradlew
+  - "./gradlew clean test build"
