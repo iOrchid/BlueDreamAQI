@@ -5,8 +5,8 @@ ext{
 	target_version = 28
 	gradle_plugin_version = '3.2.1'
 	//app config
-	app_version_code = 5
-	app_version_name = "1.2.2"
+	app_version_code = 6
+	app_version_name = "2.0.0"
 
 	//support config
 	appcompat_version = '1.0.2'
