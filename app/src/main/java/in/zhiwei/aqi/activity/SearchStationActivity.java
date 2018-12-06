@@ -10,15 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.ToastUtils;
-import com.github.promeg.pinyinhelper.Pinyin;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,14 +18,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnEditorAction;
+import com.blankj.utilcode.util.KeyboardUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.adapter.SearchCityAdapter;
 import in.zhiwei.aqi.contract.ISearchContract;
 import in.zhiwei.aqi.global.GlobalConstants;
 import in.zhiwei.aqi.network.res.SearchRes;
 import in.zhiwei.aqi.presenter.SearchPresenter;
+import in.zhiwei.aqi.utils.PinyinUtils;
 import in.zhiwei.aqi.utils.Tools;
 import in.zhiwei.aqi.widgets.AqiWidget;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * widget配置的界面，在首次添加widget的时候，触发
@@ -152,7 +150,7 @@ public class SearchStationActivity extends AppCompatActivity implements ISearchC
 	@Override
 	public void onItemClicked(@NonNull String name) {
 		//保存选择的城市, pinyin
-		String city = Pinyin.toPinyin(name, "");
+		String city = PinyinUtils.ccs2Pinyin(name, "");
 		SPUtils.getInstance().put(GlobalConstants.SP_KEY_CURRENT_CITY_NAME, name);
 		SPUtils.getInstance().put(GlobalConstants.SP_KEY_CURRENT_CITY_ID, city);
 		//回传

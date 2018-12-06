@@ -1,8 +1,8 @@
-<svg width="1024" height="512" xmlns="http://www.w3.org/2000/svg">
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
  <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
  <g>
   <title>background</title>
-  <rect fill="#fff" id="canvas_background" height="514" width="514" y="-1" x="-1"/>
+  <rect fill="#fff" id="canvas_background" height="512" width="1024" y="0" x="0"/>
   <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
    <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
   </g>

@@ -110,9 +110,6 @@ dependencies {
 	implementation "org.jsoup:jsoup:$jsoup_version"
 	//lottie Android 炫酷动画依赖库
 	implementation "com.airbnb.android:lottie:$lottie_version"
-	//汉字 转 拼音
-	implementation "com.github.promeg:tinypinyin:$tinypinyin_version" // TinyPinyin核心包，约80KB
-	implementation "com.github.promeg:tinypinyin-lexicons-android-cncity:$tinypinyin_version"
 	//</editor-folder>
 
 	//<editor-folder desc="Architecture components LifeCycle & Room">

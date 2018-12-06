@@ -1,10 +1,7 @@
 package in.zhiwei.aqi;
 
 import android.app.Application;
-
 import com.blankj.utilcode.util.Utils;
-import com.github.promeg.pinyinhelper.Pinyin;
-import com.github.promeg.tinypinyin.lexicons.android.cncity.CnCityDict;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
@@ -20,8 +17,6 @@ public class AQIApplication extends Application {
 		super.onCreate();
 		//初始化配置
 		Utils.init(this);
-		// 添加中文城市词典
-		Pinyin.init(Pinyin.newConfig().with(CnCityDict.getInstance(this)));
 		LeakCanary.install(this);
 	}
 }
