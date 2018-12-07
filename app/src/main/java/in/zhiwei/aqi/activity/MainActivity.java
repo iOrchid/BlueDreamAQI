@@ -10,14 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.NetworkUtils;
-import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.ToastUtils;
-
-import java.lang.reflect.Method;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -29,11 +21,10 @@ import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import butterknife.BindView;
-import butterknife.BindViews;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnLongClick;
+import butterknife.*;
+import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import in.zhiwei.aqi.R;
 import in.zhiwei.aqi.adapter.NearbyAdapter;
 import in.zhiwei.aqi.adapter.SimpleAQIAdapter;
@@ -50,6 +41,9 @@ import in.zhiwei.aqi.utils.Tools;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * 主界面activity，内部嵌套fragment，用于展示城市aqi信息，以及选择城市等
@@ -185,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 		mRvSimpleAQI.setAdapter(mSimpleAQIAdapter);
 		//附近监测站点recyclerView
 		LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-		layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+		layoutManager.setOrientation(RecyclerView.VERTICAL);
 		mRvNearby.setLayoutManager(layoutManager);
 		mNearAdapter = new NearbyAdapter();
 		//注册监听，item点击
