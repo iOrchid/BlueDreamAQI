@@ -11,7 +11,6 @@ import `in`.zhiwei.aqi.network.AQIService
 import `in`.zhiwei.aqi.network.HttpApi
 import `in`.zhiwei.aqi.presenter.MainPresenter
 import `in`.zhiwei.aqi.utils.Tools
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -24,7 +23,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.NestedScrollView
@@ -89,7 +87,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
     private var mWindSpeed: Int = 0//风速
     private var mHumidity: Int = 0//湿度
     private var mAirPressure: Int = 0//压强
-    private lateinit var disposable: Disposable
+    private var disposable: Disposable? = null
 
     private lateinit var mPresenter: MainPresenter//用于控制fragment UI的presenter
 
@@ -224,13 +222,14 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
             R.id.map_menu//查看aqi地图数据
             -> if (checkNetwork()) {
                 val city = SPUtils.getInstance().getString(GlobalConstants.SP_KEY_CURRENT_CITY_ID, "beijing")
-                CityAQIMapActivity.actionActivity(this, city)
+                val intent = Intent(this, CityAQIMapActivity::class.java)
+                intent.putExtra("city_id", city)
+                startActivity(intent)
             }
             R.id.share_menu//分享
             -> shareIt()
             R.id.search_menu//搜索城市
             -> if (checkNetwork()) {
-
                 val searchIntent = Intent(this, SearchStationActivity::class.java)
                 startActivityForResult(searchIntent, SEARCH_CITY_REQUEST_CODE)
             }
@@ -256,11 +255,11 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
      * @return 可用与否
      */
     private fun checkNetwork(): Boolean {
-        if (NetworkUtils.isAvailableByPing()) {
-            return true
+        return if (NetworkUtils.isAvailableByPing()) {
+            true
         } else {
             ToastUtils.showShort("网络似乎不可用哦~_~")
-            return false
+            false
         }
     }
 
@@ -299,49 +298,23 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         startActivity(Intent.createChooser(textIntent, getString(R.string.str_share_title)))
     }
 
-    /**
-     * 覆写函数，用于显示出icon和text
-     *
-     * @param view view
-     * @param menu menu对象
-     * @return 返回boolean
-     */
-    @SuppressLint("RestrictedApi")
-    override fun onPrepareOptionsPanel(view: View, menu: Menu?): Boolean {
-        if (menu != null) {
-            if (menu.javaClass != MenuBuilder::class.java) {
-                return super.onPrepareOptionsPanel(view, menu)
-            }
-            try {
-                @SuppressLint("PrivateApi") val m =
-                    menu.javaClass.getDeclaredMethod("setOptionalIconsVisible", java.lang.Boolean.TYPE)
-                m.isAccessible = true
-                m.invoke(menu, true)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-        }
-        return super.onPrepareOptionsPanel(view, menu)
-    }
-
     override fun onGetAQISuccess(aqiEntity: AQIEntity) {
         val aqiModel = aqiEntity.aqiModel
         val otherAQIData = aqiEntity.otherAQIData
         //header 设置
-        setHeaderData(aqiModel!!)
+        setHeaderData(aqiModel)
         //温度，风速设置
-        setTempWind(aqiModel, otherAQIData?.windDirection!!)
+        setTempWind(aqiModel, otherAQIData?.windDirection)
         //气象数据
-        setWeatherData(aqiModel)
+        setWeatherData(aqiModel!!)
         //附近站点监测数据
         mNearAdapter.setData(aqiModel.nearest!!)
         //简单aqi预报list
-        val aqiBeans = aqiModel.forecast!!.aqi
+        val aqiBeans = aqiModel.forecast?.aqi
         val simpleAQiList = Tools.getSimpleAQiList(this, aqiBeans!!)
         mSimpleAQIAdapter.setData(simpleAQiList)
         //设置toolbar的title
-        mToolbar.title = aqiModel.city!!.name
+        mToolbar.title = aqiModel.city?.name
         //refreshlayout
         mRefreshLayout.isRefreshing = false
         //滚动到顶部
@@ -357,8 +330,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
      * @param aqiModel      aqi对象
      * @param windDirection
      */
-    private fun setTempWind(aqiModel: AQIModel, windDirection: String) {
-        val iaqi = aqiModel.iaqi
+    private fun setTempWind(aqiModel: AQIModel?, windDirection: String?) {
+        val iaqi = aqiModel?.iaqi
         for (bean in iaqi!!) {
             when (bean.p) {
                 "pm25"//pm2.5
@@ -371,6 +344,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
                 }
                 "o3"//臭氧O3
                 -> {
+                    //do nothing
                 }
                 "no2"//二氧化氮
                 -> {
@@ -414,10 +388,10 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
      *
      * @param aqiModel aqi数据对象
      */
-    private fun setHeaderData(aqiModel: AQIModel) {
-        val mAQI = aqiModel.aqi
+    private fun setHeaderData(aqiModel: AQIModel?) {
+        val mAQI = aqiModel?.aqi
         tvAQINumHeader.text = Tools.strFormat("%d", mAQI)//aqi值
-        tvAQILevelNameHeader.text = Tools.getAQILevel(this, mAQI)//污染程度
+        tvAQILevelNameHeader.text = Tools.getAQILevel(this, mAQI!!)//污染程度
         //设置字体颜色 aqi > 150 颜色白色，否则，黑色
         val colorBG = if (mAQI > 150) Color.WHITE else Color.BLACK
         tvAQINumHeader.setTextColor(colorBG)
@@ -426,8 +400,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         val colorBanner =
             if (mAQI > 150) resources.getColor(R.color.colorWhiteTranslate) else resources.getColor(R.color.colorBlackTranslate)
         //有可能不是中文，会出现 Attempt to invoke virtual method 'java.lang.String in.zhiwei.aqi.entity.AQIModel$TimeBean$SBean$CnBean.getTime()' on a null object reference
-        var updateTime = aqiModel.time!!.s!!.en!!.time//先默认英文的时间，如果是是中文环境，在重新赋值
-        val cnBean = aqiModel.time!!.s!!.cn
+        var updateTime = aqiModel.time?.s?.en?.time//先默认英文的时间，如果是是中文环境，在重新赋值
+        val cnBean = aqiModel.time?.s?.cn
         if (Tools.isChinese) {
             updateTime = if (cnBean == null) Tools.translateEn(updateTime!!) else cnBean.time
         }
@@ -435,7 +409,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         val dominentpol = aqiModel.dominentpol
         val strBanner = if (dominentpol == null) updateTime else Tools.strFormat(
             getString(R.string.str_api_update_time),
-            updateTime!!,
+            updateTime,
             dominentpol
         )
         tvAQIUpdateTimeHeader.text = strBanner//更新时间
@@ -448,17 +422,17 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
      * @param aqiModel aqi的数据对象
      */
     private fun setWeatherData(aqiModel: AQIModel) {
-        val sBean = aqiModel.time!!.s
+        val sBean = aqiModel.time?.s
         //默认就支持中文，英文
-        var updateTime = sBean!!.en!!.time//先默认英文的时间，如果是是中文环境，在重新赋值
-        val cnBean = sBean.cn
+        var updateTime = sBean?.en?.time//先默认英文的时间，如果是是中文环境，在重新赋值
+        val cnBean = sBean?.cn
         if (Tools.isChinese) {
             updateTime = if (cnBean == null) Tools.translateEn(updateTime!!) else cnBean.time
         }
-        val city = aqiModel.city!!.name
-        val weekDayTime = updateTime!!.substring(4, updateTime.length)
+        val city = aqiModel.city?.name
+        val weekDayTime = updateTime?.substring(4, updateTime.length)
         tvCityTimeWeatherData.text =
-                Tools.strFormat(getString(R.string.str_current_weather_data), city!!, weekDayTime)
+                Tools.strFormat(getString(R.string.str_current_weather_data), city, weekDayTime)
         tvTemperatureWeatherData.text = Tools.strFormat(getString(R.string.str_temperature_num), mTemperature)
         tvHumidityWeatherData.text = Tools.strFormat(getString(R.string.str_humidity), mHumidity)
         tvAirPressureWeatherData.text = Tools.strFormat(getString(R.string.str_air_pressure), mAirPressure)
@@ -503,9 +477,9 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SEARCH_CITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val stationName = data!!.getStringExtra(INTENT_KEY_STATION_NAME)
+            val stationName = data?.getStringExtra(INTENT_KEY_STATION_NAME)
             mRefreshLayout.isRefreshing = true
-            mPresenter.changeStation(stationName)
+            mPresenter.changeStation(stationName!!)
         }
     }
 
@@ -518,7 +492,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
 
     override fun onStop() {
         super.onStop()
-        disposable.dispose()
+        disposable?.dispose()
         mPresenter.dispose()
     }
 

@@ -4,9 +4,6 @@ import `in`.zhiwei.aqi.R
 import `in`.zhiwei.aqi.global.GlobalConstants
 import `in`.zhiwei.aqi.utils.Tools
 import android.annotation.TargetApi
-import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
@@ -60,7 +57,7 @@ class CityAQIMapActivity : AppCompatActivity() {
         initWebView()
         //获取传递来的city参数,必须是小写的拼音才行
         val city = intent.getStringExtra(INTENT_KEY_CITY_ID)
-        if (!TextUtils.isEmpty(city)) {
+        if (city != null && !TextUtils.isEmpty(city)) {
             loadUrl(Tools.strFormat(URL_AQI_CITY_MAP, city.toLowerCase()))
         }
     }
@@ -76,7 +73,7 @@ class CityAQIMapActivity : AppCompatActivity() {
         //启用缓存
         webSettings.setAppCacheEnabled(true)
         webSettings.loadWithOverviewMode = true
-        mWebView!!.isVerticalScrollBarEnabled = false
+        mWebView.isVerticalScrollBarEnabled = false
         webSettings.setSupportZoom(true)
         //用于适配内容
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -93,10 +90,6 @@ class CityAQIMapActivity : AppCompatActivity() {
         mWebView.loadUrl(url)//url 为需要加载的html地址
         //设置WebViewClient类
         mWebView.webViewClient = object : WebViewClient() {
-            //设置加载前的函数
-            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
-                mProgressBar.visibility = View.VISIBLE
-            }
 
             //设置结束加载函数
             override fun onPageFinished(view: WebView, url: String) {
@@ -113,12 +106,6 @@ class CityAQIMapActivity : AppCompatActivity() {
                     btnError.visibility = View.VISIBLE
                 }
                 Log.e("CityAQIMapActivity", "webView Client onReceived Error : " + error.description)
-            }
-
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-            override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
-                //拦截，重载url请求，使在map中点击aqi点，不会跳转
-                return true
             }
         }
     }
@@ -146,19 +133,7 @@ class CityAQIMapActivity : AppCompatActivity() {
 
     companion object {
         //val声明常量，添加const，可以使得常量给java共享使用，似乎是这么回事
-        private const val INTENT_KEY_CITY_ID = "city_id"//用于查看地图数据的城市id，拼音或英文
+        val INTENT_KEY_CITY_ID = "city_id"//用于查看地图数据的城市id，拼音或英文
         private const val URL_AQI_CITY_MAP = "http://aqicn.org/map/%s/m/"//查看城市aqi地图信息,here表示当前城市
-
-        /**
-         * 提供外部调用本Activity的便捷方式
-         *
-         * @param context context
-         * @param cityID  城市id 的string
-         */
-        fun actionActivity(context: Context, cityID: String) {
-            val intent = Intent(context, CityAQIMapActivity::class.java)
-            intent.putExtra(INTENT_KEY_CITY_ID, cityID)
-            context.startActivity(intent)
-        }
     }
 }

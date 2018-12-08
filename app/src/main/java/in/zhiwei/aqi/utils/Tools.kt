@@ -181,7 +181,7 @@ object Tools {
      * @param args   传来的参数
      * @return 格式后的string
      */
-    fun strFormat(format: String, vararg args: Any): String {
+    fun strFormat(format: String, vararg args: Any?): String {
         return String.format(Locale.CHINESE, format, *args)
     }
 
