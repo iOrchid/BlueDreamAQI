@@ -11,6 +11,7 @@ import `in`.zhiwei.aqi.network.AQIService
 import `in`.zhiwei.aqi.network.HttpApi
 import `in`.zhiwei.aqi.presenter.MainPresenter
 import `in`.zhiwei.aqi.utils.Tools
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
@@ -208,8 +209,15 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener, 
         onRefresh()
     }
 
+    @SuppressLint("PrivateApi")
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+        //反射，设置icon,其实也可以变相的将menu的xml中配置item时候，item内部嵌套menu-items，来指定icon的实现
+        val clazz = Class.forName("androidx.appcompat.view.menu.MenuBuilder")
+        val m = clazz.getDeclaredMethod("setOptionalIconsVisible",Boolean::class.java)
+        m.isAccessible = true
+        m.invoke(menu, true)
+
         return super.onCreateOptionsMenu(menu)
     }
 
