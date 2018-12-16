@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-	android:initialKeyguardLayout="@layout/aqi_widget"
-	android:initialLayout="@layout/aqi_widget"
-	android:minHeight="40dp"
-	android:minWidth="40dp"
-	android:previewImage="@drawable/aqi_preview"
-	android:updatePeriodMillis="1800000"
-	android:widgetCategory="home_screen" />

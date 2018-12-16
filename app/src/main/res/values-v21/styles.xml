@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="DesignThemeNoActionbar" parent="Theme.Design.Light.NoActionBar">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <!--状态栏透明-->
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
-</resources>
