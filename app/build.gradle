@@ -18,14 +18,17 @@ android {
 		versionName app_version_name
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 		resConfigs "zh-rCN", "en", "xxhdpi"
-		ndk {
-			abiFilters "armeabi" // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
-		}
+//		ndk {
+//			abiFilters "armeabi" // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
+//		}
 	}
 
 	buildTypes {
 		release {
-			minifyEnabled true
+			zipAlignEnabled true  //是否支持zip
+			shrinkResources true  // 移除无用的resource文件
+			minifyEnabled true    //是否进行混淆
+			debuggable false      // 是否可以debug
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'ams_proguard_rules.pro'
 		}
 	}
@@ -88,8 +91,8 @@ dependencies {
 	implementation "com.google.dagger:dagger:$dagger_version"
 	kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
-	implementation "com.jakewharton:butterknife:$butterknife_version"
-	kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
+//	implementation "com.jakewharton:butterknife:$butterknife_version"
+//	kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 	//</editor-folder>
 
 	//<editor-folder desc="性能监测">
