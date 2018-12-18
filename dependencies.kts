@@ -1,55 +1,6 @@
-apply plugin: 'com.android.application'
-
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-//导入versions 配置
-apply from: '../versions.gradle'
-
-android {
-	compileSdkVersion compile_sdk_version
-
-	defaultConfig {
-		applicationId "in.zhiwei.aqi"
-		minSdkVersion min_sdk_version
-		targetSdkVersion target_version
-		versionCode app_version_code
-		versionName app_version_name
-		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-		resConfigs "zh-rCN", "en", "xxhdpi"
-//		ndk {
-//			abiFilters "armeabi" // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
-//		}
-	}
-
-	buildTypes {
-		release {
-			zipAlignEnabled true  //是否支持zip
-			shrinkResources true  // 移除无用的resource文件
-			minifyEnabled true    //是否进行混淆
-			debuggable false      // 是否可以debug
-			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'ams_proguard_rules.pro'
-		}
-	}
-
-	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_8
-		targetCompatibility JavaVersion.VERSION_1_8
-	}
-
-	sourceSets {
-		main {
-			jniLibs.srcDirs = ['libs']
-		}
-	}
-
-	dataBinding {
-		enabled = true
-	}
-}
-
+//用于 更新版本号的检测，这个文件对项目工程无影响
 dependencies {
-	implementation fileTree(include: ['*.jar'], dir: 'libs')
+	implementation fileTree (include: ['*.jar'], dir: 'libs')
 
 	//<editor-folder desc="support"
 	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.11"
