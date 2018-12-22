@@ -47,6 +47,10 @@ android {
 }
 
 dependencies {
+	//todo 注意，如果出现gradle编译失败，下载依赖库失败，可以尝试
+	//todo 1、添加阿里云的jcenter库，
+	//todo 2、AS的settings--build--compiler去掉 --offline
+	//todo 3、将下方的依赖库$符号引用的版本号，替换成数字，基本就能解决掉gradle更新依赖的错误了。
 	implementation fileTree(include: ['*.jar'], dir: 'libs')
 
 	//<editor-folder desc="support"
@@ -60,6 +64,7 @@ dependencies {
 
 	//<editor-folder desc="单元测试">
 	testImplementation "junit:junit:$junit_version"
+	androidTestImplementation "androidx.test:core:$test_core_version"
 	androidTestImplementation "androidx.test:runner:$runner_version"
 	androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 	//</editor-folder>
