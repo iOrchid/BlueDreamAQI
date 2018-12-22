@@ -28,6 +28,8 @@
 			android:id="@+id/tv_aqi_item_monitors"
 			android:text="132·轻度"
 			android:textSize="16sp"
+			android:textColor="@color/colorWhite"
+			android:background="@drawable/shape_aqi_level_good"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
