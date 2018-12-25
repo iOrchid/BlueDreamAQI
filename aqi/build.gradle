@@ -56,7 +56,7 @@ dependencies {
 	implementation "androidx.appcompat:appcompat:1.0.2"
 	implementation "androidx.recyclerview:recyclerview:1.0.0"
 	implementation "com.google.android.material:material:1.0.0"
-	implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+	implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
 	implementation "androidx.cardview:cardview:1.0.0"
 	//</editor-folder>
 
@@ -106,7 +106,7 @@ dependencies {
 	//android job 1.3.0-alpha09
 	implementation "com.evernote:android-job:1.2.6"
 	//android utils
-	implementation "com.blankj:utilcode:1.21.2"
+	implementation "com.blankj:utilcode:1.22.7"
 	// jsoup HTML parser library @ https://jsoup.org/
 	implementation "org.jsoup:jsoup:1.11.2"
 	//lottie Android 炫酷动画依赖库
