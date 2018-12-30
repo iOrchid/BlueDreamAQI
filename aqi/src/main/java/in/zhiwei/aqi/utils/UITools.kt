@@ -14,8 +14,9 @@ import android.view.WindowManager
  * You never know what you can do until you try !
  */
 object UITools {
+
 	/**
-	 * 全透状态栏
+	 * 设置状态栏全透明
 	 */
 	fun setStatusBarFullTransparent(activity: Activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -32,7 +33,7 @@ object UITools {
 	}
 
 	/**
-	 * 半透明状态栏
+	 * 设置半透明状态栏
 	 */
 	fun setHalfTransparent(activity: Activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
