@@ -1,12 +1,7 @@
 package org.zhiwei.aqi
 
-import android.os.Bundle
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import org.jsoup.Jsoup
-import org.zhiwei.booster.KtActivity
-import org.zhiwei.libcore.LogKt
+import android.app.Application
+import com.didichuxing.doraemonkit.DoraemonKit
 
 /**
  * 作者： 志威  zhiwei.org
@@ -22,19 +17,10 @@ import org.zhiwei.libcore.LogKt
  * You never know what you can do until you try !
  * ----------------------------------------------------------------
  */
-class MainActivity : KtActivity() {
+class MyApplication : Application() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        runBlocking {
-            launch(Dispatchers.IO) {
-
-                Jsoup.connect("https://aqicn.org/city/beijing/us-embassy/cn/m/").get()
-                    .body().allElements.forEach {
-                        LogKt.i("${it.nodeName()} name ${it.tagName()}")
-                    }
-            }.join()
-        }
+    override fun onCreate() {
+        super.onCreate()
+        DoraemonKit.install(this)
     }
 }

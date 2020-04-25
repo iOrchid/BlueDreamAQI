@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BlueDreamAQI.iml" filepath="$PROJECT_DIR$/BlueDreamAQI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Studio-BlueDreamAQI.iml" filepath="$PROJECT_DIR$/Studio-BlueDreamAQI.iml" group="BlueDreamAQI" />
+      <module fileurl="file://$PROJECT_DIR$/BlueDreamAQI.iml" filepath="$PROJECT_DIR$/BlueDreamAQI.iml" group="BlueDreamAQI" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="BlueDreamAQI/app" />
-      <module fileurl="file://$PROJECT_DIR$/aqi/aqi.iml" filepath="$PROJECT_DIR$/aqi/aqi.iml" />
     </modules>
   </component>
 </project>
