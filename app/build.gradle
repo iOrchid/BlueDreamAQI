@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+apply from: '../dependencies.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+	compileSdkVersion compile_sdk_version
+	buildToolsVersion build_tools_version
+
+	defaultConfig {
+		applicationId "org.zhiwei.aqi"
+		minSdkVersion min_sdk_verion
+		targetSdkVersion target_sdk_version
+		versionCode 7
+		versionName "2.0.0"
+
+		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+	}
+
+	buildTypes {
+		release {
+			zipAlignEnabled true  //是否支持zip
+			shrinkResources true  // 移除无用的resource文件
+			minifyEnabled true    //是否进行混淆
+			debuggable false      // 是否可以debug
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'ams_proguard_rules.pro'
+		}
+	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+
+	dataBinding {
+		enabled = true
+	}
+}
+
+dependencies {
+	//通用依赖，放在dependencies.gradle中
+
+	//<editor-folder desc="didi doraemonKit 性能监测">
+	debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.1.4'
+	debugImplementation 'com.didichuxing.doraemonkit:doraemonkit-leakcanary:3.1.4'
+	releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.4'
+	//</editor-folder>
+
+	//<editor-folder desc="其他依赖库">
+	implementation("com.github.zhiwei1990:KtBooster:0.1.2.1")
+	// jsoup HTML parser library @ https://jsoup.org/
+	implementation "org.jsoup:jsoup:1.13.1"
+	//lottie Android 炫酷动画依赖库
+	implementation "com.airbnb.android:lottie:3.4.0"
+	//</editor-folder>
+
+}

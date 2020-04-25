@@ -79,7 +79,7 @@
 
 [![Github stars](https://img.shields.io/github/stars/zhiwei1990/BlueDreamAQI.svg?style=social&label=star)](https://github.com/zhiwei1990/BlueDreamAQI)[![Github followers](https://img.shields.io/github/followers/zhiwei1990.svg?style=social&label=follow)](https://github.com/zhiwei1990/BlueDreamAQI)[![Github issues](https://img.shields.io/github/issues/zhiwei1990/BlueDreamAQI.svg?style=social&label=issues)](https://github.com/zhiwei1990/BlueDreamAQI)
 
-[^1]: 项目开发环境为AndroidStudio `3.2.1`、Jdk8+、Windows10
+[^1]: 项目开发环境为AndroidStudio `3.6.3`、Jdk8+、MacOS
 
 
 
