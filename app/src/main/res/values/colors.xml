@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2196F3</color>
-    <color name="colorPrimaryDark">#1976D2</color>
-    <color name="colorPrimaryLight">#BBDEFB</color>
-    <color name="colorAccent">#03A9F4</color>
-    <color name="colorPrimaryText">#212121</color>
-    <color name="colorSecondaryText">#757575</color>
-    <color name="colorDivider">#BDBDBD</color>
-    <color name="colorWhite">#FFFFFF</color>
+	<color name="colorPrimary">#2196F3</color>
+	<color name="colorPrimaryDark">#1976D2</color>
+	<color name="colorPrimaryLight">#BBDEFB</color>
+	<color name="colorAccent">#03A9F4</color>
+	<color name="colorPrimaryText">#212121</color>
+	<color name="colorSecondaryText">#757575</color>
+	<color name="colorDivider">#BDBDBD</color>
+	<color name="colorWhite">#FFFFFF</color>
+	<color name="colorBlack">#000000</color>
+	<color name="colorBlackAlpha">#20000000</color>
+	<color name="colorWindowsBackground">#E6E6E6</color>
+
+	<!--api level color from https://www.airnow.gov/index.cfm?action=aqibasics.aqi-->
+	<color name="colorAQIGood">#009966</color>
+	<color name="colorAQIModerate">#FFDE33</color>
+	<!--light unhealthy 应该是 unhealthy for sensitive group USG-->
+	<color name="colorAQIUSG">#FF9933</color>
+	<color name="colorAQIUnhealthy">#CC0033</color>
+	<color name="colorAQIVeryUnhealthy">#660099</color>
+	<color name="colorAQIHazardous">#7E0023</color>
+
 </resources>

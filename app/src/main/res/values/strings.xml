@@ -1,3 +1,10 @@
 <resources>
-	<string name="app_name">app</string>
+	<string name="app_name">梦之蓝AQI</string>
+
+	<!--//region 首页-->
+	<string name="str_latest_update">最后更新时间 %s</string>
+	<string name="str_pm2_concentration">PM2.5当前浓度:%d微克/立方米</string>
+	<string name="str_city_today">%s今日</string>
+	<!--//endregion-->
+
 </resources>

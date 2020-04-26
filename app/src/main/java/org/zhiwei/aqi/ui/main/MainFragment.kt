@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import org.zhiwei.aqi.R
+import org.zhiwei.aqi.adapter.StationAdapter
+import org.zhiwei.aqi.databinding.MainFragmentBinding
 import org.zhiwei.booster.KtFragment
 
 /**
@@ -24,14 +25,44 @@ import org.zhiwei.booster.KtFragment
  */
 class MainFragment : KtFragment() {
 
-    private val viewModel: MainViewModel by viewModels<MainViewModel> {
-        defaultViewModelProviderFactory
-    }
+	private val viewModel: MainViewModel by viewModels<MainViewModel> {
+		defaultViewModelProviderFactory
+	}
+	private var mBinding: MainFragmentBinding? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+	private val stationAdapter = StationAdapter()
+
+	override fun onCreateView(
+		inflater: LayoutInflater,
+		container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View? {
+		if (mBinding == null) {
+			mBinding = MainFragmentBinding.inflate(inflater, container, false)
+		}
+		return mBinding?.root
+	}
+
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		mBinding?.apply {
+			vm = viewModel
+			lifecycleOwner = viewLifecycleOwner
+			adapter = stationAdapter
+		}
+		viewModel.apply {
+			//请求网络
+			serverData()
+			//观察结果
+			liveAQI.observeKt {
+				stationAdapter.updateList(it.stations)
+			}
+		}
+
+	}
+
+	override fun onDestroy() {
+		mBinding = null
+		super.onDestroy()
+	}
 }
