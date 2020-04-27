@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.zhiwei.aqi.databinding.ItemRvStationMainBinding
-import org.zhiwei.aqi.entity.ItemStation
+import org.zhiwei.aqi.entity.Pm25AQI
 
 /**
  * 作者： 志威  zhiwei.org
@@ -23,7 +23,7 @@ import org.zhiwei.aqi.entity.ItemStation
  */
 class StationAdapter :
 	RecyclerView.Adapter<StationAdapter.StationVH>() {
-	private val mList = mutableListOf<ItemStation>()
+	private val mList = mutableListOf<Pm25AQI.ItemStation>()
 
 	/**
 	 * viewHolder
@@ -45,7 +45,7 @@ class StationAdapter :
 		/**
 		 * 绑定item的数据
 		 */
-		fun bind(bean: ItemStation) {
+		fun bind(bean: Pm25AQI.ItemStation) {
 			binding.info = bean
 			binding.executePendingBindings()
 		}
@@ -62,7 +62,8 @@ class StationAdapter :
 	/**
 	 * 刷新数据
 	 */
-	fun updateList(list: List<ItemStation>) {
+	fun updateList(list: List<Pm25AQI.ItemStation>?) {
+		list ?: return
 		mList.clear()
 		mList.addAll(list)
 		notifyDataSetChanged()

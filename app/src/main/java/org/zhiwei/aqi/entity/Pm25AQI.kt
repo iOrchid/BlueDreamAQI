@@ -16,19 +16,23 @@ import androidx.annotation.Keep
  * You never know what you can do until you try !
  * ----------------------------------------------------------------
  */
-@Keep
-data class ItemStation(val name: String, val pm2: Int, val aqi: Int)
 
 /**
- * 首页的aqi数据对象类
+ * 首页的aqi数据对象类,数据抓取自m.pm25.com
  */
 @Keep
-data class AQI(
-	val city: String,
-	val lastUpdateTime: String,
+data class Pm25AQI(
+	val city: String?,
+	val lastUpdateTime: String?,
 	val aqi: Int,
-	val pm2: Int,
-	val todayDesc: String,
-	val tips: String,
-	val stations: List<ItemStation>
-)
+	val pm2Concentration: String?,
+	val bgImage: String?,
+	val todayDesc: String?,
+	val tips: String?,
+	val stations: List<ItemStation>?
+) {
+	//站点监控数据
+	@Keep
+	data class ItemStation(val name: String, val pm2: Int, val aqi: Int)
+}
+

@@ -7,9 +7,10 @@ import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.Response
-import org.zhiwei.aqi.entity.AQI
-import org.zhiwei.aqi.entity.ItemStation
-import org.zhiwei.libcore.LogKt
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
+import org.zhiwei.aqi.entity.Pm25AQI
+import org.zhiwei.aqi.utils.ParserUtils
 import org.zhiwei.libnet.KtHttp
 
 /**
@@ -28,35 +29,50 @@ import org.zhiwei.libnet.KtHttp
  */
 class MainViewModel : ViewModel() {
 
-	val liveAQI = MutableLiveData<AQI>()
+	val liveAQI = MutableLiveData<Pm25AQI>()
 
-
-	private val stations = mutableListOf<ItemStation>()
+	//监控站点
+	private val stations = mutableListOf<Pm25AQI.ItemStation>()
 
 	/**
 	 * 请求网路数据
 	 */
-	fun serverData() {
-		//mock data
-		stations.add(ItemStation("万寿西宫", 6, 32))
-		stations.add(ItemStation("定陵", 13, 32))
-		stations.add(ItemStation("东四", 8, 33))
-		stations.add(ItemStation("天坛", 11, 32))
-		stations.add(ItemStation("农展馆", 9, 33))
-		stations.add(ItemStation("官园", 8, 34))
-		stations.add(ItemStation("海淀区万柳", 12, 33))
-		stations.add(ItemStation("顺义新城", 29, 42))
-		stations.add(ItemStation("怀柔镇", 9, 31))
-		stations.add(ItemStation("昌平镇", 12, 31))
-		stations.add(ItemStation("奥体中心", 12, 32))
-		stations.add(ItemStation("古城", 9, 33))
-		liveAQI.postValue(AQI("北京", "26日 11:00", 28, 8, "集团你宁阿济格的", "你哦决定了旮角", stations))
+	fun pm25Server() {
 
 		//请求解析数据
 		viewModelScope.launch(Dispatchers.IO) {
 			val html = KtHttp.initConfig("http://m.pm25.com/wap/city/")
-				.get("beijing.html").toBean(String::class.java)
-			LogKt.i("ktHttp str $html")
+				.get("xian.html").toBean(String::class.java)
+			val doc = Jsoup.parse(html)
+			val city = doc.getElementsByClass("cm_location")[0].text()
+			val updateTime = doc.getElementsByClass("cm_updatetime")[0].text()
+			val aqiNum = doc.getElementsByClass("cm_area_big")[0].text()
+			val concentration = doc.getElementsByClass("cm_nongdu")[0].text()
+			val todayDesc = doc.getElementsByClass("c_item")[0].select("p").first().text()
+			val tips = doc.getElementsByClass("c_item")[1].select("p").first().text()
+			val bgImg = doc.getElementsByClass("c_bg").elementAt(0).attr("style")
+			val imgUrl = ParserUtils.parseInBracketsFirst(bgImg)//相对路径
+			val list = doc.getElementsByClass("ci_jiance_line")
+			list.forEach { element: Element? ->
+				element?.apply {
+					val station = getElementsByClass("ci_location").first().text()
+					val pm25 = getElementsByClass("ci_pm25num").first().text()
+					val aqi = getElementsByTag("strong").first().text()
+					stations.add(Pm25AQI.ItemStation(station, pm25.toInt(), aqi.toInt()))
+				}
+			}
+			liveAQI.postValue(
+				Pm25AQI(
+					city,
+					updateTime,
+					aqiNum.toInt(),
+					concentration,
+					"http://m.pm25.com$imgUrl",
+					todayDesc,
+					tips,
+					stations
+				)
+			)
 		}
 	}
 

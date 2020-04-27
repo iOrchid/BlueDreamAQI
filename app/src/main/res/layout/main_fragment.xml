@@ -41,7 +41,7 @@
 					app:contentScrim="?attr/colorPrimary"
 					app:layout_scrollFlags="scroll|exitUntilCollapsed"
 					app:statusBarScrim="?attr/colorPrimaryDark"
-					app:title="北京"
+					app:title="@{vm.liveAQI.city}"
 					app:titleEnabled="false"
 					app:toolbarId="@id/toolbar_main">
 
@@ -59,7 +59,8 @@
 							android:fitsSystemWindows="true"
 							android:scaleType="centerCrop"
 							android:src="@drawable/grass"
-							app:layout_constraintTop_toTopOf="parent" />
+							app:layout_constraintTop_toTopOf="parent"
+							app:srcCompat="@{vm.liveAQI.bgImage}" />
 
 					<androidx.appcompat.widget.AppCompatTextView
 							android:id="@+id/tv_city_main"
@@ -83,7 +84,7 @@
 							android:alpha="0.7"
 							android:drawableStart="@drawable/ic_refresh"
 							android:drawablePadding="5dp"
-							android:text="@{@string/str_latest_update(vm.liveAQI.lastUpdateTime)}"
+							android:text="@{vm.liveAQI.lastUpdateTime}"
 							android:textColor="@color/colorWhite"
 							app:layout_constraintBaseline_toBaselineOf="@id/tv_city_main"
 							app:layout_constraintStart_toEndOf="@id/tv_city_main"
@@ -139,7 +140,7 @@
 							android:id="@+id/tv_aqi_desc_main"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="@{@string/str_pm2_concentration(vm.liveAQI.pm2)}"
+							android:text="@{vm.liveAQI.pm2Concentration}"
 							android:textColor="@color/colorWhite"
 							app:layout_constraintStart_toStartOf="@id/v_line_main"
 							app:layout_constraintTop_toBottomOf="@id/v_line_main"
@@ -315,14 +316,14 @@
 								android:textSize="14sp"
 								app:layout_constraintBaseline_toBaselineOf="@id/tv_title_station_main"
 								app:layout_constraintEnd_toStartOf="@id/tv_title_aqi_main"
-								app:layout_constraintHorizontal_bias="0.8"
+								app:layout_constraintHorizontal_bias="0.7"
 								app:layout_constraintStart_toEndOf="@id/tv_title_station_main" />
 
 						<androidx.appcompat.widget.AppCompatTextView
 								android:id="@+id/tv_title_aqi_main"
 								android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
-								android:layout_marginEnd="20dp"
+								android:layout_marginEnd="30dp"
 								android:text="AQI"
 								android:textColor="@color/colorPrimaryText"
 								android:textSize="14sp"

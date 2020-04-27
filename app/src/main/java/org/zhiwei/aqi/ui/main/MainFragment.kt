@@ -52,7 +52,7 @@ class MainFragment : KtFragment() {
 		}
 		viewModel.apply {
 			//请求网络
-			serverData()
+			pm25Server()
 			//观察结果
 			liveAQI.observeKt {
 				stationAdapter.updateList(it.stations)

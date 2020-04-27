@@ -1,8 +1,11 @@
 package org.zhiwei.aqi.utils
 
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.zhiwei.aqi.R
 
 /**
@@ -74,4 +77,18 @@ object BindUtils {
 @BindingAdapter("android:background")
 fun adapterBackground(tv: TextView, id: Int) {
 	tv.background = ContextCompat.getDrawable(tv.context, id)
+}
+
+/**
+ *适配ImageView，使得可以加载url的图片，icon true就是圆形头像，否则不处理
+ */
+@BindingAdapter("srcCompat", "icon", requireAll = false)
+fun bindUrl(iv: ImageView, url: String?, icon: Boolean = false) {
+	val uri = if (url.isNullOrEmpty() || !url.startsWith("http")) R.drawable.grass else url
+	val options =
+		if (icon) RequestOptions.circleCropTransform() else RequestOptions.centerCropTransform()
+	Glide.with(iv)
+		.applyDefaultRequestOptions(options)
+		.load(uri)
+		.into(iv)
 }
