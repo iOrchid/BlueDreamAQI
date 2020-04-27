@@ -1,154 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-	<data>
+    <data>
 
-		<import type="org.zhiwei.aqi.utils.BindUtils" />
+        <import type="org.zhiwei.aqi.utils.BindUtils" />
 
-		<variable
-				name="vm"
-				type="org.zhiwei.aqi.ui.main.MainViewModel" />
+        <variable
+            name="vm"
+            type="org.zhiwei.aqi.ui.main.MainViewModel" />
 
-	</data>
-
-
-	<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			xmlns:app="http://schemas.android.com/apk/res-auto"
-			xmlns:tools="http://schemas.android.com/tools"
-			android:id="@+id/motion_top_main_fragment"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/bg_278dp"
-			android:fitsSystemWindows="true"
-			app:layoutDescription="@xml/scene_main_top"
-			app:showPaths="true">
-		<!--	tools:showIn="@layout/main_fragment"-->
-
-		<androidx.appcompat.widget.AppCompatImageView
-				android:id="@+id/iv_bg_main"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/bg_278dp"
-				android:fitsSystemWindows="true"
-				android:scaleType="centerCrop"
-				android:src="@drawable/grass"
-				app:layout_constraintTop_toTopOf="parent"
-				app:srcCompat="@{vm.liveAQI.bgImage}" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-				android:id="@+id/tv_city_main"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="15dp"
-				android:layout_marginTop="40dp"
-				android:text="@{vm.liveAQI.city}"
-				android:textColor="@color/colorWhite"
-				android:textSize="22sp"
-				app:layout_constraintStart_toStartOf="@id/iv_bg_main"
-				app:layout_constraintTop_toTopOf="@id/iv_bg_main"
-				tools:text="北京" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-				android:id="@+id/tv_update_time_main"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="10dp"
-				android:layout_marginTop="15dp"
-				android:alpha="0.7"
-				android:drawableStart="@drawable/ic_refresh"
-				android:drawablePadding="5dp"
-				android:text="@{vm.liveAQI.lastUpdateTime}"
-				android:textColor="@color/colorWhite"
-				app:layout_constraintBaseline_toBaselineOf="@id/tv_city_main"
-				app:layout_constraintStart_toEndOf="@id/tv_city_main"
-				tools:text="最后更新时间 26日 11:00" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-				android:id="@+id/tv_aqi_num_main"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@{``+vm.liveAQI.aqi}"
-				android:textColor="@color/colorWhite"
-				android:textSize="65sp"
-				app:layout_constraintStart_toStartOf="@id/tv_city_main"
-				app:layout_constraintTop_toBottomOf="@id/tv_city_main"
-				tools:text="28" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-				android:id="@+id/tv_air_quality_main"
-				android:layout_width="30dp"
-				android:layout_height="20dp"
-				android:layout_marginStart="15dp"
-				android:layout_marginBottom="5dp"
-				android:background="@{BindUtils.aqiLevelRes(vm.liveAQI.aqi),default=@drawable/shape_air_good}"
-				android:gravity="center"
-				android:text="@{BindUtils.aqiLevelStr(vm.liveAQI.aqi)}"
-				android:textColor="@color/colorWhite"
-				android:textSize="12sp"
-				app:layout_constraintBottom_toTopOf="@id/tv_quality_main"
-				app:layout_constraintStart_toEndOf="@id/tv_aqi_num_main"
-				tools:text="优" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-				android:id="@+id/tv_quality_main"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="AQI指数"
-				android:textColor="@color/colorWhite"
-				android:textSize="14sp"
-				app:layout_constraintBaseline_toBaselineOf="@id/tv_aqi_num_main"
-				app:layout_constraintStart_toStartOf="@id/tv_air_quality_main"
-				app:layout_constraintTop_toBottomOf="@id/tv_air_quality_main" />
-
-		<View
-				android:id="@+id/v_line_main"
-				android:layout_width="0dp"
-				android:layout_height="0.5dp"
-				android:background="@color/colorWhite"
-				app:layout_constraintEnd_toEndOf="@id/tv_update_time_main"
-				app:layout_constraintStart_toStartOf="@id/tv_city_main"
-				app:layout_constraintTop_toBottomOf="@id/tv_aqi_num_main" />
-
-		<androidx.appcompat.widget.AppCompatTextView
-				android:id="@+id/tv_aqi_desc_main"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="@{vm.liveAQI.pm2Concentration}"
-				android:textColor="@color/colorWhite"
-				app:layout_constraintStart_toStartOf="@id/v_line_main"
-				app:layout_constraintTop_toBottomOf="@id/v_line_main"
-				tools:text="PM2.5当前浓度:8微克/立方米" />
-
-		<com.google.android.material.button.MaterialButton
-				android:id="@+id/tv_share_main"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginEnd="15dp"
-				android:layout_marginBottom="15dp"
-				android:backgroundTint="@color/colorBlackAlpha"
-				android:drawableEnd="@drawable/ic_share"
-				android:gravity="center"
-				android:text="分享"
-				android:textColor="@color/colorWhite"
-				android:textSize="14sp"
-				app:cornerRadius="20dp"
-				app:layout_constraintBottom_toTopOf="@id/v_bg_bar_main"
-				app:layout_constraintEnd_toEndOf="@id/iv_bg_main" />
-
-		<View
-				android:id="@+id/v_bg_bar_main"
-				android:layout_width="match_parent"
-				android:layout_height="40dp"
-				android:alpha="0.3"
-				android:background="@color/colorWhite"
-				app:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
+    </data>
 
 
-		<androidx.appcompat.widget.AppCompatSeekBar
-				android:id="@+id/seek_main"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:progress="30"
-				app:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
-				app:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
+    <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/motion_top_main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bg_278dp"
+        android:fitsSystemWindows="true"
+        app:layoutDescription="@xml/scene_main_top"
+        app:showPaths="true">
+        <!--	tools:showIn="@layout/main_fragment"-->
 
-	</androidx.constraintlayout.motion.widget.MotionLayout>
+        <org.zhiwei.aqi.view.BoundsImageView
+            android:id="@+id/iv_bg_main"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bg_278dp"
+            android:fitsSystemWindows="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/grass"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@{vm.liveAQI.bgImage}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_city_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="60dp"
+            android:gravity="center"
+            android:text="@{vm.liveAQI.city}"
+            android:textColor="@color/colorWhite"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@id/iv_bg_main"
+            app:layout_constraintTop_toTopOf="@id/iv_bg_main"
+            tools:text="北京" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_update_time_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:alpha="0.7"
+            android:drawableStart="@drawable/ic_refresh"
+            android:drawablePadding="5dp"
+            android:text="@{vm.liveAQI.lastUpdateTime}"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_city_main"
+            app:layout_constraintStart_toEndOf="@id/tv_city_main"
+            tools:text="最后更新时间 26日 11:00" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_aqi_num_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{``+vm.liveAQI.aqi}"
+            android:textColor="@color/colorWhite"
+            android:textSize="65sp"
+            app:layout_constraintStart_toStartOf="@id/tv_city_main"
+            app:layout_constraintTop_toBottomOf="@id/tv_city_main"
+            tools:text="28" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_air_quality_main"
+            android:layout_width="30dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="5dp"
+            android:background="@{BindUtils.aqiLevelRes(vm.liveAQI.aqi),default=@drawable/shape_air_good}"
+            android:gravity="center"
+            android:text="@{BindUtils.aqiLevelStr(vm.liveAQI.aqi)}"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tv_quality_main"
+            app:layout_constraintStart_toEndOf="@id/tv_aqi_num_main"
+            tools:text="优" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_quality_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AQI指数"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv_aqi_num_main"
+            app:layout_constraintStart_toStartOf="@id/tv_air_quality_main"
+            app:layout_constraintTop_toBottomOf="@id/tv_air_quality_main" />
+
+        <View
+            android:id="@+id/v_line_main"
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:background="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="@id/tv_update_time_main"
+            app:layout_constraintStart_toStartOf="@id/tv_city_main"
+            app:layout_constraintTop_toBottomOf="@id/tv_aqi_num_main" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_aqi_desc_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.liveAQI.pm2Concentration}"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintStart_toStartOf="@id/v_line_main"
+            app:layout_constraintTop_toBottomOf="@id/v_line_main"
+            tools:text="PM2.5当前浓度:8微克/立方米" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tv_share_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:backgroundTint="@color/colorBlackAlpha"
+            android:drawableEnd="@drawable/ic_share"
+            android:gravity="center"
+            android:text="分享"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            app:cornerRadius="20dp"
+            app:layout_constraintBottom_toTopOf="@id/v_bg_bar_main"
+            app:layout_constraintEnd_toEndOf="@id/iv_bg_main" />
+
+        <View
+            android:id="@+id/v_bg_bar_main"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:alpha="0.3"
+            android:background="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
+
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/seek_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progress="30"
+            app:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
+            app:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

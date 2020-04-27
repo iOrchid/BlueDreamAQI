@@ -13,5 +13,4 @@
 	<style name="TextAppearance.AQI.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5">
 		<item name="android:textColor">?attr/colorOnSurface</item>
 	</style>
-
 </resources>

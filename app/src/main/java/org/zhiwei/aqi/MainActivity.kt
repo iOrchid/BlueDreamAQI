@@ -1,6 +1,9 @@
 package org.zhiwei.aqi
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import org.zhiwei.booster.KtActivity
 
 
@@ -22,14 +25,14 @@ class MainActivity : KtActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-//		window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
-//		window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-//		window.apply {
-//			addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-//			decorView.systemUiVisibility =
-//				View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//			statusBarColor = Color.TRANSPARENT
-//		}
+		window.apply {
+			addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
+			addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+			addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+			decorView.systemUiVisibility =
+				View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+			statusBarColor = Color.TRANSPARENT
+		}
 		setContentView(R.layout.main_activity)
 	}
 }
