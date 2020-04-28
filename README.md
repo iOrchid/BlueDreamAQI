@@ -16,26 +16,28 @@
 	* [四、项目组成[^1]]()
 	* [五、规划]()
 	* [六、示例内容(部分）]()
-	* [七、关于作者]()[![jianshu](./images/jianshu.png)](https://www.jianshu.com/u/72294e6848c0)[![github](./images/github.png)](https://github.com/zhiwei1990)[![csdn](./images/csdn.png)](https://blog.csdn.net/zhiwei9001)
+	* [七、关于作者]()[![jianshu](./images/jianshu.svg)](https://www.jianshu.com/u/72294e6848c0)[![github](./images/github.svg)](https://github.com/zhiwei1990)[![csdn](./images/csdn.svg)](https://blog.csdn.net/zhiwei9001)
 
 ####  一、项目简介
 
-> 梦之蓝AQI，旨在项目实践来学习和应用`Android`应用开发的较新技术,网络爬取`AQI`数据，以清爽的界面风格呈现于用户，以期有助于大家关注`空气质量`，关爱自身`呼吸健康`。
->
-> - ###### 为什么做此项目？
->
->   记忆中，小时候的`大雾弥漫`是一种曼妙的意境。那时候，似乎并没有`雾霾`这么个概念。长大后，听得多的是`沙尘暴`，再后来才是`雾霾`。直到后来到北方工作后，才切身体会到，什么是`雾霾`，自身体质敏感而过敏、呼吸系统感染，不得已又返回南方工作，方才好转。
->
->   南方也有雾霾，却很少见有人注重防护，**如果你不走进医院，你不会感受到呼吸道疾病的多么普遍，如果你不去看一些调研，你不会知道这些年空气污染引起的疾病与死亡增长了多少。[pm2.5危害](http://www.pm25.com/news/429.html)**，似乎全世界的经济发展都无法避免污染，同时我们也在治理。我们坚信生态环境会越来越好，同时我们也希望，在此之前，每个人都能爱护、保护好自己的身体健康。
->
-> ​	梦之蓝AQI，项目开源数据公开，希望会对于同样空气污染敏感的朋友，有那么点参考意义，帮助我们做好呼吸防护。
->
-> - ###### 项目意义
->
->   1. 本项目开源，旨在练习Android应用开发技术，并希望对于有需要的朋友，提供一丝参考价值
->   2. 项目练习Kotlin、MVP、Jetpack、Dagger2、Coroutines、RxJava、Retrofit/Okhttp等热门android技术框架的应用
->   3. 实践练习Android的自定义控件、动画、转场交互以及MaterialDesign设计交互等
->   4. 尝试组件化的封装与设计
+> 2020注定是不平凡的一年，我们在这样的艰辛与苦难中走来，春末夏初，愿一切都恢复美好。
+
+梦之蓝AQI，旨在项目实践来学习和应用`Android`应用开发的较新技术,网络爬取`AQI`数据，以清爽的界面风格呈现于用户，以期有助于大家关注`空气质量`，关爱自身`呼吸健康`。
+
+- ######为什么做此项目？
+
+  记忆中，小时候的`大雾弥漫`是一种曼妙的意境。那时候，似乎并没有`雾霾`这么个概念。长大后，听得多的是`沙尘暴`，再后来才是`雾霾`。直到后来到北方工作后，才切身体会到，什么是`雾霾`，自身体质敏感而过敏、呼吸系统感染，不得已又返回南方工作，方才好转。
+
+  南方也有雾霾，却很少见有人注重防护，**如果你不走进医院，你不会感受到呼吸道疾病的多么普遍，如果你不去看一些调研，你不会知道这些年空气污染引起的疾病与死亡增长了多少。[pm2.5危害](http://www.pm25.com/news/429.html)**，似乎全世界的经济发展都无法避免污染，同时我们也在治理。我们坚信生态环境会越来越好，同时我们也希望，在此之前，每个人都能爱护、保护好自己的身体健康。
+
+- ######项目意义
+
+  1. 项目综合练习`Kotlin、MVVM、Jetpack、Coroutines、Retrofit/Okhttp`等热门`android`主流技术框架的应用，并实践`APP`基础架构能力
+  2. 实践练习`Android`的自定义控件、动画、转场交互以及`MaterialDesign`设计交互等
+
+- 免责声明
+
+<font color=green>本项目旨在研究学习`Android`相关开发技术，数据源自网络爬取（若有不当侵犯，请及时联系作者），作者及项目不对数据可靠性以及使用者的任何使用不良后果负责。使用本项目及附生产品（包括但不限于App）均表示接受本声明。</font>
 
 #### 二、更新日志
 
@@ -64,20 +66,14 @@
 
 #### 三、Sample示例
 
-[下载体验apk](https://raw.githubusercontent.com/zhiwei1990/BlueDreamAQI/master/release/aqi.apk)或者手机扫描二维码下载`Demo`的`apk`包
-
-![扫描下载](README.assets/QR_aqi.png)
-
-[![get form baiduAppStore](README.assets/baiduAppStore.png)](http://shouji.baidu.com/software/23722654.html)[![get from HuaweiAppStore](README.assets/huawei_appstore.png)](http://app.hicloud.com/app/C100221047)[![get from HuaweiAppStore](README.assets/wandoujia.png)](http://www.wandoujia.com/apps-in.zhiwei.aqi)
+empty now
 
 #### 四、项目组成[^1]
 
-项目主要简单的演示一些`android`技术与框架库的入门使用，`RxJava`操作符、`Kotlin`基本语法，以及`JetPack`的组件的简单使用。
+项目主要综合当前最新`Android`开发技术，`Kotlin`、协程`coroutines`、`JetPack`等组件使用。
 
 - `Android Architecture Components`
-- `RxJava`
-- `Kotlin`
-- `Dagger2`
+- `Kotlin、Coroutines`
 - **Jetpack**
   - `lifecycle`
   - `livedata`
@@ -89,11 +85,9 @@
 
 #### 五、规划
 
-- [x] ~~基础功能实现，App升级、简单分享~~
-- [x] ~~Splash、widget、aqi地图、城市选择、 转场动画~~
-- [ ] ~~热修复接入，反馈~~，设置，前台进程、X5Client，网络电量等状态响应
-- [ ] pm25.com ，加入aqi资讯 吸入/沉淀量检测，生活指南/指数，作为2.0 beta版开发
-- [ ] 接入pm25.in数据源，Air Visual 数据源,提供不同的UI风格
+- [ ] 新版本`UI`基础优化，分享、升级、免责声明、支持跳转
+- [ ] Splash、widget、aqi地图、城市选择、 转场动画
+- [ ] 热修复接入，反馈，设置，网络状态响应
 - [ ] 排行榜（每日、周、月），地图模式
 - [ ] AQI预报、温馨（语音）提示、推送、社交化分享
 - [ ] 配置pm2.5科普资料展示页面、防护装备、户外提示、饮食搭配等
@@ -103,7 +97,7 @@
 
 #### 六、示例内容(部分）
 
-![北京AQI图2](README.assets/img_aqi_nearby.png)![关于开发者](README.assets/img_aqi_about.png)![搜索界面](README.assets/img_search_city.png)
+empty now
 
 #### 七、关于作者 [![jianshu](./images/jianshu.svg)](https://www.jianshu.com/u/72294e6848c0)[![github](./images/github.svg)](https://github.com/zhiwei1990)[![csdn](./images/csdn.svg)](https://blog.csdn.net/zhiwei9001)
 
