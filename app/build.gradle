@@ -1,31 +1,28 @@
 apply plugin: 'com.android.application'
 
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-//kapt，用于编译kotlin‘的依赖
-apply plugin: 'kotlin-kapt'
-//导入versions 配置
-apply from: '../versions.gradle'
+apply from: '../dependencies.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
 	compileSdkVersion compile_sdk_version
+	buildToolsVersion build_tools_version
 
 	defaultConfig {
-		applicationId "in.zhiwei.aqi"
-		minSdkVersion min_sdk_version
-		targetSdkVersion target_version
-		versionCode app_version_code
-		versionName app_version_name
+		applicationId "org.zhiwei.aqi"
+		minSdkVersion min_sdk_verion
+		targetSdkVersion target_sdk_version
+		versionCode 7
+		versionName "2.0.0"
+
 		testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-		resConfigs "zh-rCN", "en", "xxhdpi"
-		ndk {
-			abiFilters "armeabi" // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
-		}
 	}
 
 	buildTypes {
 		release {
-			minifyEnabled true
+			zipAlignEnabled true  //是否支持zip
+			shrinkResources true  // 移除无用的resource文件
+			minifyEnabled true    //是否进行混淆
+			debuggable false      // 是否可以debug
 			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'ams_proguard_rules.pro'
 		}
 	}
@@ -35,100 +32,27 @@ android {
 		targetCompatibility JavaVersion.VERSION_1_8
 	}
 
-	sourceSets {
-		main {
-			jniLibs.srcDirs = ['libs']
-		}
-	}
-
 	dataBinding {
 		enabled = true
 	}
 }
 
 dependencies {
-	//todo 注意，如果出现gradle编译失败，下载依赖库失败，可以尝试
-	//todo 1、添加阿里云的jcenter库，
-	//todo 2、AS的settings--build--compiler去掉 --offline
-	//todo 3、将下方的依赖库$符号引用的版本号，替换成数字，基本就能解决掉gradle更新依赖的错误了。
-	implementation fileTree(include: ['*.jar'], dir: 'libs')
+	//通用依赖，放在dependencies.gradle中
 
-	//<editor-folder desc="support"
-	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-	implementation "androidx.appcompat:appcompat:$appcompat_version"
-	implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
-	implementation "com.google.android.material:material:$material_version"
-	implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-	implementation "androidx.cardview:cardview:$cardview_version"
-	//</editor-folder>
-
-	//<editor-folder desc="单元测试">
-	testImplementation "junit:junit:$junit_version"
-	androidTestImplementation "androidx.test:core:$test_core_version"
-	androidTestImplementation "androidx.test:runner:$runner_version"
-	androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-	//</editor-folder>
-
-	//<editor-folder desc="Rx 相关">
-	implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
-	implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
-	implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
-	implementation "com.jakewharton.rxbinding2:rxbinding:$rxbinding_version"
-	//</editor-folder>
-
-	//<editor-folder desc="网络相关">
-	implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-	implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_rxjava_version"
-	implementation "com.squareup.retrofit2:converter-gson:$retrofit_gson_version"
-	implementation "com.squareup.retrofit2:converter-scalars:$retrofit_scalars_version"
-	//okhttp3
-	implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-	//gson
-	implementation "com.google.code.gson:gson:$gson_version"
-	//</editor-folder>
-
-	//<editor-folder desc="注入工具">
-
-	//dagger2
-	implementation "com.google.dagger:dagger:$dagger_version"
-	kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-	implementation "com.jakewharton:butterknife:$butterknife_version"
-	kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
-	//</editor-folder>
-
-	//<editor-folder desc="性能监测">
-	//leakcannary
-	debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
-	releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
-	//UI阻塞监控
-	debugImplementation "com.github.markzhai:blockcanary-android:$blockcanary_version"
+	//<editor-folder desc="didi doraemonKit 性能监测">
+	debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.1.4'
+	debugImplementation 'com.didichuxing.doraemonkit:doraemonkit-leakcanary:3.1.4'
+	releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.4'
 	//</editor-folder>
 
 	//<editor-folder desc="其他依赖库">
-	//android job
-	implementation "com.evernote:android-job:$job_version"
-	//android utils
-	implementation "com.blankj:utilcode:$utils_version"
-	// jsoup HTML parser library @ https://jsoup.org/
-	implementation "org.jsoup:jsoup:$jsoup_version"
+
+	implementation("com.github.zhiwei1990:KtBooster:0.1.2.1")
+	// jsoup HTML parser library @https://jsoup.org/
+	implementation "org.jsoup:jsoup:1.13.1"
 	//lottie Android 炫酷动画依赖库
-	implementation "com.airbnb.android:lottie:$lottie_version"
-	//</editor-folder>
-
-	//<editor-folder desc="Architecture components LifeCycle & Room">
-	implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
-	implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-	kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-
-	implementation "androidx.room:room-runtime:$room_version"
-	implementation "androidx.room:room-rxjava2:$room_version"
-	kapt "androidx.room:room-compiler:$room_version"
-
-	implementation "androidx.paging:paging-runtime:$paging_version"
-	implementation "android.arch.work:work-runtime:$work_version"
-	implementation "android.arch.navigation:navigation-ui:$navigation_version"
-	implementation "android.arch.navigation:navigation-fragment:$navigation_version"
+	implementation "com.airbnb.android:lottie:3.4.0"
 
 	//</editor-folder>
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<data>
+
+		<import type="org.zhiwei.aqi.utils.BindUtils" />
+
+		<variable
+				name="vm"
+				type="org.zhiwei.aqi.ui.main.MainViewModel" />
+
+		<variable
+				name="adapter"
+				type="androidx.recyclerview.widget.RecyclerView.Adapter" />
+	</data>
+
+	<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:fitsSystemWindows="true"
+			android:id="@+id/motion_base_main"
+			app:layoutDescription="@xml/scene_main_fragment">
+
+		<include
+				layout="@layout/top_main_fragment"
+				app:vm="@{vm}" />
+
+		<include
+				layout="@layout/content_main_fragment"
+				app:adapter="@{adapter}"
+				app:vm="@{vm}" />
+
+	</androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

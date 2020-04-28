@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+	<data>
+
+		<import type="org.zhiwei.aqi.utils.BindUtils" />
+
+		<variable
+				name="info"
+				type="org.zhiwei.aqi.entity.Pm25AQI.ItemStation" />
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			xmlns:tools="http://schemas.android.com/tools"
+			android:layout_width="match_parent"
+			android:layout_height="40dp">
+
+		<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/tv_station_item_rv_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@{info.name}"
+				android:textColor="@color/colorPrimaryText"
+				android:textSize="14sp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="万寿西宫" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/tv_pm_item_rv_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="50dp"
+				android:text="@{``+info.pm2}"
+				android:textColor="@color/colorPrimaryText"
+				android:textSize="14sp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toStartOf="@id/tv_aqi_item_rv_main"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:text="8" />
+
+		<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/tv_aqi_item_rv_main"
+				android:layout_width="70dp"
+				android:layout_height="25dp"
+				android:background="@{BindUtils.aqiLevelRes(info.aqi)}"
+				android:gravity="center"
+				android:text="@{BindUtils.itemAQI(info.aqi)}"
+				android:textColor="@color/colorWhite"
+				android:textSize="14sp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:background="@drawable/shape_air_good"
+				tools:text="27·优" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
