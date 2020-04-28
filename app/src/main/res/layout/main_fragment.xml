@@ -18,8 +18,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:fitsSystemWindows="true"
-			app:layoutDescription="@xml/scene_main_fragment"
-			app:showPaths="true">
+			android:id="@+id/motion_base_main"
+			app:layoutDescription="@xml/scene_main_fragment">
 
 		<include
 				layout="@layout/top_main_fragment"

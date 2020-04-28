@@ -101,13 +101,11 @@
 			android:layout_height="wrap_content"
 			android:layout_marginEnd="15dp"
 			android:layout_marginBottom="15dp"
-			android:backgroundTint="@color/colorBlackAlpha"
 			android:drawableEnd="@drawable/ic_share"
 			android:gravity="center"
 			android:text="分享"
 			android:textColor="@color/colorWhite"
 			android:textSize="14sp"
-			motion:cornerRadius="20dp"
 			motion:layout_constraintBottom_toTopOf="@id/v_bg_bar_main"
 			motion:layout_constraintEnd_toEndOf="@id/iv_bg_main">
 			<CustomAttribute
