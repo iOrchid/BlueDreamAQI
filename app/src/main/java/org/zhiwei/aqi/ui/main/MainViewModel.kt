@@ -11,6 +11,7 @@ import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.zhiwei.aqi.entity.Pm25AQI
 import org.zhiwei.aqi.utils.ParserUtils
+import org.zhiwei.libcore.LogKt
 import org.zhiwei.libnet.KtHttp
 
 /**
@@ -35,14 +36,35 @@ class MainViewModel : ViewModel() {
 	private val stations = mutableListOf<Pm25AQI.ItemStation>()
 
 	/**
+	 * 通过ip查询就近的城市，这个定位很粗泛，一般就是手机卡的归属省市，或者地区
+	 */
+	fun nearCity() {
+		viewModelScope.launch {
+			val url = "https://api.waqi.info/mapq/nearest"
+			val rsp = KtHttp.initConfig(url).get("")
+			//请求成功才继续
+			if (!rsp.isSuccessful) return@launch
+
+			val toBean = rsp.toBean(String::class.java)
+			LogKt.d("nearCity 44行: $toBean")
+
+		}
+	}
+
+
+	/**
 	 * 请求网路数据
 	 */
 	fun pm25Server() {
 
 		//请求解析数据
 		viewModelScope.launch(Dispatchers.IO) {
-			val html = KtHttp.initConfig("http://m.pm25.com/wap/city/")
-				.get("xian.html").toBean(String::class.java)
+			val rsp = KtHttp.initConfig("http://m.pm25.com/wap/city/")
+				.get("xian.html")
+			//请求成功才继续
+			if (!rsp.isSuccessful) return@launch
+
+			val html = rsp.toBean(String::class.java)
 			val doc = Jsoup.parse(html)
 			val city = doc.getElementsByClass("cm_location")[0].text()
 			val updateTime = doc.getElementsByClass("cm_updatetime")[0].text()
@@ -83,6 +105,7 @@ class MainViewModel : ViewModel() {
 	 */
 	@Suppress("UNCHECKED_CAST")
 	fun <T> Response.toBean(clazz: Class<T>): T? {
+		if (!isSuccessful) return null
 		if (clazz.isAssignableFrom(String::class.java)) {
 			return this.body?.string() as T
 		}

@@ -59,6 +59,7 @@ class MainFragment : KtFragment() {
 			motion_top_main_fragment.setDebugMode(mode)
 		}
 		viewModel.apply {
+			nearCity()
 			//请求网络
 			pm25Server()
 			//观察结果

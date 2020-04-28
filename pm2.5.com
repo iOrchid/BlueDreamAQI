@@ -31,3 +31,13 @@
 其他UI
     天气图标、温度、分享、吸入计算、致癌风险
     预防、饮食、运动的建议
+
+
+//aqicn.org
+//获取城市
+https://api.waqi.info/mapq/nearest
+//根据城市获取aqi的html
+/city/{cityName}/{language}/m/
+//搜索监测站
+"https://wind.waqi.info/nsearch/station/{name}"
+
