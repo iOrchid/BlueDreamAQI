@@ -19,8 +19,8 @@ import com.didichuxing.doraemonkit.DoraemonKit
  */
 class MyApplication : Application() {
 
-    override fun onCreate() {
-        super.onCreate()
-        DoraemonKit.install(this)
-    }
+	override fun onCreate() {
+		super.onCreate()
+		DoraemonKit.install(this)
+	}
 }

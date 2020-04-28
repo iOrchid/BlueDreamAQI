@@ -48,7 +48,7 @@ dependencies {
 
 	//<editor-folder desc="其他依赖库">
 
-	implementation("com.github.zhiwei1990:KtBooster:0.1.2.1")
+	implementation("com.github.zhiwei1990:KtBooster:0.1.3")
 	// jsoup HTML parser library @https://jsoup.org/
 	implementation "org.jsoup:jsoup:1.13.1"
 	//lottie Android 炫酷动画依赖库

@@ -3,16 +3,15 @@ package org.zhiwei.aqi.ui.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Response
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.zhiwei.aqi.entity.Pm25AQI
 import org.zhiwei.aqi.utils.ParserUtils
 import org.zhiwei.libcore.LogKt
 import org.zhiwei.libnet.KtHttp
+import org.zhiwei.libnet.support.toEntity
 
 /**
  * 作者： 志威  zhiwei.org
@@ -45,7 +44,7 @@ class MainViewModel : ViewModel() {
 			//请求成功才继续
 			if (!rsp.isSuccessful) return@launch
 
-			val toBean = rsp.toBean(String::class.java)
+			val toBean = rsp.toEntity<String>()
 			LogKt.d("nearCity 44行: $toBean")
 
 		}
@@ -64,7 +63,7 @@ class MainViewModel : ViewModel() {
 			//请求成功才继续
 			if (!rsp.isSuccessful) return@launch
 
-			val html = rsp.toBean(String::class.java)
+			val html = rsp.toEntity<String>()
 			val doc = Jsoup.parse(html)
 			val city = doc.getElementsByClass("cm_location")[0].text()
 			val updateTime = doc.getElementsByClass("cm_updatetime")[0].text()
@@ -96,23 +95,5 @@ class MainViewModel : ViewModel() {
 				)
 			)
 		}
-	}
-
-	/**
-	 * 将Response的对象，转化为需要的对象类型，也就是将body.string转为bean
-	 * [clazz] 待转化的对象类型
-	 * @return 返回需要的类型对象，可能为null，如果json解析失败的话
-	 */
-	@Suppress("UNCHECKED_CAST")
-	fun <T> Response.toBean(clazz: Class<T>): T? {
-		if (!isSuccessful) return null
-		if (clazz.isAssignableFrom(String::class.java)) {
-			return this.body?.string() as T
-		}
-		return kotlin.runCatching {
-			Gson().fromJson(this.body?.string(), clazz)
-		}.onFailure { e ->
-			e.printStackTrace()
-		}.getOrNull()
 	}
 }
