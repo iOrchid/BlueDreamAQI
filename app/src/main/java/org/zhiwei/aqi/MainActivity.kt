@@ -1,6 +1,5 @@
 package org.zhiwei.aqi
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -28,10 +27,10 @@ class MainActivity : KtActivity() {
 		window.apply {
 			addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN)
 			addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+			//前两个也可以不用，
 			addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 			decorView.systemUiVisibility =
 				View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-			statusBarColor = Color.TRANSPARENT
 		}
 		setContentView(R.layout.main_activity)
 	}

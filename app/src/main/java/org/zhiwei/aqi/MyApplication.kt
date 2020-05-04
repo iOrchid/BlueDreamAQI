@@ -1,7 +1,11 @@
 package org.zhiwei.aqi
 
 import android.app.Application
+import androidx.work.*
 import com.didichuxing.doraemonkit.DoraemonKit
+import org.zhiwei.aqi.workers.QueryAqiWorker
+import org.zhiwei.aqi.workers.QueryCityWorker
+import java.util.concurrent.TimeUnit
 
 /**
  * 作者： 志威  zhiwei.org
@@ -16,11 +20,30 @@ import com.didichuxing.doraemonkit.DoraemonKit
  *
  * You never know what you can do until you try !
  * ----------------------------------------------------------------
+ * 自定义Application
  */
 class MyApplication : Application() {
 
 	override fun onCreate() {
 		super.onCreate()
 		DoraemonKit.install(this)
+
+		//后台任务
+		val localCityRequest = OneTimeWorkRequestBuilder<QueryCityWorker>().build()
+		val aqiRequest = OneTimeWorkRequestBuilder<QueryAqiWorker>().build()
+
+		val aqiWorker =
+			PeriodicWorkRequest.Builder(QueryAqiWorker::class.java, 30, TimeUnit.MINUTES)
+				//设置重试机制的时间策略，有线性和指数增长两种方式
+				.setBackoffCriteria(BackoffPolicy.LINEAR, 20, TimeUnit.MINUTES)
+				.build()
+		//单次获取粗略定位信息和执行一次aqi数据查询
+		WorkManager.getInstance(this)
+			.beginWith(localCityRequest)
+			.then(aqiRequest)
+			.enqueue()
+		//定时轮询aqi的后台任务，
+		WorkManager.getInstance(this)
+			.enqueueUniquePeriodicWork("queryAqi", ExistingPeriodicWorkPolicy.KEEP, aqiWorker)
 	}
 }

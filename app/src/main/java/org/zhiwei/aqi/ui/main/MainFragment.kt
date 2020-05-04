@@ -6,11 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
+import androidx.work.WorkManager
 import kotlinx.android.synthetic.main.top_main_fragment.*
 import org.zhiwei.aqi.BuildConfig
 import org.zhiwei.aqi.adapter.StationAdapter
 import org.zhiwei.aqi.databinding.MainFragmentBinding
+import org.zhiwei.aqi.workers.DATA_KEY_PM25_AQI
 import org.zhiwei.booster.KtFragment
+import org.zhiwei.libcore.LogKt
 
 /**
  * 作者： 志威  zhiwei.org
@@ -59,14 +62,27 @@ class MainFragment : KtFragment() {
 			motion_top_main_fragment.setDebugMode(mode)
 		}
 		viewModel.apply {
-			nearCity()
 			//请求网络
-			pm25Server()
+			nearCity()
 			//观察结果
+			liveCity.observeKt { city: String? ->
+				city ?: return@observeKt
+				//查询城市的aqi
+				pm25Server(city)
+			}
 			liveAQI.observeKt {
 				stationAdapter.updateList(it.stations)
 			}
 		}
+
+		WorkManager.getInstance(requireContext()).getWorkInfosForUniqueWorkLiveData("queryAqi")
+			.observeKt {
+				LogKt.d(
+					"onViewCreated 74: work list bean ${it.first().outputData.getString(
+						DATA_KEY_PM25_AQI
+					)}"
+				)
+			}
 
 	}
 
