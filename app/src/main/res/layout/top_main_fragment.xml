@@ -46,6 +46,18 @@
 				app:layout_constraintTop_toTopOf="@id/iv_bg_main"
 				tools:text="北京" />
 
+		<androidx.appcompat.widget.AppCompatImageView
+				android:id="@+id/iv_loading_top_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="10dp"
+				android:clickable="@{!vm.isLoading}"
+				android:onClick="@{()->vm.refresh()}"
+				app:layout_constraintBottom_toBottomOf="@id/tv_city_main"
+				app:layout_constraintStart_toEndOf="@id/tv_city_main"
+				app:layout_constraintTop_toTopOf="@id/tv_city_main"
+				app:srcCompat="@drawable/ic_refresh" />
+
 		<androidx.appcompat.widget.AppCompatTextView
 				android:id="@+id/tv_update_time_main"
 				android:layout_width="wrap_content"
@@ -53,12 +65,13 @@
 				android:layout_marginStart="10dp"
 				android:layout_marginTop="15dp"
 				android:alpha="0.7"
-				android:drawableStart="@drawable/ic_refresh"
+				android:clickable="@{!vm.isLoading}"
 				android:drawablePadding="5dp"
+				android:onClick="@{()->vm.refresh()}"
 				android:text="@{vm.liveAQI.lastUpdateTime}"
 				android:textColor="@color/colorWhite"
 				app:layout_constraintBaseline_toBaselineOf="@id/tv_city_main"
-				app:layout_constraintStart_toEndOf="@id/tv_city_main"
+				app:layout_constraintStart_toEndOf="@id/iv_loading_top_main"
 				tools:text="最后更新时间 26日 11:00" />
 
 		<androidx.appcompat.widget.AppCompatTextView

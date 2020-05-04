@@ -30,11 +30,14 @@ import org.zhiwei.libnet.support.toEntity
  */
 class MainViewModel : ViewModel() {
 
-	val liveAQI = MutableLiveData<Pm25AQI>()
-
 	//监控站点
 	private val stations = mutableListOf<Pm25AQI.ItemStation>()
 
+	//loading
+	val isLoading = MutableLiveData<Boolean>()
+
+	//城市的aqi
+	val liveAQI = MutableLiveData<Pm25AQI>()
 	//城市
 	val liveCity = MutableLiveData<String>()
 
@@ -61,11 +64,13 @@ class MainViewModel : ViewModel() {
 	 * [cityPinyin] 城市的拼音
 	 */
 	fun pm25Server(cityPinyin: String) {
-
+		isLoading.postValue(true)
 		//请求解析数据
 		viewModelScope.launch(Dispatchers.IO) {
 			val rsp = KtHttp.initConfig("http://m.pm25.com/wap/city/")
 				.get("$cityPinyin.html")
+			//loading finish
+			isLoading.postValue(false)
 			//请求成功才继续
 			if (rsp?.isSuccessful != true) return@launch
 
@@ -101,5 +106,12 @@ class MainViewModel : ViewModel() {
 				)
 			)
 		}
+	}
+
+	/**
+	 * 刷新数据
+	 */
+	fun refresh() {
+		pm25Server(liveCity.value ?: "beijing")
 	}
 }

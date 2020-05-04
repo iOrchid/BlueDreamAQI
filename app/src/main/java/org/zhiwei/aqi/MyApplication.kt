@@ -29,6 +29,13 @@ class MyApplication : Application() {
 		DoraemonKit.install(this)
 
 		//后台任务
+//		workTask()
+	}
+
+	/**
+	 * 后台worker
+	 */
+	private fun workTask() {
 		val localCityRequest = OneTimeWorkRequestBuilder<QueryCityWorker>().build()
 		val aqiRequest = OneTimeWorkRequestBuilder<QueryAqiWorker>().build()
 

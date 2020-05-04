@@ -1,134 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:motion="http://schemas.android.com/apk/res-auto">
+		xmlns:motion="http://schemas.android.com/apk/res-auto">
 	<Transition
-		motion:constraintSetEnd="@+id/end"
-		motion:constraintSetStart="@+id/start"
-		motion:duration="300"
-		motion:motionInterpolator="linear" />
+			motion:constraintSetEnd="@+id/end"
+			motion:constraintSetStart="@+id/start"
+			motion:duration="300"
+			motion:motionInterpolator="linear" />
 
 	<!--//region 动画开始时的效果状态-->
 
 	<ConstraintSet android:id="@+id/start">
 		<Constraint
-			android:id="@id/iv_bg_main"
-			android:layout_width="match_parent"
-			android:layout_height="@dimen/bg_278dp"
-			android:alpha="1.0"
-			android:scaleType="centerCrop"
-			android:scaleX="1.2"
-			android:scaleY="1.2"
-			motion:layout_constraintTop_toTopOf="parent" />
+				android:id="@id/iv_bg_main"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bg_278dp"
+				android:alpha="1.0"
+				android:scaleType="centerCrop"
+				android:scaleX="1.2"
+				android:scaleY="1.2"
+				motion:layout_constraintTop_toTopOf="parent" />
 
 		<Constraint
-			android:id="@id/tv_city_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="15dp"
-			android:layout_marginTop="60dp"
-			android:textColor="@color/colorWhite"
-			android:textSize="22sp"
-			motion:layout_constraintStart_toStartOf="@id/iv_bg_main"
-			motion:layout_constraintTop_toTopOf="@id/iv_bg_main" />
+				android:id="@id/tv_city_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="15dp"
+				android:layout_marginTop="60dp"
+				android:textColor="@color/colorWhite"
+				android:textSize="22sp"
+				motion:layout_constraintStart_toStartOf="@id/iv_bg_main"
+				motion:layout_constraintTop_toTopOf="@id/iv_bg_main" />
 
 		<Constraint
-			android:id="@id/tv_update_time_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginStart="10dp"
-			android:layout_marginTop="15dp"
-			android:alpha="0.9"
-			android:drawableStart="@drawable/ic_refresh"
-			android:drawablePadding="5dp"
-			android:textColor="@color/colorWhite"
-			motion:layout_constraintBaseline_toBaselineOf="@id/tv_city_main"
-			motion:layout_constraintStart_toEndOf="@id/tv_city_main" />
+				android:id="@id/iv_loading_top_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="10dp"
+				android:alpha="0.9"
+				motion:layout_constraintBottom_toBottomOf="@id/tv_city_main"
+				motion:layout_constraintStart_toEndOf="@id/tv_city_main"
+				motion:layout_constraintTop_toTopOf="@id/tv_city_main" />
 
 		<Constraint
-			android:id="@id/tv_aqi_num_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:alpha="1"
-			android:textColor="@color/colorWhite"
-			android:textSize="65sp"
-			motion:layout_constraintStart_toStartOf="@id/tv_city_main"
-			motion:layout_constraintTop_toBottomOf="@id/tv_city_main" />
+				android:id="@id/tv_update_time_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="10dp"
+				android:alpha="0.9"
+				android:textColor="@color/colorWhite"
+				motion:layout_constraintBottom_toBottomOf="@id/iv_loading_top_main"
+				motion:layout_constraintStart_toEndOf="@id/iv_loading_top_main"
+				motion:layout_constraintTop_toTopOf="@id/iv_loading_top_main" />
 
 		<Constraint
-			android:id="@id/tv_air_quality_main"
-			android:layout_width="30dp"
-			android:layout_height="20dp"
-			android:layout_marginStart="15dp"
-			android:layout_marginBottom="5dp"
-			android:gravity="center"
-			android:textColor="@color/colorWhite"
-			android:textSize="12sp"
-			motion:layout_constraintBottom_toTopOf="@id/tv_quality_main"
-			motion:layout_constraintStart_toEndOf="@id/tv_aqi_num_main" />
+				android:id="@id/tv_aqi_num_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:alpha="1"
+				android:textColor="@color/colorWhite"
+				android:textSize="65sp"
+				motion:layout_constraintStart_toStartOf="@id/tv_city_main"
+				motion:layout_constraintTop_toBottomOf="@id/tv_city_main" />
 
 		<Constraint
-			android:id="@id/tv_quality_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="AQI指数"
-			android:textColor="@color/colorWhite"
-			android:textSize="14sp"
-			motion:layout_constraintBaseline_toBaselineOf="@id/tv_aqi_num_main"
-			motion:layout_constraintStart_toStartOf="@id/tv_air_quality_main"
-			motion:layout_constraintTop_toBottomOf="@id/tv_air_quality_main" />
+				android:id="@id/tv_air_quality_main"
+				android:layout_width="30dp"
+				android:layout_height="20dp"
+				android:layout_marginStart="15dp"
+				android:layout_marginBottom="5dp"
+				android:gravity="center"
+				android:textColor="@color/colorWhite"
+				android:textSize="12sp"
+				motion:layout_constraintBottom_toTopOf="@id/tv_quality_main"
+				motion:layout_constraintStart_toEndOf="@id/tv_aqi_num_main" />
 
 		<Constraint
-			android:id="@id/v_line_main"
-			android:layout_width="0dp"
-			android:layout_height="0.5dp"
-			android:background="@color/colorWhite"
-			motion:layout_constraintEnd_toEndOf="@id/tv_update_time_main"
-			motion:layout_constraintStart_toStartOf="@id/tv_city_main"
-			motion:layout_constraintTop_toBottomOf="@id/tv_aqi_num_main" />
+				android:id="@id/tv_quality_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="AQI指数"
+				android:textColor="@color/colorWhite"
+				android:textSize="14sp"
+				motion:layout_constraintBaseline_toBaselineOf="@id/tv_aqi_num_main"
+				motion:layout_constraintStart_toStartOf="@id/tv_air_quality_main"
+				motion:layout_constraintTop_toBottomOf="@id/tv_air_quality_main" />
 
 		<Constraint
-			android:id="@id/tv_aqi_desc_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@{vm.liveAQI.pm2Concentration}"
-			android:textColor="@color/colorWhite"
-			motion:layout_constraintStart_toStartOf="@id/v_line_main"
-			motion:layout_constraintTop_toBottomOf="@id/v_line_main" />
+				android:id="@id/v_line_main"
+				android:layout_width="0dp"
+				android:layout_height="0.5dp"
+				android:background="@color/colorWhite"
+				motion:layout_constraintEnd_toEndOf="@id/tv_update_time_main"
+				motion:layout_constraintStart_toStartOf="@id/tv_city_main"
+				motion:layout_constraintTop_toBottomOf="@id/tv_aqi_num_main" />
 
 		<Constraint
-			android:id="@id/tv_share_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginEnd="15dp"
-			android:layout_marginBottom="15dp"
-			android:drawableEnd="@drawable/ic_share"
-			android:gravity="center"
-			android:text="分享"
-			android:textColor="@color/colorWhite"
-			android:textSize="14sp"
-			motion:layout_constraintBottom_toTopOf="@id/v_bg_bar_main"
-			motion:layout_constraintEnd_toEndOf="@id/iv_bg_main">
+				android:id="@id/tv_aqi_desc_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@{vm.liveAQI.pm2Concentration}"
+				android:textColor="@color/colorWhite"
+				motion:layout_constraintStart_toStartOf="@id/v_line_main"
+				motion:layout_constraintTop_toBottomOf="@id/v_line_main" />
+
+		<Constraint
+				android:id="@id/tv_share_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginEnd="15dp"
+				android:layout_marginBottom="15dp"
+				android:drawableEnd="@drawable/ic_share"
+				android:gravity="center"
+				android:text="分享"
+				android:textColor="@color/colorWhite"
+				android:textSize="14sp"
+				motion:layout_constraintBottom_toTopOf="@id/v_bg_bar_main"
+				motion:layout_constraintEnd_toEndOf="@id/iv_bg_main">
 			<CustomAttribute
-				motion:attributeName="text"
-				motion:customStringValue="分享" />
+					motion:attributeName="text"
+					motion:customStringValue="分享" />
 		</Constraint>
 
 		<Constraint
-			android:id="@id/v_bg_bar_main"
-			android:layout_width="match_parent"
-			android:layout_height="40dp"
-			android:alpha="0.3"
-			android:background="@color/colorWhite"
-			motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
+				android:id="@id/v_bg_bar_main"
+				android:layout_width="match_parent"
+				android:layout_height="40dp"
+				android:alpha="0.3"
+				android:background="@color/colorWhite"
+				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
 
 
 		<Constraint
-			android:id="@id/seek_main"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:progress="30"
-			motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
-			motion:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
+				android:id="@id/seek_main"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:progress="30"
+				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
+				motion:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
 
 	</ConstraintSet>
 
@@ -139,122 +147,133 @@
 	<ConstraintSet android:id="@+id/end">
 
 		<Constraint
-			android:id="@id/iv_bg_main"
-			android:layout_width="match_parent"
-			android:layout_height="76dp"
-			android:alpha="0.7"
-			android:scaleX="1.0"
-			android:scaleY="1.0"
-			motion:layout_constraintTop_toTopOf="parent" />
+				android:id="@id/iv_bg_main"
+				android:layout_width="match_parent"
+				android:layout_height="76dp"
+				android:alpha="0.7"
+				android:scaleX="1.0"
+				android:scaleY="1.0"
+				motion:layout_constraintTop_toTopOf="parent" />
 
 		<Constraint
-			android:id="@id/tv_city_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="10dp"
-			android:gravity="center"
-			android:textColor="@color/colorBlack"
-			android:textSize="22sp"
-			motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main"
-			motion:layout_constraintEnd_toEndOf="@id/iv_bg_main"
-			motion:layout_constraintStart_toStartOf="@id/iv_bg_main" />
+				android:id="@id/tv_city_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="10dp"
+				android:gravity="center"
+				android:textColor="@color/colorBlack"
+				android:textSize="22sp"
+				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main"
+				motion:layout_constraintEnd_toEndOf="@id/iv_bg_main"
+				motion:layout_constraintStart_toStartOf="@id/iv_bg_main" />
 
 		<Constraint
-			android:id="@id/tv_update_time_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:alpha="0"
-			motion:layout_constraintBottom_toBottomOf="@id/tv_city_main"
-			motion:layout_constraintStart_toStartOf="@id/iv_bg_main"
-			motion:layout_constraintTop_toTopOf="@id/tv_city_main" />
+				android:id="@id/iv_loading_top_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="10dp"
+				android:alpha="0"
+				motion:layout_constraintBottom_toBottomOf="@id/tv_city_main"
+				motion:layout_constraintStart_toStartOf="@id/iv_bg_main"
+				motion:layout_constraintTop_toTopOf="@id/tv_city_main"
+				motion:srcCompat="@drawable/ic_refresh" />
 
 		<Constraint
-			android:id="@id/tv_aqi_num_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:alpha="0"
-			android:textColor="@color/colorWhite"
-			android:textSize="65sp"
-			motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main"
-			motion:layout_constraintStart_toStartOf="@id/iv_bg_main"
-			motion:layout_constraintTop_toTopOf="@id/iv_bg_main"
-			motion:progress="0.3" />
+				android:id="@id/tv_update_time_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:alpha="0"
+				motion:layout_constraintBottom_toBottomOf="@id/iv_loading_top_main"
+				motion:layout_constraintStart_toEndOf="@id/iv_loading_top_main"
+				motion:layout_constraintTop_toTopOf="@id/iv_loading_top_main" />
 
 		<Constraint
-			android:id="@id/tv_air_quality_main"
-			android:layout_width="30dp"
-			android:layout_height="20dp"
-			android:layout_marginStart="15dp"
-			android:layout_marginBottom="5dp"
-			android:alpha="0"
-			android:gravity="center"
-			android:textColor="@color/colorWhite"
-			android:textSize="12sp"
-			motion:layout_constraintBottom_toTopOf="@id/tv_quality_main"
-			motion:layout_constraintStart_toEndOf="@id/tv_aqi_num_main" />
+				android:id="@id/tv_aqi_num_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:alpha="0"
+				android:textColor="@color/colorWhite"
+				android:textSize="65sp"
+				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main"
+				motion:layout_constraintStart_toStartOf="@id/iv_bg_main"
+				motion:layout_constraintTop_toTopOf="@id/iv_bg_main"
+				motion:progress="0.3" />
 
 		<Constraint
-			android:id="@id/tv_quality_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:alpha="0"
-			android:text="AQI指数"
-			android:textColor="@color/colorWhite"
-			android:textSize="14sp"
-			motion:layout_constraintBaseline_toBaselineOf="@id/tv_aqi_num_main"
-			motion:layout_constraintStart_toStartOf="@id/tv_air_quality_main"
-			motion:layout_constraintTop_toBottomOf="@id/tv_air_quality_main" />
+				android:id="@id/tv_air_quality_main"
+				android:layout_width="30dp"
+				android:layout_height="20dp"
+				android:layout_marginStart="15dp"
+				android:layout_marginBottom="5dp"
+				android:alpha="0"
+				android:gravity="center"
+				android:textColor="@color/colorWhite"
+				android:textSize="12sp"
+				motion:layout_constraintBottom_toTopOf="@id/tv_quality_main"
+				motion:layout_constraintStart_toEndOf="@id/tv_aqi_num_main" />
 
 		<Constraint
-			android:id="@id/v_line_main"
-			android:layout_width="0dp"
-			android:layout_height="0.5dp"
-			android:alpha="0"
-			android:background="@color/colorWhite"
-			motion:layout_constraintEnd_toEndOf="@id/tv_update_time_main"
-			motion:layout_constraintStart_toStartOf="@id/tv_city_main"
-			motion:layout_constraintTop_toBottomOf="@id/tv_aqi_num_main" />
+				android:id="@id/tv_quality_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:alpha="0"
+				android:text="AQI指数"
+				android:textColor="@color/colorWhite"
+				android:textSize="14sp"
+				motion:layout_constraintBaseline_toBaselineOf="@id/tv_aqi_num_main"
+				motion:layout_constraintStart_toStartOf="@id/tv_air_quality_main"
+				motion:layout_constraintTop_toBottomOf="@id/tv_air_quality_main" />
 
 		<Constraint
-			android:id="@id/tv_aqi_desc_main"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:alpha="0"
-			android:text="@{vm.liveAQI.pm2Concentration}"
-			android:textColor="@color/colorWhite"
-			motion:layout_constraintStart_toStartOf="@id/v_line_main"
-			motion:layout_constraintTop_toBottomOf="@id/v_line_main" />
+				android:id="@id/v_line_main"
+				android:layout_width="0dp"
+				android:layout_height="0.5dp"
+				android:alpha="0"
+				android:background="@color/colorWhite"
+				motion:layout_constraintEnd_toEndOf="@id/tv_update_time_main"
+				motion:layout_constraintStart_toStartOf="@id/tv_city_main"
+				motion:layout_constraintTop_toBottomOf="@id/tv_aqi_num_main" />
 
 		<Constraint
-			android:id="@id/tv_share_main"
-			android:layout_width="30dp"
-			android:layout_height="40dp"
-			android:layout_marginEnd="15dp"
-			android:visibility="invisible"
-			motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main"
-			motion:layout_constraintEnd_toEndOf="@id/iv_bg_main">
+				android:id="@id/tv_aqi_desc_main"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:alpha="0"
+				android:text="@{vm.liveAQI.pm2Concentration}"
+				android:textColor="@color/colorWhite"
+				motion:layout_constraintStart_toStartOf="@id/v_line_main"
+				motion:layout_constraintTop_toBottomOf="@id/v_line_main" />
+
+		<Constraint
+				android:id="@id/tv_share_main"
+				android:layout_width="30dp"
+				android:layout_height="40dp"
+				android:layout_marginEnd="15dp"
+				android:visibility="invisible"
+				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main"
+				motion:layout_constraintEnd_toEndOf="@id/iv_bg_main">
 			<CustomAttribute
-				motion:attributeName="text"
-				motion:customStringValue="" />
+					motion:attributeName="text"
+					motion:customStringValue="" />
 		</Constraint>
 
 		<Constraint
-			android:id="@id/v_bg_bar_main"
-			android:layout_width="match_parent"
-			android:layout_height="40dp"
-			android:background="@color/colorWhite"
-			android:scaleY="0.5"
-			android:visibility="invisible"
-			motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
+				android:id="@id/v_bg_bar_main"
+				android:layout_width="match_parent"
+				android:layout_height="40dp"
+				android:background="@color/colorWhite"
+				android:scaleY="0.5"
+				android:visibility="invisible"
+				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
 
 
 		<Constraint
-			android:id="@id/seek_main"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:scaleY="0.5"
-			android:visibility="invisible"
-			motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main" />
+				android:id="@id/seek_main"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:scaleY="0.5"
+				android:visibility="invisible"
+				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main" />
 
 	</ConstraintSet>
 	<!--//endregion-->
