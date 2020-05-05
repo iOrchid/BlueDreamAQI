@@ -30,6 +30,8 @@ class MyApplication : Application() {
 
 		//后台任务
 //		workTask()
+
+		//高德定位 0c7904b04851f177658e90559f4c13e6
 	}
 
 	/**

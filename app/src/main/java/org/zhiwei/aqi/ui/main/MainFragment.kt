@@ -2,8 +2,8 @@ package org.zhiwei.aqi.ui.main
 
 import android.Manifest
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.content.pm.PackageManager
-import android.location.*
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +11,15 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
-import androidx.core.content.getSystemService
 import androidx.fragment.app.viewModels
+import com.amap.api.location.AMapLocation
+import com.amap.api.location.AMapLocationClient
+import com.amap.api.location.AMapLocationClientOption
 import kotlinx.android.synthetic.main.top_main_fragment.*
 import org.zhiwei.aqi.BuildConfig
 import org.zhiwei.aqi.adapter.StationAdapter
 import org.zhiwei.aqi.databinding.MainFragmentBinding
+import org.zhiwei.aqi.utils.PinyinUtils
 import org.zhiwei.booster.KtFragment
 import org.zhiwei.libcore.LogKt
 
@@ -40,9 +43,6 @@ class MainFragment : KtFragment() {
 		defaultViewModelProviderFactory
 	}
 	private var mBinding: MainFragmentBinding? = null
-
-	private var locationManager: LocationManager? = null
-
 
 	private val stationAdapter = StationAdapter()
 
@@ -77,6 +77,7 @@ class MainFragment : KtFragment() {
 				city ?: return@observeKt
 				//查询城市的aqi
 				pm25Server(city)
+				LogKt.d("onViewCreated 80: city $city")
 			}
 			liveAQI.observeKt {
 				stationAdapter.updateList(it.stations)
@@ -94,11 +95,13 @@ class MainFragment : KtFragment() {
 					540f,
 					630f,
 					720f
-				)
-				loadingAnim.interpolator = AnimationUtils.loadInterpolator(
-					requireContext(),
-					android.R.anim.linear_interpolator
-				)
+				).apply {
+					interpolator = AnimationUtils.loadInterpolator(
+						requireContext(),
+						android.R.anim.linear_interpolator
+					)
+					repeatMode = ValueAnimator.REVERSE
+				}
 				if (loading) {
 					loadingAnim
 						.start()
@@ -108,10 +111,6 @@ class MainFragment : KtFragment() {
 			}
 		}
 
-		locationManager = requireContext().getSystemService<LocationManager>()
-		val criteria = Criteria()
-		criteria.isAltitudeRequired = false//是否需要海拔信息，若是，则使用gps定位
-		val bestProvider = locationManager?.getBestProvider(criteria, false)
 		if (ActivityCompat.checkSelfPermission(
 				requireContext(),
 				Manifest.permission.ACCESS_FINE_LOCATION
@@ -123,44 +122,28 @@ class MainFragment : KtFragment() {
 			LogKt.w("onViewCreated 127: no permission,")
 			return
 		}
-		locationManager?.requestLocationUpdates(bestProvider, 1000L, 1000f, listener)
-		LogKt.i("onViewCreated 131: bestProvider $bestProvider")
 
-	}
+		val amapClient = AMapLocationClient(requireContext())
+		val clientOptions = AMapLocationClientOption().apply {
+			isOnceLocation = true//单次定位
+			isOnceLocationLatest = true//3s内最新位置
+			locationPurpose = AMapLocationClientOption.AMapLocationPurpose.SignIn
+			locationMode = AMapLocationClientOption.AMapLocationMode.Hight_Accuracy
+		}
+		amapClient.setLocationOption(clientOptions)
 
-	/**
-	 * local listener
-	 */
-	private val listener = object : LocationListener {
-		override fun onLocationChanged(location: Location?) {
-			val accuracy = location?.accuracy//获取精确位置
-			val altitude = location?.altitude//获取海拔
-			val latitude = location?.latitude ?: 0.0//获取纬度，平行
-			val longitude = location?.longitude ?: 0.0//获取经度，垂直
-
-			val geocoder = Geocoder(requireContext())
-			val fromLocation = geocoder.getFromLocation(latitude, longitude, 10)
-			viewModel.liveCity.postValue(fromLocation[0].locality)
-			LogKt.d("onLocationChanged 151: location ${fromLocation.joinToString()}")
+		amapClient.setLocationListener { amapLocation: AMapLocation? ->
+			val city = amapLocation?.city ?: "北京"
+			val ccs = if (city.endsWith("市")) city.substringBeforeLast("市") else city
+			viewModel.liveCity.postValue(PinyinUtils.ccs2Pinyin(ccs))
+			LogKt.d("onViewCreated 131: location $ccs")
 		}
 
-		override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
-			LogKt.d("onStatusChanged 155: $provider $status")
-		}
-
-		override fun onProviderEnabled(provider: String?) {
-			LogKt.d("onProviderEnabled 159: $provider")
-		}
-
-		override fun onProviderDisabled(provider: String?) {
-			LogKt.d("onProviderDisabled 163: $provider")
-		}
-
+		amapClient.startLocation()
 	}
 
 	override fun onDestroy() {
 		mBinding = null
-		locationManager?.removeUpdates(listener)
 		super.onDestroy()
 	}
 }

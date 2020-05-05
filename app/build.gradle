@@ -46,6 +46,10 @@ dependencies {
 	releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.4'
 	//</editor-folder>
 
+	implementation 'com.amap.api:map2d:6.0.0'
+	implementation 'com.amap.api:search:7.3.0'
+	implementation 'com.amap.api:location:4.9.0'
+
 	//<editor-folder desc="其他依赖库">
 
 	implementation("com.github.zhiwei1990:KtBooster:0.1.3")

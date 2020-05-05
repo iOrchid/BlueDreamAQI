@@ -38,6 +38,7 @@ class MainViewModel : ViewModel() {
 
 	//城市的aqi
 	val liveAQI = MutableLiveData<Pm25AQI>()
+
 	//城市
 	val liveCity = MutableLiveData<String>()
 
@@ -76,35 +77,40 @@ class MainViewModel : ViewModel() {
 
 			val html = rsp.toEntity<String>()
 			val doc = Jsoup.parse(html)
-			val city = doc.getElementsByClass("cm_location")[0].text()
-			val updateTime = doc.getElementsByClass("cm_updatetime")[0].text()
-			val aqiNum = doc.getElementsByClass("cm_area_big")[0].text()
-			val concentration = doc.getElementsByClass("cm_nongdu")[0].text()
-			val todayDesc = doc.getElementsByClass("c_item")[0].select("p").first().text()
-			val tips = doc.getElementsByClass("c_item")[1].select("p").first().text()
-			val bgImg = doc.getElementsByClass("c_bg").elementAt(0).attr("style")
-			val imgUrl = ParserUtils.parseInBracketsFirst(bgImg)//相对路径
-			val list = doc.getElementsByClass("ci_jiance_line")
-			list.forEach { element: Element? ->
-				element?.apply {
-					val station = getElementsByClass("ci_location").first().text()
-					val pm25 = getElementsByClass("ci_pm25num").first().text()
-					val aqi = getElementsByTag("strong").first().text()
-					stations.add(Pm25AQI.ItemStation(station, pm25.toInt(), aqi.toInt()))
+			kotlin.runCatching {
+				val city = doc.getElementsByClass("cm_location")[0].text()
+				val updateTime = doc.getElementsByClass("cm_updatetime")[0].text()
+				val aqiNum = doc.getElementsByClass("cm_area_big")[0].text()
+				val concentration = doc.getElementsByClass("cm_nongdu")[0].text()
+				val todayDesc = doc.getElementsByClass("c_item")[0].select("p").first().text()
+				val tips = doc.getElementsByClass("c_item")[1].select("p").first().text()
+				val bgImg = doc.getElementsByClass("c_bg").elementAt(0).attr("style")
+				val imgUrl = ParserUtils.parseInBracketsFirst(bgImg)//相对路径
+				val list = doc.getElementsByClass("ci_jiance_line")
+				list.forEach { element: Element? ->
+					element?.apply {
+						val station = getElementsByClass("ci_location").first().text()
+						val pm25 = getElementsByClass("ci_pm25num").first().text()
+						val aqi = getElementsByTag("strong").first().text()
+						stations.add(Pm25AQI.ItemStation(station, pm25.toInt(), aqi.toInt()))
+					}
 				}
-			}
-			liveAQI.postValue(
-				Pm25AQI(
-					city,
-					updateTime,
-					aqiNum.toInt(),
-					concentration,
-					"http://m.pm25.com$imgUrl",
-					todayDesc,
-					tips,
-					stations
+				liveAQI.postValue(
+					Pm25AQI(
+						city,
+						updateTime,
+						aqiNum.toInt(),
+						concentration,
+						"http://m.pm25.com$imgUrl",
+						todayDesc,
+						tips,
+						stations
+					)
 				)
-			)
+			}.onFailure {
+				//pm25 移动端可能不支持该城市的数据
+				it.printStackTrace()
+			}
 		}
 	}
 
