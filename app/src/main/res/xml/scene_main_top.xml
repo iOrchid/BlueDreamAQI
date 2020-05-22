@@ -135,9 +135,19 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:progress="30"
+				android:visibility="invisible"
 				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
 				motion:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
 
+		<Constraint
+				android:id="@+id/aqi_bar_main"
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				android:padding="20dp"
+				motion:layout_constraintBottom_toTopOf="@id/seek_main"
+				motion:layout_constraintEnd_toEndOf="parent"
+				motion:layout_constraintStart_toStartOf="parent"
+				motion:layout_constraintTop_toBottomOf="@id/tv_share_main" />
 	</ConstraintSet>
 
 	<!--//endregion-->
@@ -275,6 +285,15 @@
 				android:visibility="invisible"
 				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main" />
 
+		<Constraint
+				android:id="@+id/aqi_bar_main"
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				android:padding="20dp"
+				motion:layout_constraintBottom_toTopOf="@id/seek_main"
+				motion:layout_constraintEnd_toEndOf="parent"
+				motion:layout_constraintStart_toStartOf="parent"
+				motion:layout_constraintTop_toBottomOf="@id/tv_share_main" />
 	</ConstraintSet>
 	<!--//endregion-->
 
