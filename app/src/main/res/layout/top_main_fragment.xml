@@ -158,7 +158,7 @@
 				app:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
 
 
-		<androidx.appcompat.widget.AppCompatSeekBar
+		<org.zhiwei.aqi.view.AqiSeekBar
 				android:id="@+id/seek_main"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"

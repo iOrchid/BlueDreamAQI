@@ -50,7 +50,7 @@ class MainViewModel : ViewModel() {
 			val url = "https://api.waqi.info/mapq/nearest"
 			val rsp = KtHttp.initConfig(url).get("")
 			//请求成功才继续
-			if (!rsp.isSuccessful) return@launch
+			if (rsp?.isSuccessful != true) return@launch
 
 			val toBean = rsp.toEntity<NearestCityRsp>()
 			val city = toBean?.g?.city
@@ -73,7 +73,7 @@ class MainViewModel : ViewModel() {
 			//loading finish
 			isLoading.postValue(false)
 			//请求成功才继续
-			if (!rsp.isSuccessful) return@launch
+			if (rsp?.isSuccessful != true) return@launch
 
 			val html = rsp.toEntity<String>()
 			val doc = Jsoup.parse(html)
