@@ -129,25 +129,13 @@
 				android:background="@color/colorWhite"
 				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
 
-
-		<Constraint
-				android:id="@id/seek_main"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:progress="30"
-				android:visibility="invisible"
-				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
-				motion:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
-
 		<Constraint
 				android:id="@+id/aqi_bar_main"
 				android:layout_width="match_parent"
-				android:layout_height="10dp"
+				android:layout_height="wrap_content"
 				android:padding="20dp"
-				motion:layout_constraintBottom_toTopOf="@id/seek_main"
-				motion:layout_constraintEnd_toEndOf="parent"
-				motion:layout_constraintStart_toStartOf="parent"
-				motion:layout_constraintTop_toBottomOf="@id/tv_share_main" />
+				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
+				motion:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
 	</ConstraintSet>
 
 	<!--//endregion-->
@@ -269,31 +257,27 @@
 
 		<Constraint
 				android:id="@id/v_bg_bar_main"
-				android:layout_width="match_parent"
-				android:layout_height="40dp"
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
 				android:background="@color/colorWhite"
-				android:scaleY="0.5"
+				android:scaleY="0.2"
 				android:visibility="invisible"
-				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
-
-
-		<Constraint
-				android:id="@id/seek_main"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:scaleY="0.5"
-				android:visibility="invisible"
-				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main" />
+				motion:layout_constraintBottom_toBottomOf="@id/iv_bg_main"
+				motion:layout_constraintEnd_toEndOf="@id/iv_bg_main"
+				motion:layout_constraintStart_toStartOf="@id/iv_bg_main" />
 
 		<Constraint
 				android:id="@+id/aqi_bar_main"
-				android:layout_width="match_parent"
-				android:layout_height="10dp"
+				android:layout_width="5dp"
+				android:layout_height="wrap_content"
+				android:alpha="0"
 				android:padding="20dp"
-				motion:layout_constraintBottom_toTopOf="@id/seek_main"
-				motion:layout_constraintEnd_toEndOf="parent"
-				motion:layout_constraintStart_toStartOf="parent"
-				motion:layout_constraintTop_toBottomOf="@id/tv_share_main" />
+				android:scaleY="0.2"
+				motion:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
+				motion:layout_constraintEnd_toEndOf="@id/v_bg_bar_main"
+				motion:layout_constraintStart_toStartOf="@id/v_bg_bar_main"
+				motion:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
+
 	</ConstraintSet>
 	<!--//endregion-->
 

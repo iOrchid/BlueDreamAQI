@@ -1,9 +1,7 @@
 package org.zhiwei.aqi.view
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.StyleRes
@@ -11,6 +9,7 @@ import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import org.zhiwei.aqi.R
 import org.zhiwei.libcore.LogKt
+
 
 /**
  * 作者： 志威  zhiwei.org
@@ -64,7 +63,25 @@ class AqiSeekBar : View {
 
 	private val bgPaint = Paint()
 	private val buoyPaint = Paint()
+	private val tvPaint = Paint()
 
+	private val barHeight = 15f//seekbar的背景条的高度
+
+	private val aqiColorLevels = intArrayOf(
+		Color.parseColor("#009966"),
+		Color.parseColor("#FFDE33"),
+		Color.parseColor("#FF9933"),
+		Color.parseColor("#CC0033"),
+		Color.parseColor("#660099"),
+		Color.parseColor("#7E0023")
+	)
+	private val aqiColorPos = floatArrayOf(0.166f, 0.33f, 0.5f, 0.66f, 0.83f, 1f)
+
+	private var aqiLevelText = AQI_LEVEL_TEXT_GOOD
+	private var aqiTvWidth: Float
+
+
+	private var aqiTvPos: Float = 0f//浮标的文字的位置
 	//endregion
 
 	private fun initConfig(
@@ -82,14 +99,25 @@ class AqiSeekBar : View {
 
 	}
 
+
 	init {
 		//背景画笔
 		bgPaint.color = Color.BLUE
 		bgPaint.style = Paint.Style.FILL
-		bgPaint.strokeWidth = 20f
+		bgPaint.strokeWidth = 2f
 		bgPaint.isAntiAlias = true
+		//文字画笔
+		tvPaint.color = Color.WHITE
+		tvPaint.textSize = 36f
+		tvPaint.strokeWidth = 2f
+		tvPaint.style = Paint.Style.FILL
+
+		aqiTvWidth = tvPaint.measureText(aqiLevelText)
+
+		aqiTvPos = (width - aqiTvWidth) / 2
+
 		//浮标画笔
-		buoyPaint.color = Color.RED
+		buoyPaint.color = aqiColorLevels[0]
 		buoyPaint.style = Paint.Style.FILL
 		buoyPaint.isAntiAlias = true
 	}
@@ -106,6 +134,7 @@ class AqiSeekBar : View {
 		val heightSize = MeasureSpec.getSize(heightMeasureSpec)
 		val heightMode = MeasureSpec.getMode(heightMeasureSpec)
 
+		//实际宽高像素
 
 		LogKt.w("onMeasure 110行: width spec $widthMeasureSpec $widthMode $widthSize // height spec $heightMeasureSpec $heightMode $heightSize margin $marginStart $marginEnd  padding $paddingStart $paddingEnd")
 	}
@@ -120,16 +149,25 @@ class AqiSeekBar : View {
 		super.onDraw(canvas)
 		canvas ?: return
 		//绘制背景,注意得到with，height padding等都是像素值
+		val linearGradient =
+			LinearGradient(0f, 0f, width.toFloat(), 0f, aqiColorLevels, null, Shader.TileMode.CLAMP)
+		bgPaint.shader = linearGradient
 		canvas.drawRoundRect(
 			paddingStart.toFloat(),
-			0f,
+			(height - barHeight) / 2f,
 			width.toFloat() - paddingEnd.toFloat(),
-			height.toFloat(),
-			10f,
-			10f,
+			(height + barHeight) / 2f,
+			barHeight / 2f,
+			barHeight / 2f,
 			bgPaint
 		)
-		canvas.drawCircle(width / 2f, height / 2f, 50f, buoyPaint)
+
+		canvas.drawCircle(width / 2f, height / 2f, 30f, buoyPaint)
+		//绘制文字，需要计算文字大小，来确定baseline，才能准确的绘制位置
+		val fontMetrics = tvPaint.fontMetrics
+		val h = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom
+		canvas.drawText(aqiLevelText, (width - aqiTvWidth) / 2f, (height + h) / 2f, tvPaint)
+
 		LogKt.d("onDraw 100行: h:$height w:$width marginStart:$marginStart marginEnd $marginEnd padding $paddingStart ")
 	}
 
@@ -141,5 +179,20 @@ class AqiSeekBar : View {
 
 	//endregion
 
+	fun setAqiTvPos(pos: Float) {
+
+
+		invalidate()
+	}
+
+
+	companion object {
+		private const val AQI_LEVEL_TEXT_GOOD = "优"
+		private const val AQI_LEVEL_TEXT_MODERATE = "良"
+		private const val AQI_LEVEL_TEXT_UNHEALTHY_FOR_SENSITIVE_GROUP = "差"
+		private const val AQI_LEVEL_TEXT_UNHEALTHY = "劣"
+		private const val AQI_LEVEL_TEXT_VERY_UNHEALTHY = "糟"
+		private const val AQI_LEVEL_TEXT_HAZARDOUS = "危"
+	}
 
 }

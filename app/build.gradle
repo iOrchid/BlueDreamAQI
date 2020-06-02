@@ -41,9 +41,9 @@ dependencies {
 	//通用依赖，放在dependencies.gradle中
 
 	//<editor-folder desc="didi doraemonKit 性能监测">
-	debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.1.4'
+	debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:3.1.5'
 	debugImplementation 'com.didichuxing.doraemonkit:doraemonkit-leakcanary:3.1.4'
-	releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.4'
+	releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:3.1.5'
 	//</editor-folder>
 
 	implementation 'com.amap.api:map2d:6.0.0'

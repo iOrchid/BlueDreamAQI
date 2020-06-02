@@ -157,27 +157,15 @@
 				android:background="@color/colorWhite"
 				app:layout_constraintBottom_toBottomOf="@id/iv_bg_main" />
 
-
-		<org.zhiwei.aqi.view.AqiSeekBar
-				android:id="@+id/seek_main"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:progress="30"
-				android:visibility="invisible"
-				app:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
-				app:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
-
 		<org.zhiwei.aqi.view.AqiSeekBar
 				android:id="@+id/aqi_bar_main"
 				android:layout_width="match_parent"
-				android:layout_height="40dp"
+				android:layout_height="wrap_content"
 				android:layout_marginStart="30dp"
 				android:layout_marginEnd="30dp"
 				android:padding="20dp"
-				app:layout_constraintBottom_toTopOf="@id/seek_main"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toBottomOf="@id/tv_share_main" />
+				app:layout_constraintBottom_toBottomOf="@id/v_bg_bar_main"
+				app:layout_constraintTop_toTopOf="@id/v_bg_bar_main" />
 
 	</androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
