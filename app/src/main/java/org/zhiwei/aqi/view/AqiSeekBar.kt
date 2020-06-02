@@ -179,10 +179,43 @@ class AqiSeekBar : View {
 
 	//endregion
 
-	fun setAqiTvPos(pos: Float) {
+	fun setAqiNum(aqi: Int) {
 
 
 		invalidate()
+	}
+
+
+	/**
+	 * 根据aqi的数值，以及所属等级，计算出对应的颜色值
+	 */
+	private fun genAqiColor(aqi: Int) {
+		when (aqi) {
+			in 0..50 -> AQI_LEVEL_TEXT_GOOD
+			in 51..100 -> AQI_LEVEL_TEXT_MODERATE
+			in 101..150 -> AQI_LEVEL_TEXT_UNHEALTHY_FOR_SENSITIVE_GROUP
+			in 151..200 -> AQI_LEVEL_TEXT_UNHEALTHY
+			in 200..300 -> AQI_LEVEL_TEXT_VERY_UNHEALTHY
+			in 300..500 -> AQI_LEVEL_TEXT_HAZARDOUS
+			in 500..Int.MAX_VALUE -> AQI_LEVEL_TEXT_VERY_HAZARDOUS
+			else -> AQI_LEVEL_TEXT_UNKNOWN
+		}
+	}
+
+	/**
+	 * 根据aqi数值，得到对应等级的描述文字
+	 */
+	private fun getAqiText(aqi: Int): String {
+		return when (aqi) {
+			in 0..50 -> AQI_LEVEL_TEXT_GOOD
+			in 51..100 -> AQI_LEVEL_TEXT_MODERATE
+			in 101..150 -> AQI_LEVEL_TEXT_UNHEALTHY_FOR_SENSITIVE_GROUP
+			in 151..200 -> AQI_LEVEL_TEXT_UNHEALTHY
+			in 200..300 -> AQI_LEVEL_TEXT_VERY_UNHEALTHY
+			in 300..500 -> AQI_LEVEL_TEXT_HAZARDOUS
+			in 500..Int.MAX_VALUE -> AQI_LEVEL_TEXT_VERY_HAZARDOUS
+			else -> AQI_LEVEL_TEXT_UNKNOWN
+		}
 	}
 
 
@@ -193,6 +226,8 @@ class AqiSeekBar : View {
 		private const val AQI_LEVEL_TEXT_UNHEALTHY = "劣"
 		private const val AQI_LEVEL_TEXT_VERY_UNHEALTHY = "糟"
 		private const val AQI_LEVEL_TEXT_HAZARDOUS = "危"
+		private const val AQI_LEVEL_TEXT_VERY_HAZARDOUS = "禁"
+		private const val AQI_LEVEL_TEXT_UNKNOWN = "未"
 	}
 
 }
