@@ -61,12 +61,15 @@ class AqiSeekBar : View {
 
 	//region 成员属性
 
+	//画笔
 	private val bgPaint = Paint()
-	private val buoyPaint = Paint()
+	private val floaterPaint = Paint()
 	private val tvPaint = Paint()
 
-	private val barHeight = 15f//seekbar的背景条的高度
+	private var barHeight = 15f//aqiSeekBar的背景条的高度
+	private var barWidth = 0f//aqiSeekBar的宽度
 
+	//aqi等级的color标准值
 	private val aqiColorLevels = intArrayOf(
 		Color.parseColor("#009966"),
 		Color.parseColor("#FFDE33"),
@@ -77,11 +80,13 @@ class AqiSeekBar : View {
 	)
 	private val aqiColorPos = floatArrayOf(0.166f, 0.33f, 0.5f, 0.66f, 0.83f, 1f)
 
-	private var aqiLevelText = AQI_LEVEL_TEXT_GOOD
-	private var aqiTvWidth: Float
-
-
+	private var aqiLevelText = AQI_LEVEL_TEXT_GOOD//浮标文字
 	private var aqiTvPos: Float = 0f//浮标的文字的位置
+	private var aqiTvWidth: Float//浮标文字的宽度
+
+	private var floaterPosition = 0f//浮标的圆心位置
+	private var floaterRadius = 40f//浮标圆半径
+
 	//endregion
 
 	private fun initConfig(
@@ -117,9 +122,9 @@ class AqiSeekBar : View {
 		aqiTvPos = (width - aqiTvWidth) / 2
 
 		//浮标画笔
-		buoyPaint.color = aqiColorLevels[0]
-		buoyPaint.style = Paint.Style.FILL
-		buoyPaint.isAntiAlias = true
+		floaterPaint.color = aqiColorLevels[0]
+		floaterPaint.style = Paint.Style.FILL
+		floaterPaint.isAntiAlias = true
 	}
 
 	//region 函数api
@@ -135,6 +140,7 @@ class AqiSeekBar : View {
 		val heightMode = MeasureSpec.getMode(heightMeasureSpec)
 
 		//实际宽高像素
+		barWidth = (widthSize - paddingStart - paddingEnd).toFloat()
 
 		LogKt.w("onMeasure 110行: width spec $widthMeasureSpec $widthMode $widthSize // height spec $heightMeasureSpec $heightMode $heightSize margin $marginStart $marginEnd  padding $paddingStart $paddingEnd")
 	}
@@ -150,25 +156,25 @@ class AqiSeekBar : View {
 		canvas ?: return
 		//绘制背景,注意得到with，height padding等都是像素值
 		val linearGradient =
-			LinearGradient(0f, 0f, width.toFloat(), 0f, aqiColorLevels, null, Shader.TileMode.CLAMP)
+			LinearGradient(0f, 0f, barWidth, 0f, aqiColorLevels, null, Shader.TileMode.CLAMP)
 		bgPaint.shader = linearGradient
 		canvas.drawRoundRect(
 			paddingStart.toFloat(),
 			(height - barHeight) / 2f,
-			width.toFloat() - paddingEnd.toFloat(),
+			barWidth,
 			(height + barHeight) / 2f,
 			barHeight / 2f,
 			barHeight / 2f,
 			bgPaint
 		)
-
-		canvas.drawCircle(width / 2f, height / 2f, 30f, buoyPaint)
-		//绘制文字，需要计算文字大小，来确定baseline，才能准确的绘制位置
+		//浮标圆圈的绘制
+		canvas.drawCircle(floaterPosition, height / 2f, floaterRadius, floaterPaint)
+		//浮标中 绘制文字，需要计算文字大小，来确定baseline，才能准确的绘制位置
 		val fontMetrics = tvPaint.fontMetrics
 		val h = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom
-		canvas.drawText(aqiLevelText, (width - aqiTvWidth) / 2f, (height + h) / 2f, tvPaint)
+		canvas.drawText(aqiLevelText, floaterPosition - aqiTvWidth / 2, height / 2f + h, tvPaint)
 
-		LogKt.d("onDraw 100行: h:$height w:$width marginStart:$marginStart marginEnd $marginEnd padding $paddingStart ")
+		LogKt.d("onDraw 100行: h:$height w:$width marginStart:$marginStart marginEnd $marginEnd padding $paddingStart barWidth $barWidth 浮标位置,$floaterPosition")
 	}
 
 	override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
@@ -181,7 +187,10 @@ class AqiSeekBar : View {
 
 	fun setAqiNum(aqi: Int) {
 
-
+		genAqiColor(aqi)
+		aqiLevelText = getAqiText(aqi)
+		floaterPosition = calculateFloaterPosition(aqi)
+		LogKt.e("setAqiNum 192: barWidth $barWidth 浮标位置,$floaterPosition")
 		invalidate()
 	}
 
@@ -191,7 +200,9 @@ class AqiSeekBar : View {
 	 */
 	private fun genAqiColor(aqi: Int) {
 		when (aqi) {
-			in 0..50 -> AQI_LEVEL_TEXT_GOOD
+			in 0..50 -> {
+
+			}
 			in 51..100 -> AQI_LEVEL_TEXT_MODERATE
 			in 101..150 -> AQI_LEVEL_TEXT_UNHEALTHY_FOR_SENSITIVE_GROUP
 			in 151..200 -> AQI_LEVEL_TEXT_UNHEALTHY
@@ -218,6 +229,30 @@ class AqiSeekBar : View {
 		}
 	}
 
+	/**
+	 * 根据aqi，计算浮标圆心大体位置
+	 */
+	private fun calculateFloaterPosition(aqi: Int): Float {
+		//注意aqi为Int，所以aqi/500f 才能不为零。500是aqiSeekBar的量程大小
+		// 在0--200其实是等分刻度的，200--300是两倍刻度，300--500是4倍刻度，比例尺是变化的。
+		//额外都要加上 浮标的半径
+		return when (aqi) {
+			in 0..200 -> {
+				//1个aqi单位 等于 barWidth/300
+				floaterRadius / 2 + barWidth * (aqi / 300f)
+			}
+			in 200..300 -> {
+				//在200之前的，如上，在200--300之内的，1个aqi单位 等于 barWidth/600
+				floaterRadius / 2 + barWidth * ((3 * aqi - 200f) / 600f)
+			}
+			in 300..500 -> {
+				//在300之前，计算规则如上，也就是分200 前后。300--500段，1个aqi单位 等于barWidth/1200
+				floaterRadius / 2 + barWidth * ((7 * aqi - 700f) / 1200f)
+			}
+			in 500..Int.MAX_VALUE -> barWidth
+			else -> 0f
+		}
+	}
 
 	companion object {
 		private const val AQI_LEVEL_TEXT_GOOD = "优"
