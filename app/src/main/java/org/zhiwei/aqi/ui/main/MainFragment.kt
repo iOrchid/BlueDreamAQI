@@ -81,7 +81,7 @@ class MainFragment : KtFragment() {
 			}
 			liveAQI.observeKt {
 				stationAdapter.updateList(it.stations)
-				aqi_bar_main.setAqiNum(222)
+				aqi_bar_main.setAqiNum(it.aqi)
 			}
 			isLoading.observeKt { loading ->
 				val loadingAnim = ObjectAnimator.ofFloat(

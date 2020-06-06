@@ -70,6 +70,15 @@ class AqiSeekBar : View {
 	private var barWidth = 0f//aqiSeekBar的宽度
 
 	//aqi等级的color标准值
+
+	//colors
+	private val AQI_COLOR_GOOD = Color.parseColor("#009966")
+	private val AQI_COLOR_MODERATE = Color.parseColor("#FFDE33")
+	private val AQI_COLOR_USG = Color.parseColor("#FF9933")
+	private val AQI_COLOR_UNHEALTHY = Color.parseColor("#CC0033")
+	private val AQI_COLOR_VERY_UNHEALTHY = Color.parseColor("#660099")
+	private val AQI_COLOR_HAZARDOUS = Color.parseColor("#7E0023")
+
 	private val aqiColorLevels = intArrayOf(
 		Color.parseColor("#009966"),
 		Color.parseColor("#FFDE33"),
@@ -85,7 +94,10 @@ class AqiSeekBar : View {
 	private var aqiTvWidth: Float//浮标文字的宽度
 
 	private var floaterPosition = 0f//浮标的圆心位置
+	private var floaterPosRatio = 0f//浮标对比bar的宽度的位置比例
 	private var floaterRadius = 40f//浮标圆半径
+	private var floaterRadiusRatio = 0.04f//浮标半径，对比bar的宽度的比例
+
 
 	//endregion
 
@@ -147,7 +159,16 @@ class AqiSeekBar : View {
 
 	override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
 		super.onSizeChanged(w, h, oldw, oldh)
-		LogKt.i("onSizeChanged 115行: $w $oldw // $h  $oldh  margin $marginStart $marginEnd  padding $paddingStart $paddingEnd")
+
+		barWidth = (w - paddingStart - paddingEnd).toFloat()
+		floaterPosition = floaterPosRatio * barWidth
+		floaterRadius = floaterRadiusRatio * barWidth
+		if (floaterRadius > 40) {
+			floaterRadius = 40f
+		} else if (floaterRadius < 0) {
+			floaterRadius = 0f
+		}
+		LogKt.i("onSizeChanged 115行: $w $oldw // $h  $oldh  margin $marginStart $marginEnd  padding $paddingStart $paddingEnd barWidth $barWidth")
 	}
 
 
@@ -186,10 +207,11 @@ class AqiSeekBar : View {
 	//endregion
 
 	fun setAqiNum(aqi: Int) {
-
-		genAqiColor(aqi)
+		floaterPaint.color = genAqiColor(aqi)
 		aqiLevelText = getAqiText(aqi)
 		floaterPosition = calculateFloaterPosition(aqi)
+		floaterPosRatio = floaterPosition / barWidth
+		floaterRadiusRatio = floaterRadius / barWidth
 		LogKt.e("setAqiNum 192: barWidth $barWidth 浮标位置,$floaterPosition")
 		invalidate()
 	}
@@ -198,18 +220,25 @@ class AqiSeekBar : View {
 	/**
 	 * 根据aqi的数值，以及所属等级，计算出对应的颜色值
 	 */
-	private fun genAqiColor(aqi: Int) {
-		when (aqi) {
+	private fun genAqiColor(aqi: Int): Int {
+		return when (aqi) {
 			in 0..50 -> {
-
+				getCurrentColor(aqi / 50f, AQI_COLOR_GOOD, AQI_COLOR_MODERATE)
 			}
-			in 51..100 -> AQI_LEVEL_TEXT_MODERATE
-			in 101..150 -> AQI_LEVEL_TEXT_UNHEALTHY_FOR_SENSITIVE_GROUP
-			in 151..200 -> AQI_LEVEL_TEXT_UNHEALTHY
-			in 200..300 -> AQI_LEVEL_TEXT_VERY_UNHEALTHY
-			in 300..500 -> AQI_LEVEL_TEXT_HAZARDOUS
-			in 500..Int.MAX_VALUE -> AQI_LEVEL_TEXT_VERY_HAZARDOUS
-			else -> AQI_LEVEL_TEXT_UNKNOWN
+			in 51..100 -> {
+				getCurrentColor((aqi - 50) / 50f, AQI_COLOR_MODERATE, AQI_COLOR_USG)
+			}
+			in 101..150 -> {
+				getCurrentColor((aqi - 100) / 50f, AQI_COLOR_USG, AQI_COLOR_UNHEALTHY)
+			}
+			in 151..200 -> {
+				getCurrentColor((aqi - 150) / 50f, AQI_COLOR_UNHEALTHY, AQI_COLOR_VERY_UNHEALTHY)
+			}
+			in 200..300 -> {
+				getCurrentColor((aqi - 200) / 100f, AQI_COLOR_VERY_UNHEALTHY, AQI_COLOR_HAZARDOUS)
+			}
+			in 300..Int.MAX_VALUE -> AQI_COLOR_HAZARDOUS
+			else -> AQI_COLOR_GOOD
 		}
 	}
 
@@ -254,13 +283,39 @@ class AqiSeekBar : View {
 		}
 	}
 
+	/**
+	 * 根据过渡比例，来获取当前比例，在start和end之间的颜色值
+	 */
+	private fun getCurrentColor(fraction: Float, startColor: Int, endColor: Int): Int {
+		val redStart = Color.red(startColor)
+		val blueStart = Color.blue(startColor)
+		val greenStart = Color.green(startColor)
+		val alphaStart = Color.alpha(startColor)
+
+		val redEnd = Color.red(endColor)
+		val blueEnd = Color.blue(endColor)
+		val greenEnd = Color.green(endColor)
+		val alphaEnd = Color.alpha(endColor)
+
+		val redDifference = redEnd - redStart
+		val blueDifference = blueEnd - blueStart
+		val greenDifference = greenEnd - greenStart
+		val alphaDifference = alphaEnd - alphaStart
+
+		val redCurrent = (redStart + fraction * redDifference).toInt()
+		val blueCurrent = (blueStart + fraction * blueDifference).toInt()
+		val greenCurrent = (greenStart + fraction * greenDifference).toInt()
+		val alphaCurrent = (alphaStart + fraction * alphaDifference).toInt()
+		return Color.argb(alphaCurrent, redCurrent, greenCurrent, blueCurrent)
+	}
+
 	companion object {
 		private const val AQI_LEVEL_TEXT_GOOD = "优"
 		private const val AQI_LEVEL_TEXT_MODERATE = "良"
 		private const val AQI_LEVEL_TEXT_UNHEALTHY_FOR_SENSITIVE_GROUP = "差"
 		private const val AQI_LEVEL_TEXT_UNHEALTHY = "劣"
 		private const val AQI_LEVEL_TEXT_VERY_UNHEALTHY = "糟"
-		private const val AQI_LEVEL_TEXT_HAZARDOUS = "危"
+		private const val AQI_LEVEL_TEXT_HAZARDOUS = "危"//
 		private const val AQI_LEVEL_TEXT_VERY_HAZARDOUS = "禁"
 		private const val AQI_LEVEL_TEXT_UNKNOWN = "未"
 	}
