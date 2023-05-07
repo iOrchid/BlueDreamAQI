@@ -3,7 +3,7 @@
 ## BlueDreamAQI:partly_sunny:
 
 [![jetpack](https://img.shields.io/badge/志威-Jetpack-brightgreen.svg)](https://developer.android.com/jetpack/) [![apache2.0](https://img.shields.io/badge/license-apache2.0-brightgreen.svg)](./LICENSE) 
-[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Build Status](https://travis-ci.org/zhiwei1990/BlueDreamAQI.svg?branch=master)](https://travis-ci.org/zhiwei1990/BlueDreamAQI) [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=zhiwei1990_BlueDreamAQI&metric=alert_status)](https://sonarcloud.io/dashboard?id=zhiwei1990_BlueDreamAQI) [![codebeat badge](https://codebeat.co/badges/cf8fdfb4-2716-4494-9a72-b1727a8d5805)](https://codebeat.co/projects/github-com-zhiwei1990-BlueDreamAQI-master) ![GitHub repo size](https://img.shields.io/github/repo-size/zhiwei1990/BlueDreamAQI.svg?style=flat-square) ![GitHub Release Date](https://img.shields.io/github/release-date/zhiwei1990/BlueDreamAQI.svg?color=orange&style=flat-square) [![version](https://img.shields.io/github/release/zhiwei1990/BlueDreamAQI.svg)](https://github.com/zhiwei1990/BlueDreamAQI/releases) ![GitHub last commit](https://img.shields.io/github/last-commit/zhiwei1990/BlueDreamAQI.svg?style=flat-square) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/zhiwei1990/BlueDreamAQI.svg?style=flat-square) [![HitCount](http://hits.dwyl.io/zhiwei1990/BlueDreamAQI.svg)](http://hits.dwyl.io/zhiwei1990/BlueDreamAQI)
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![Build Status](https://travis-ci.org/iOrchid/BlueDreamAQI.svg?branch=master)](https://travis-ci.org/iOrchid/BlueDreamAQI) [![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=iOrchid_BlueDreamAQI&metric=alert_status)](https://sonarcloud.io/dashboard?id=iOrchid_BlueDreamAQI) [![codebeat badge](https://codebeat.co/badges/cf8fdfb4-2716-4494-9a72-b1727a8d5805)](https://codebeat.co/projects/github-com-iOrchid-BlueDreamAQI-master) ![GitHub repo size](https://img.shields.io/github/repo-size/iOrchid/BlueDreamAQI.svg?style=flat-square) ![GitHub Release Date](https://img.shields.io/github/release-date/iOrchid/BlueDreamAQI.svg?color=orange&style=flat-square) [![version](https://img.shields.io/github/release/iOrchid/BlueDreamAQI.svg)](https://github.com/iOrchid/BlueDreamAQI/releases) ![GitHub last commit](https://img.shields.io/github/last-commit/iOrchid/BlueDreamAQI.svg?style=flat-square) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/iOrchid/BlueDreamAQI.svg?style=flat-square) [![HitCount](http://hits.dwyl.io/iOrchid/BlueDreamAQI.svg)](http://hits.dwyl.io/iOrchid/BlueDreamAQI)
 
 
 目录
@@ -16,7 +16,7 @@
 	* [四、项目组成[^1]]()
 	* [五、规划]()
 	* [六、示例内容(部分）]()
-	* [七、关于作者]()[![jianshu](./images/jianshu.svg)](https://www.jianshu.com/u/72294e6848c0)[![github](./images/github.svg)](https://github.com/zhiwei1990)[![csdn](./images/csdn.svg)](https://blog.csdn.net/zhiwei9001)
+	* [七、关于作者]()[![jianshu](./images/jianshu.svg)](https://www.jianshu.com/u/72294e6848c0)[![github](./images/github.svg)](https://github.com/iOrchid)[![csdn](./images/csdn.svg)](https://blog.csdn.net/zhiwei9001)
 
 ####  一、项目简介
 
@@ -113,7 +113,7 @@ empty now
 
   ![img](./images/admireCode.png)![alipay](./images/alipay2QR.png)
 
-[![Github stars](https://img.shields.io/github/stars/zhiwei1990/BlueDreamAQI.svg?style=social&label=star)](https://github.com/zhiwei1990/BlueDreamAQI)[![Github followers](https://img.shields.io/github/followers/zhiwei1990.svg?style=social&label=follow)](https://github.com/zhiwei1990/BlueDreamAQI)[![Github issues](https://img.shields.io/github/issues/zhiwei1990/BlueDreamAQI.svg?style=social&label=issues)](https://github.com/zhiwei1990/BlueDreamAQI)
+[![Github stars](https://img.shields.io/github/stars/iOrchid/BlueDreamAQI.svg?style=social&label=star)](https://github.com/iOrchid/BlueDreamAQI)[![Github followers](https://img.shields.io/github/followers/iOrchid.svg?style=social&label=follow)](https://github.com/iOrchid/BlueDreamAQI)[![Github issues](https://img.shields.io/github/issues/iOrchid/BlueDreamAQI.svg?style=social&label=issues)](https://github.com/iOrchid/BlueDreamAQI)
 
 - **License**[↑回到顶部](#top)
 
